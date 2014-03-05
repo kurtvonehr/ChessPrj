@@ -9,56 +9,44 @@ package chess;
 
 public interface IChessModel {
 
-    /**
-     * Returns whether the game is complete.
-     *
-     * @return {@code true} if complete, {@code false} otherwise.
-     */
-    boolean isComplete();
-
-    /**
-     * Returns whether the piece at location {@code [move.fromRow, move.fromColumn]} is allowed to move to location
-     * {@code [move.fromRow, move.fromColumn]}.
-     *
-     * @param move a {@link Move} object describing the move to be made.
-     * @return {@code true} if the proposed move is valid, {@code false} otherwise.
-     * @throws IndexOutOfBoundsException if either {@code [move.fromRow, move.fromColumn]} or {@code [move.toRow,
-     *                                   move.toColumn]} don't represent valid locations on the board.
-     */
-    boolean isValidMove(Move move);
-
-    /**
-     * Moves the piece from location {@code [move.fromRow, move.fromColumn]} to location {@code [move.fromRow,
-     * move.fromColumn]}.
-     *
-     * @param move a {@link Move} object describing the move to be made.
-     * @throws IndexOutOfBoundsException if either {@code [move.fromRow, move.fromColumn]} or {@code [move.toRow,
-     *                                   move.toColumn]} don't represent valid locations on the board.
-     */
-    void move(Move move);
-
-    /**
-     * Report whether the current player is in check.
-     *
-     * @return {@code true} if the current player is in check, {@code false} otherwise.
-     */
-    boolean inCheck(Player player);
-
-    /**
-     * Return the current player.
-     *
-     * @return the current player
-     */
-    Player currentPlayer();
-
-    /**
-     * Return the {@code ChessPiece} object at location {@code [row, column]}.
-     *
-     * @param row    the row (numbered {@code 0} through {@code numRows -1}
-     * @param column the row (numbered {@code 0} through {@code numColumns -1}
-     * @return the {@code ChessPiece} object at location {@code [row, column]}.
-     * @throws IndexOutOfBoundsException if {@code [row, column]} is not a valid location on the board.
-     */
-    IChessPiece pieceAt(int row, int column);
+	private IChessPiece[][] board; 
+	 private Player player; 
+	 // declare other instance variables as needed 
+	 
+	 public ChessModel() { 
+	 // complete this 
+	 } 
+	 
+	 public boolean isComplete() { 
+	 return false; 
+	 } 
+	 
+	 public boolean isValidMove(Move moce) { 
+	 // complete this 
+	 } 
+	 
+	 public void move(Move move) { 
+	 // complete this 
+	 } 
+	 
+	 public boolean inCheck(Player p) { 
+	 return false; 
+	 } 
+	 
+	 public Player currentPlayer() { 
+	 // complete this 
+	 } 
+	 
+	 public int numRows() { 
+	 // complete this 
+	 } 
+	 
+	 public int numColumns() { 
+	 // complete this 
+	 } 
+	 
+	 public IChessPiece pieceAt(int row, int column) { 
+	 // complete this 
+	 } 
 
 }

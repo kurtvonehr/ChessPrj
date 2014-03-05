@@ -2,22 +2,21 @@ package chess;
 
 public abstract class ChessPiece implements IChessPiece {
 
-	@Override
-	public Player player() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	private Player owner; 
+	 
+	 protected ChessPiece(Player player) { 
+	 this.owner = player; 
+	 } 
+	 
+	 public abstract String type(); 
+	 
+	 public Player player() { 
+	 // complete this 
+	 } 
+	 
+	 public boolean isValidMove(Move move, IChessPiece[][] board) { 
+	 // complete this 
+	 } 
 
-	@Override
-	public String type() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isValidMove(Move move, IChessPiece[][] board) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }
