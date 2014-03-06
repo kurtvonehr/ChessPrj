@@ -11,7 +11,39 @@ public class Move {
 
    public int fromRow, fromColumn, toRow, toColumn;
 
-    public Move() {
+    public int getFromRow() {
+    	return fromRow;
+	}
+	
+	public void setFromRow(int fromRow) {
+		this.fromRow = fromRow;
+	}
+	
+	public int getFromColumn() {
+		return fromColumn;
+	}
+	
+	public void setFromColumn(int fromColumn) {
+		this.fromColumn = fromColumn;
+	}
+	
+	public int getToRow() {
+		return toRow;
+	}
+	
+	public void setToRow(int toRow) {
+		this.toRow = toRow;
+	}
+	
+	public int getToColumn() {
+		return toColumn;
+	}
+	
+	public void setToColumn(int toColumn) {
+		this.toColumn = toColumn;
+	}
+
+	public Move() {
     }
 
     public Move(int fromRow, int fromColumn, int toRow, int toColumn) {
