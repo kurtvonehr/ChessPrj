@@ -6,6 +6,7 @@ package chess;
  * @author Kurt VonEhr, Jacob Mckim, 
  */
 public enum Player {
+	
    BLACK, WHITE;
 
    /**

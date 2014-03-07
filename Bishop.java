@@ -18,6 +18,8 @@ package chess;
 *                                 
 *---------------------------------------------------------------------*/
 
+private Player owner;
+
 public class Bishop extends ChessPiece {
 	
 	//---------------------------------------------------------------//	
@@ -37,7 +39,7 @@ public class Bishop extends ChessPiece {
     
     *****************************************************************/
 	public Bishop (Player player) {
-		super(Player);
+		this.owner = player;
 		
 	}
 	
@@ -48,25 +50,12 @@ public class Bishop extends ChessPiece {
 	
 	@Override
 	public String type() {
-		return "Bishop";
-		
+		return "Bishop";	
 	}
 	
 	
 	@Override
 	public boolean isValidMove(Move move, IChessPiece[][] board) {
-		return false;
-	}
-	
-	@Override
-	public String type() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isValidMove(Move move, IChessPiece[][] board) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	
