@@ -58,6 +58,27 @@ public class Bishop extends ChessPiece {
 		return false;
 	}
 	
+	@Override
+	public String type() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isValidMove(Move move, IChessPiece[][] board) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+	boolean inGrid (int xPos, int yPos) {
+		
+		//TODO Add in this feature to allow checking of grid locations
+		//validating that the give position is within the bounds of the
+		//board. NEED TO TAKE INTO ACCOUNT DIMENSIONS OF GRID.
+	}
+
+	
 	//--------------------------------------------------------------//
 
 }
