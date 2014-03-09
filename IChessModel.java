@@ -52,6 +52,7 @@ public interface IChessModel {
      * represent valid locations on the board.
      * 
      *****************************************************************/
+     
      public void move(Move move);
      
      

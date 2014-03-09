@@ -28,7 +28,7 @@ public interface IChessPiece {
    * @return the type of this piece
    * 
    *****************************************************************/
-   String type();
+   Piece type();
 
 
    /****************************************************************

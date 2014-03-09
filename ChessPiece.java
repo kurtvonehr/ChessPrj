@@ -51,8 +51,12 @@ public abstract class ChessPiece implements IChessPiece {
 	// Interface Function Definitions								//
 	//--------------------------------------------------------------//
 	 
-	/* Method called to return piece type as string. */
-	public abstract String type(); 
+	/* Method called to return piece type as Piece. */
+	public abstract Piece type(); 
+	
+	public void setType(Piece type){
+		
+	}
 	 
 	 
 	/* Method called to return the owner of this piece. */

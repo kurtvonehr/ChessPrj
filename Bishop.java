@@ -1,17 +1,17 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* Bishop.java                             		              *
+* Bishop.java                             		                      *
 *---------------------------------------------------------------------*
 * Description - A class used to emulate a specialized game peice in   *
-* the game of chess. The bishop is allowed to move only linear 	      *
-* patterns along the line f(x) and -f(x).			      *
+* the game of chess. The bishop is allowed to move only linear 		  *
+* patterns along the line f(x) and -f(x).							  *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
 * Author : McKim A. Jacob, Vonehr Kurt                                *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES						      *	                                      
+* ISSUES AND NOTES												      *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
@@ -28,23 +28,23 @@ public class Bishop extends ChessPiece {
 	
 	
 	//---------------------------------------------------------------//	
- 	// Class Constructors                                            //
- 	//---------------------------------------------------------------//	
+	// Class Constructors                                            //
+	//---------------------------------------------------------------//	
 	
 	/*****************************************************************
-	The primary constructor for the bishop peice. It creates a bishop
-	for the given player specified.
+    The primary constructor for the bishop peice. It creates a bishop
+    for the given player specified.
         
-	@return None 
+    @return None 
     
- 	*****************************************************************/
+    *****************************************************************/
 	public Bishop (Player player) {
 		this.owner = player;
 		
 	}
 	
 	//--------------------------------------------------------------//	
-	// Override Function Definitions				//
+	// Override Function Definitions					      		//
 	//--------------------------------------------------------------//
 	
 	

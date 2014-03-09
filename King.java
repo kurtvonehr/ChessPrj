@@ -1,17 +1,15 @@
 package chess;
 
-private Player owner;
-
 public class King extends ChessPiece {
 	
-	public Bishop (Player player) {
-		this.owner = player;
-		
+	public King(Player player) {
+		super(player);
+		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
-	public String type() {
-		return "King";	
+	public Piece type() {
+		return Piece.KING;	
 	}
 	
 	

@@ -27,14 +27,14 @@ public class ChessModel implements IChessModel {
   	/* The one instance of this class that exists. */
   	private ChessModel instance;
   
-	/* The game board holding all game peices. */
-	private IChessPiece[ ][ ] board; 
+	/* The game board holding all game pieces. Board is 8x8 */
+	private IChessPiece[][] board = new ChessPiece[8][8]; 
 	
 	/* The first player opponent. */
-	private Player playerOne;
+	private Player White = Player.WHITE;
 	 
 	/* The second player opponent. */
-	private Player playerTwo;
+	private Player Black = Player.BLACK;
 	
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
@@ -42,13 +42,16 @@ public class ChessModel implements IChessModel {
 
 	private ChessModel() { 
 	
+		
+		
+		
 	}
 	
 	//--------------------------------------------------------------//	
 	// Function Definitions					      					//
 	//--------------------------------------------------------------//   
 	
-	public static ChessModel getInstance () {
+	public ChessModel getInstance () {
 	  
 	    // Check to see if the instance exists.
        if (instance == null)
@@ -58,9 +61,12 @@ public class ChessModel implements IChessModel {
 	 
 	}
 
-
+	public boolean inCheck() { 
+		return false; 
+	}
+	
 	public boolean isComplete() { 
-    return false; 
+		return false; 
 	} 
 
 
