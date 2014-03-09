@@ -1,30 +1,79 @@
 package chess;
 
-private Player owner;
+/*--------------------------------------------------------------------*
+* King.java                             		              *
+*---------------------------------------------------------------------*
+* Description - A class used to emulate a specialized game peice in   *
+* the game of chess. The King is the key peice to wining the game of  *
+* chess. It can only move in single steps at a time.	              *
+*---------------------------------------------------------------------*
+* Project: Project 3 : Chess 	                                      *
+* Author : McKim A. Jacob, Vonehr Kurt                                *
+* Date Of Creation: 3 - 1 - 2014                                      *
+*---------------------------------------------------------------------*
+* ISSUES AND NOTES						      *	                                      
+*---------------------------------------------------------------------*
+* 
+*                                 
+*                                 
+*---------------------------------------------------------------------*/
 
 public class King extends ChessPiece {
 	
-	public Bishop (Player player) {
-		this.owner = player;
+	//---------------------------------------------------------------//	
+	// Class Variable Definitions                                    //
+	//---------------------------------------------------------------//
+	
+	//---------------------------------------------------------------//	
+	// Class Constructors                                            //
+	//---------------------------------------------------------------//	
+
+	/*****************************************************************
+  	The primary constructor for the king peice. It creates a king
+  	for the given player specified.
+        
+	 @return None 
+    
+  	*****************************************************************/
+	public King (Player player) {
+		super(player);
 		
 	}
 	
+	
+	//--------------------------------------------------------------//	
+	// Override Function Definitions				//
+	//--------------------------------------------------------------//  
+
+
+	/*****************************************************************
+  	An overriden acessor method that returns the type of chess peice
+  	this class peice is.
+        
+  	@return The class type of pawn as a string. 
+    
+  	*****************************************************************/
 	@Override
 	public String type() {
+		
 		return "King";	
+		
 	}
 	
 	
+	/*****************************************************************
+  	An overriden validation method used to make sure that the 
+  	requested move to preform is valid.
+        
+  	@return Whether or not the move was valid.
+    
+  	*****************************************************************/
 	@Override
 	public boolean isValidMove(Move move, IChessPiece[][] board) {
+		
+		//TODO Temp set to this.
 		return false;
 	}
 	
-	
-	boolean inGrid (int xPos, int yPos) {
-		
-		//TODO Add in this feature to allow checking of grid locations
-		//validating that the give position is within the bounds of the
-		//board. NEED TO TAKE INTO ACCOUNT DIMENSIONS OF GRID.
-	}
+	//--------------------------------------------------------------//  
 }
