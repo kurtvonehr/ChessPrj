@@ -1,17 +1,17 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* Rook.java                             		              		  *
+* Rook.java                             		              *
 *---------------------------------------------------------------------*
 * Description - A class used to emulate a specialized game peice in   *
 * the game of chess. The Rook is allowed to move only linear 	      *
-* patterns along the line of y = x and x = y. 		    			  *
+* patterns along the line of y = x and x = y.			      *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
 * Author : McKim A. Jacob, Vonehr Kurt                                *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES												      *	                                      
+* ISSUES AND NOTES						      *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
