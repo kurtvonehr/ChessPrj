@@ -26,7 +26,6 @@ public class Bishop extends ChessPiece {
 	// Class Variable Definitions                                    //
 	//---------------------------------------------------------------//
 	
-	
 	//---------------------------------------------------------------//	
  	// Class Constructors                                            //
  	//---------------------------------------------------------------//	
@@ -39,7 +38,8 @@ public class Bishop extends ChessPiece {
     
  	*****************************************************************/
 	public Bishop (Player player) {
-		this.owner = player;
+		
+		super (player);
 		
 	}
 	
@@ -47,26 +47,34 @@ public class Bishop extends ChessPiece {
 	// Override Function Definitions				//
 	//--------------------------------------------------------------//
 	
-	
+	/*****************************************************************
+  	An overriden acessor method that returns the type of chess peice
+  	this class peice is.
+        
+  	@return The class type of Bishop as a string. 
+    
+  	*****************************************************************/
 	@Override
 	public String type() {
-		return "Bishop";	
+		
+		return "Bishop";
+		
 	}
 	
 	
+	/*****************************************************************
+  	An overriden validation method used to make sure that the 
+  	requested move to preform is valid.
+        
+  	@return Whether or not the move was valid.
+    
+  	*****************************************************************/
 	@Override
 	public boolean isValidMove(Move move, IChessPiece[][] board) {
+		
+		// TODO temp set.
 		return false;
 	}
-	
-	
-	boolean inGrid (int xPos, int yPos) {
-		
-		//TODO Add in this feature to allow checking of grid locations
-		//validating that the give position is within the bounds of the
-		//board. NEED TO TAKE INTO ACCOUNT DIMENSIONS OF GRID.
-	}
-
 	
 	//--------------------------------------------------------------//
 
