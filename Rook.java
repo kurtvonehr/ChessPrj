@@ -23,9 +23,7 @@ public class Rook extends ChessPiece {
 	//---------------------------------------------------------------//	
 	// Class Variable Definitions                                    //
 	//---------------------------------------------------------------//
-	
-	private ChessModel model;
-	
+
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
 	//---------------------------------------------------------------//	
@@ -38,15 +36,15 @@ public class Rook extends ChessPiece {
     
   	*****************************************************************/
   	public Rook () {
-		
-		// Get the model object for help with control.
-		model = ChessModel.getInstance ();
+  		
+		super(player);
 		
 	}
 
 	//--------------------------------------------------------------//	
 	// Override Function Definitions		      		//
 	//--------------------------------------------------------------//  
+
 
 	/*****************************************************************
   	An overriden acessor method that returns the type of chess peice
@@ -62,10 +60,18 @@ public class Rook extends ChessPiece {
     
   	}
   
+  
+  	/*****************************************************************
+  	An overriden validation method used to make sure that the 
+  	requested move to preform is valid.
+        
+  	@return Whether or not the move was valid.
+    
+  	*****************************************************************/
 	@Override
 	public boolean isValidMove(Move move, IChessPiece[ ][ ] board) {
 		
-		// --- Variable Declarations  -------------------------------//
+		// --- Variable Declarations  -------------------------//
 		
 		/* The result of the computation. */
 		boolean result;
@@ -79,7 +85,7 @@ public class Rook extends ChessPiece {
 		/* The position in the array to be pointing. */
 		int pos;
 		
-		// --- Main Routine -----------------------------------------//
+		// --- Main Routine -----------------------------------//
 		
 		// Preform the generic background check.
 		result = super.isValidMove(move, board);
@@ -148,4 +154,6 @@ public class Rook extends ChessPiece {
 		
 	}
 	
+	//--------------------------------------------------------------//  
+
 }
