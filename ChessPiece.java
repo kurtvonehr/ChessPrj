@@ -1,16 +1,16 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* ChessPiece.java                             		              	  *
+* ChessPiece.java                             		              *
 *---------------------------------------------------------------------*
 * Description - A class used as the default definition for all the    *
-* board pieces involved in the game of chess.						  *
+* board pieces involved in the game of chess.			      *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
 * Author : McKim A. Jacob, VonEhr Kurt                                *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES						      						  *	                                      
+* ISSUES AND NOTES						      *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
@@ -24,8 +24,10 @@ public abstract class ChessPiece implements IChessPiece {
 	//---------------------------------------------------------------//
 
 	/* The player defined as the owner to this piece. */
-	
 	private Player owner; 
+	
+	/* The core model controller that operates all pieces. */
+	private ChessModel model;
 	
 	//---------------------------------------------------------------//	
  	// Class Constructors                                            //
@@ -45,10 +47,13 @@ public abstract class ChessPiece implements IChessPiece {
 		// Set class attributes.
 		this.owner = player; 
 		
+		// Get the model object for help with control.
+		model = ChessModel.getInstance ();
+		
 	} 
 	
 	//--------------------------------------------------------------//	
-	// Interface Function Definitions								//
+	// Interface Function Definitions				//
 	//--------------------------------------------------------------//
 	 
 	/* Method called to return piece type as Piece. */
@@ -92,7 +97,7 @@ public abstract class ChessPiece implements IChessPiece {
 	// Verify that it's the right piece.
 	if (fromPiece != null)
 	{
-		// Verify that the move change position of piece
+		// Verify that the move change position of piece.
 		if ( (move.getFromRow() != move.getToRow() ) &&
 			( move.getFromColumn() != move.getToColumn () ) )
 		{
