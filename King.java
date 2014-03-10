@@ -54,9 +54,8 @@ public class King extends ChessPiece {
     
   	*****************************************************************/
 	@Override
-	public String type() {
-		
-		return "King";	
+	public Piece type() {
+		return Piece.KING;	
 		
 	}
 	
