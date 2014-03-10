@@ -73,6 +73,13 @@ public class King extends ChessPiece {
 		//TODO Temp set to this.
 		return false;
 	}
+
+
+	@Override
+	public boolean inGrid(int xPos, int yPos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	//--------------------------------------------------------------//  
 }
