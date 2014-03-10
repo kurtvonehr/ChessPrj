@@ -1,17 +1,17 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* ChessModel.java                             		              	  *
+* ChessModel.java                             		              *
 *---------------------------------------------------------------------*
 * Description - A class used to control all game logic of the game of *
 * chess during the users interactions with the game. This class can   *
-* only be initialized once.											  *
+* only be initialized once.					      *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
 * Author : McKim A. Jacob, Vonehr Kurt                                *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES						      						  *	                                      
+* ISSUES AND NOTES						      *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
@@ -80,7 +80,7 @@ public class ChessModel implements IChessModel {
 	
 	
 	//--------------------------------------------------------------//	
-	// Function Definitions					      					//
+	// Function Definitions					     	//
 	//--------------------------------------------------------------//   
 	
 	public ChessModel getInstance () {
@@ -102,7 +102,7 @@ public class ChessModel implements IChessModel {
 	} 
 
 
-	public boolean isValidMove(Move moce) { 
+	public boolean isValidMove(Move move) { 
 		// complete this 
 	} 
 
