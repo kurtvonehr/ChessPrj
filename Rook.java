@@ -29,13 +29,13 @@ public class Rook extends ChessPiece {
 	//---------------------------------------------------------------//	
 	
 	/*****************************************************************
-  	The primary constructor for the rook peice. It creates a rook
+  	The primary constructor for the rook piece. It creates a rook
   	for the given player specified.
         
 	 @return None 
     
   	*****************************************************************/
-  	public Rook () {
+  	public Rook (Player player) {
   		
 		super(player);
 		
@@ -47,23 +47,23 @@ public class Rook extends ChessPiece {
 
 
 	/*****************************************************************
-  	An overriden acessor method that returns the type of chess peice
-  	this class peice is.
+  	An overridden assessor method that returns the type of chess piece
+  	this class piece is.
         
   	@return The class type of rook as a string. 
     
   	*****************************************************************/
   	@Override
-  	public String type () {
+  	public Piece type () {
     
-    	return "Rook";
+    	return Piece.ROOK;
     
   	}
   
   
   	/*****************************************************************
-  	An overriden validation method used to make sure that the 
-  	requested move to preform is valid.
+  	An overridden validation method used to make sure that the 
+  	requested move to perform is valid.
         
   	@return Whether or not the move was valid.
     
@@ -87,14 +87,14 @@ public class Rook extends ChessPiece {
 		
 		// --- Main Routine -----------------------------------//
 		
-		// Preform the generic background check.
+		// Reform the generic background check.
 		result = super.isValidMove(move, board);
 		
-		// continue with checking for peice specifics.
+		// continue with checking for piece specifics.
 		if (result)
 		{
-			// Check if it is horizontial.
-			if (move.GetFromRow() == move.getToRow()) 
+			// Check if it is horizontal.
+			if (move.getFromRow() == move.getToRow()) 
 			{
 				// Determine which part of the move is greater.
 				if ( move.getFromColumn() > move.getToColumn() ) 
@@ -108,7 +108,7 @@ public class Rook extends ChessPiece {
 					lesser = move.getFromColumn();
 				}
 				
-				//  Find if there are any peices in between the rows.
+				//  Find if there are any pieces in between the rows.
 				for ( pos = lesser + 1; pos < greater; pos++ )
 				{
 					if (board [move.getToRow()] [pos] != null) 
@@ -134,7 +134,7 @@ public class Rook extends ChessPiece {
 					lesser = move.getFromRow();
 				}
 				
-				//  Find if there are any peices in between the rows.
+				//  Find if there are any pieces in between the rows.
 				for ( pos = lesser + 1; pos < greater; pos++ )
 				{
 					if (board [pos] [move.getToColumn()] != null) 
@@ -152,6 +152,12 @@ public class Rook extends ChessPiece {
 		// Return the result of the operation.
 		return result;
 		
+	}
+
+	@Override
+	public boolean inGrid(int xPos, int yPos) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	//--------------------------------------------------------------//  

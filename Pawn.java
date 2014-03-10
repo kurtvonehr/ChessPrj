@@ -53,8 +53,8 @@ public class Pawn extends ChessPiece {
 
 
 	/*****************************************************************
-  	An overriden acessor method that returns the type of chess peice
-  	this class peice is.
+  	An overridden assessor method that returns the type of chess piece
+  	this class piece is.
         
   	@return The class type of pawn as a Piece enum. 
     
@@ -68,8 +68,8 @@ public class Pawn extends ChessPiece {
   	
   	
   	/*****************************************************************
-  	An overriden validation method used to make sure that the 
-  	requested move to preform is valid.
+  	An overridden validation method used to make sure that the 
+  	requested move to perform is valid.
         
   	@return Whether or not the move was valid.
     
@@ -84,10 +84,10 @@ public class Pawn extends ChessPiece {
 		
 		// --- Main Routine -----------------------------------//
 		
-		// Preform the generic background check.
+		// Perform the generic background check.
 		result = super.isValidMove(move, board);
 		
-		// continue with checking for peice specifics.
+		// continue with checking for piece specifics.
 		if (result)
 		{
 			//TODO implement pawn search.
@@ -96,6 +96,12 @@ public class Pawn extends ChessPiece {
 		// Return the result of the operation.
 		return result;
 		
+	}
+
+	@Override
+	public boolean inGrid(int xPos, int yPos) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	//--------------------------------------------------------------//  

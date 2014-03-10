@@ -30,7 +30,7 @@ public class Queen extends ChessPiece {
 	//---------------------------------------------------------------//	
 
 	/*****************************************************************
-  	The primary constructor for the Queen peice. It creates a queen
+  	The primary constructor for the Queen piece. It creates a queen
   	for the given player specified.
         
 	 @return None 
@@ -48,8 +48,8 @@ public class Queen extends ChessPiece {
 
 
 	/*****************************************************************
-  	An overriden acessor method that returns the type of chess peice
-  	this class peice is.
+  	An overridden assessor method that returns the type of chess piece
+  	this class piece is.
         
   	@return The class type of queen as a Piece enum. 
     
@@ -63,8 +63,8 @@ public class Queen extends ChessPiece {
   	
   	
   	/*****************************************************************
-  	An overriden validation method used to make sure that the 
-  	requested move to preform is valid.
+  	An overridden validation method used to make sure that the 
+  	requested move to perform is valid.
         
   	@return Whether or not the move was valid.
     
@@ -79,10 +79,10 @@ public class Queen extends ChessPiece {
 
 		// --- Main Routine -----------------------------------//
 
-		// Preform the generic background check.
+		// Perform the generic background check.
 		result = super.isValidMove(move, board);
 
-		// continue with checking for peice specifics.
+		// continue with checking for piece specifics.
 		if (result)
 		{
 		    //TODO implement queen search.
@@ -92,5 +92,12 @@ public class Queen extends ChessPiece {
 		return result;
 
 	}
+
+	@Override
+	public boolean inGrid(int xPos, int yPos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+}
 
 	//--------------------------------------------------------------// 

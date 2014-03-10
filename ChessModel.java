@@ -65,7 +65,7 @@ public class ChessModel implements IChessModel {
 		board[0][0] = new Rook(Player.WHITE);
 		board[0][1] = new Knight(Player.WHITE);
 		board[0][2] = new Bishop(Player.WHITE);
-		board{0][3] = new Queen(Player.WHITE);
+		board[0][3] = new Queen(Player.WHITE);
 		board[0][4] = new King(Player.WHITE);
 		board[0][5] = new Bishop(Player.WHITE);
 		board[0][6] = new Knight(Player.WHITE);

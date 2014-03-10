@@ -36,7 +36,7 @@ public class Knight extends ChessPiece {
 	 @return None 
     
   	*****************************************************************/
-  	public Kight (Player player) {
+  	public Knight (Player player) {
 
 		super (player);
 
@@ -79,10 +79,10 @@ public class Knight extends ChessPiece {
 
 		// --- Main Routine -----------------------------------//
 
-		// Preform the generic background check.
+		// Perform the generic background check.
 		result = super.isValidMove(move, board);
 
-		// continue with checking for peice specifics.
+		// continue with checking for piece specifics.
 		if (result)
 		{
 		    //TODO implement pawn search.
@@ -92,5 +92,12 @@ public class Knight extends ChessPiece {
 		return result;
 
 	}
+
+	@Override
+	public boolean inGrid(int xPos, int yPos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+}
 
 	//--------------------------------------------------------------//  
