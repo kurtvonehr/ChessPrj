@@ -55,6 +55,8 @@ public class King extends ChessPiece {
 	@Override
 	public Piece type() {
 		return Piece.KING;	
+		
+
 	}
 	
 	
