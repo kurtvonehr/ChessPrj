@@ -25,7 +25,7 @@ public class ChessModel implements IChessModel {
 	//---------------------------------------------------------------//
 
   	/* The one instance of this class that exists. */
-  	private ChessModel instance;
+  	private static ChessModel instance;
   
 	/* The game board holding all game pieces. Board is 8x8 */
 	private IChessPiece[][] board;
@@ -88,7 +88,7 @@ public class ChessModel implements IChessModel {
 	// Function Definitions					     					//
 	//--------------------------------------------------------------//   
 	
-	public ChessModel getInstance () {
+	public static ChessModel getInstance () {
 	  
 	    // Check to see if the instance exists.
        if (instance == null)

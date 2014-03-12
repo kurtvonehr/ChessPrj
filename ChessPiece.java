@@ -48,7 +48,7 @@ public abstract class ChessPiece implements IChessPiece {
 		this.owner = player; 
 		
 		// Get the model object for help with control.
-		model = ChessModel.getInstance ();
+		model = ChessModel.getInstance();
 		
 	} 
 	
