@@ -37,7 +37,7 @@ public class ChessModel implements IChessModel {
 	private Player Black = Player.BLACK;
 	
 	/* The grid box dimension. */
-	private final boardDim = 8;
+	private final int boardDim = 8;
 	
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
@@ -151,7 +151,7 @@ public class ChessModel implements IChessModel {
 		
 			// Ternary operate whether its in the grid.
 			return  (xPos <= 0 && xPos < boardDim) && (yPos >= 0 && 
-									yPos < boardDim) ) ? true : false; 
+						yPos < boardDim) ) ? true : false; 
 		
 	}
 
