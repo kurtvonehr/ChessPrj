@@ -18,7 +18,6 @@ package chess;
 *                                 
 *---------------------------------------------------------------------*/
 
-private Player owner;
 
 public class Bishop extends ChessPiece {
 	
