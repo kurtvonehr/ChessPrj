@@ -91,7 +91,7 @@ public class Pawn extends ChessPiece {
 		if (result)
 		{
 			// Determine which direction we should be moving.
-			if (player == player.BLACK)
+			if (player() == Player.BLACK)
 			{
 				
 				// TODO implement logic.
