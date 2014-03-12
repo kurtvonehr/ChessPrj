@@ -153,12 +153,6 @@ public class Rook extends ChessPiece {
 		return result;
 		
 	}
-
-	@Override
-	public boolean inGrid(int xPos, int yPos) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	//--------------------------------------------------------------//  
 

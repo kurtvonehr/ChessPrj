@@ -90,18 +90,30 @@ public class Pawn extends ChessPiece {
 		// continue with checking for piece specifics.
 		if (result)
 		{
-			//TODO implement pawn search.
+			// Determine which direction we should be moving.
+			if (player == player.BLACK)
+			{
+				
+				// TODO implement logic.
+				
+				// Step through and see what type of move it could be.
+				//if (move.getTo) 
+				
+				// Take into account extra start case.
+				//if ()
+			}
+			
+			else
+			{
+				// TODO implement logic.
+
+			}
+			
 		}
 		
 		// Return the result of the operation.
 		return result;
 		
-	}
-
-	@Override
-	public boolean inGrid(int xPos, int yPos) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 	
 	//--------------------------------------------------------------//  

@@ -36,6 +36,9 @@ public class ChessModel implements IChessModel {
 	/* The second player opponent. */
 	private Player Black = Player.BLACK;
 	
+	/* The grid box dimension. */
+	private final boardDim = 8;
+	
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
 	//---------------------------------------------------------------//	
@@ -43,8 +46,8 @@ public class ChessModel implements IChessModel {
 	private ChessModel() { 
 	
 		//Init blank board
-		for(int i = 0; i<8; i++)
-			for(int j = 0; j<8; j++){
+		for(int i = 0; i< boardDim; i++)
+			for(int j = 0; j< boardDim; j++){
 				board[i][j] = null;
 			}
 		//Place Black pieces onto board
@@ -57,9 +60,10 @@ public class ChessModel implements IChessModel {
 		board[7][6] = new Knight(Player.BLACK);
 		board[7][7] = new Rook(Player.BLACK);
 		
-		for(int i =0; i<8;i++){
+		// Place black pawns.
+		for(int i = 0; i < boardDim; i++)
 			board[6][i] = new Pawn(Player.BLACK);
-		}
+		
 		
 		//Place White pieces onto board
 		board[0][0] = new Rook(Player.WHITE);
@@ -71,16 +75,17 @@ public class ChessModel implements IChessModel {
 		board[0][6] = new Knight(Player.WHITE);
 		board[0][7] = new Rook(Player.WHITE);
 		
-		for(int i =0; i<8;i++){
+		// Place white pawns.
+		for(int i = 0; i< boardDim; i++)
 			board[6][i] = new Pawn(Player.WHITE);
-		}
+		
 		
 	
 		}
 	
 	
 	//--------------------------------------------------------------//	
-	// Function Definitions					     	//
+	// Function Definitions					     					//
 	//--------------------------------------------------------------//   
 	
 	public ChessModel getInstance () {
@@ -135,6 +140,20 @@ public class ChessModel implements IChessModel {
 	public IChessPiece pieceAt(int row, int column) { 
 		// complete this 
 	} 
+	
+   /****************************************************************
+   * This method validates that a move postion is within the grid.
+   *
+   * @return Whether or not the move is in the grid. 
+   * 
+   *****************************************************************/
+	public boolean inGrid (int xPos, int yPos) {
+		
+			// Ternary operate whether its in the grid.
+			return  (xPos <= 0 && xPos < boardDim) && (yPos >= 0 && 
+									yPos < boardDim) ) ? true : false; 
+		
+	}
 
 
 }

@@ -93,11 +93,6 @@ public class Queen extends ChessPiece {
 
 	}
 
-	@Override
-	public boolean inGrid(int xPos, int yPos) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
 
 	//--------------------------------------------------------------// 

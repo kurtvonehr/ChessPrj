@@ -55,12 +55,6 @@ public interface IChessPiece {
    *****************************************************************/
    boolean isValidMove(Move move, IChessPiece[][] board);
    
-   /****************************************************************
-   * This method validates that a move postion is within the grid.
-   *
-   * @return Whether or not the move is in the grid. 
-   * 
-   *****************************************************************/
-   boolean inGrid (int xPos, int yPos);
+
 
 }
