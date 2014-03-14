@@ -82,6 +82,12 @@ public class Pawn extends ChessPiece {
 		/* The result of the computation. */
 		boolean result;
 		
+		/* The current row postion of the pawn. */
+		int row;
+		
+		/* The current column position of the pawn. */
+		int col;
+		
 		// --- Main Routine -----------------------------------//
 		
 		// Perform the generic background check.
@@ -97,7 +103,8 @@ public class Pawn extends ChessPiece {
 				// TODO implement logic.
 				
 				// Step through and see what type of move it could be.
-				//if (move.getTo) 
+				if (move.getToRow() == row+1 && move.getToColumn() == col + 1) 
+				{}
 				
 				// Take into account extra start case.
 				//if ()
