@@ -70,6 +70,7 @@ public class King extends ChessPiece {
 	@Override
 	public boolean isValidMove(Move move, IChessPiece[][] board) {
 		
+		if((move.getFromRow() - move.getToRow()))
 		//TODO Temp set to this.
 		return false;
 	}
