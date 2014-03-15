@@ -80,13 +80,19 @@ public class Pawn extends ChessPiece {
 		// --- Variable Declarations  -------------------------//
 
 		/* The result of the computation. */
-		boolean result;
+		boolean result = false;
 		
 		/* The current row postion of the pawn. */
 		int row;
 		
 		/* The current column position of the pawn. */
 		int col;
+		
+		/* The move to row position. */
+		int toRow = move.getToRow();
+		
+		/* The move to column position. */
+		int toCol = move.getToColumn();
 		
 		// --- Main Routine -----------------------------------//
 		
@@ -96,27 +102,77 @@ public class Pawn extends ChessPiece {
 		// continue with checking for piece specifics.
 		if (result)
 		{
+			// Get row positon values.
+			row = move.getFromRow ();
+			col = move.getFromColumn ();
+			toRow = move.getToRow ();
+			toCol = move.getToColumn ();
+			
 			// Determine which direction we should be moving.
 			if (player() == Player.BLACK)
 			{
 				
-				// TODO implement logic.
+				// -- Check what move call was preformed. -- //
 				
-				// Step through and see what type of move it could be.
-				if (move.getToRow() == row+1 && move.getToColumn() == col + 1) 
-				{}
+				// Check for a first move instance.
+				if (firstmove && col == toCol && toRow == row + 2)
+					result = true;
 				
-				// Take into account extra start case.
-				//if ()
+				// If they called a north west move.
+				else if (toRow == row + 1 && toCol == col - 1) 
+				{
+					// Check that the opponent has a peice there.
+					if (model.pieceAt().owner == Player.WHITE)
+						result = true;
+				}
+				
+				// If they called a north east move.
+				else if (toRow == row + 1 && toCol == col + 1) 
+				{
+					// Check that the opponent has a peice there.
+					if (model.pieceAt().owner == Player.WHITE)
+						result = true;
+				}
+				
+				// If they called a due north move. 
+				else if (toRow == row + 1 && toCol == col && 
+										model.pieceAt() == null)
+					result = true;
 			}
 			
 			else
 			{
-				// TODO implement logic.
-
+				// -- Check what move call was preformed. -- //
+				
+				// Check for a first move instance.
+				if (firstmove && col == toCol && toRow == row - 2)
+					result = true;
+				
+				// If they called a north west move.
+				else if (toRow == row - 1 && toCol == col - 1) 
+				{
+					// Check that the opponent has a peice there.
+					if (model.pieceAt().owner == Player.WHITE)
+						result = true;
+				}
+				
+				// If they called a north east move.
+				else if (toRow == row - 1 && toCol == col + 1) 
+				{
+					// Check that the opponent has a peice there.
+					if (model.pieceAt().owner == Player.WHITE)
+						result = true;
+				}
+				
+				// If they called a due north move. 
+				else if (toRow == row - 1 && toCol == col && 
+										model.pieceAt() == null)
+					result = true;
 			}
-			
 		}
+		
+		// Make sure if the first move cleared that we turn it off.
+		firstmove == firstmove && result ? false : false;
 		
 		// Return the result of the operation.
 		return result;
