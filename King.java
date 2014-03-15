@@ -55,8 +55,6 @@ public class King extends ChessPiece {
 	@Override
 	public Piece type() {
 		return Piece.KING;	
-		
-
 	}
 	
 	
@@ -70,9 +68,18 @@ public class King extends ChessPiece {
 	@Override
 	public boolean isValidMove(Move move, IChessPiece[][] board) {
 		
-		if((move.getFromRow() - move.getToRow()))
-		//TODO Temp set to this.
-		return false;
+		boolean validMove = true;
+		//If move is greater than one square in any direction, 
+		//move is invalid.
+		
+		if(abs((move.getToRow() - move.getFromRow()))>1)
+			validMove = false;
+		if(abs((move.getToColumn() - move.getFromColumn()))>1)
+			validMove = false;
+		if(move.getToColumn == move.getFromColumn)
+			if(move.getToRow == move.getFromRow)
+				validMove = false;
+		return validMove;
 	}
 	
 	//--------------------------------------------------------------//  
