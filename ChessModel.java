@@ -218,8 +218,7 @@ public class ChessModel implements IChessModel {
 			return board [row] [column];
 					
 		else
-			return null;
-				
+			return null;				
 	} 
 	
    /****************************************************************
