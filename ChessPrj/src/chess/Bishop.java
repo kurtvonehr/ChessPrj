@@ -1,17 +1,17 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* Bishop.java                             		             		  *
+* Bishop.java                             		              *
 *---------------------------------------------------------------------*
-* Description - A class used to emulate a specialized game piece in   *
+* Description - A class used to emulate a specialized game peice in   *
 * the game of chess. The bishop is allowed to move only linear	      *
-* patterns along the line f(x) and -f(x).			      			  *
+* patterns along the line f(x) and -f(x).			      *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
 * Author : McKim A. Jacob, Vonehr Kurt                                *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES						      						  *	                                      
+* ISSUES AND NOTES						      *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
@@ -98,8 +98,8 @@ public class Bishop extends ChessPiece {
 	if (result)
 	{
 		// Check if it is on the positive slope diagonal.
-		//else if ((move.getFromColumn() - move.getToColumn()) ==
-		//(move.getFromRow - move.getFromRow))
+		if ((move.getFromColumn() - move.getToColumn()) ==
+		(move.getFromRow() - move.getFromRow()))
 		{
 			// Determine which part of the move is greater.
 			if ( move.getFromRow() > move.getToRow() )
@@ -136,7 +136,6 @@ public class Bishop extends ChessPiece {
 				}
 			}
 		}
-	}
 		
 		// Check if it is on the negative slope diagonal
 		else if ((move.getFromColumn() - move.getToColumn()) ==
@@ -180,7 +179,7 @@ public class Bishop extends ChessPiece {
 		
 		else
 			result = false;
-		
+		}
 		
 		// Return the result of the operation.
 		return result;

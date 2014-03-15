@@ -1,16 +1,16 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* ChessPiece.java                             		                  *
+* ChessPiece.java                             		              *
 *---------------------------------------------------------------------*
 * Description - A class used as the default definition for all the    *
-* board pieces involved in the game of chess.			      		  *
+* board pieces involved in the game of chess.			      *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
 * Author : McKim A. Jacob, VonEhr Kurt                                *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES						     						  *	                                      
+* ISSUES AND NOTES						      *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
@@ -20,14 +20,14 @@ package chess;
 public abstract class ChessPiece implements IChessPiece {
 
 	//---------------------------------------------------------------//	
-	// Class Global Variable Definitions                             //
+	// Class Variable Definitions                                    //
 	//---------------------------------------------------------------//
 
 	/* The player defined as the owner to this piece. */
 	private Player owner; 
 	
 	/* The core model controller that operates all pieces. */
-	private ChessModel model;
+	public ChessModel model;
 	
 	//---------------------------------------------------------------//	
  	// Class Constructors                                            //
@@ -44,31 +44,35 @@ public abstract class ChessPiece implements IChessPiece {
  	*****************************************************************/
 	protected ChessPiece(Player player) { 
 		
-		// Sets the objects Player.enum to the given parameter
-		this.owner = player; 
+		// Set class attributes.
+		owner = player; 
 		
-		// Instantiates a new model object which controls the game.
-		model = new ChessModel();
+		// Get the model object for help with control.
+		model = ChessModel.getInstance();
 		
-		/** EDIT: Not really necessary, since we only want one game running at a time */
-		// model = ChessModel.getInstance();
 	} 
 	
 	//--------------------------------------------------------------//	
-	// Interface Function Definitions				//
+	// Interface Function Definitions								//
 	//--------------------------------------------------------------//
 	 
-	/* Method called to return the owner of this piece. */
-	public Player player() { 	 
-		return owner;
-	} 
-	
 	/* Method called to return piece type as Piece. */
-	// Each piece (ex: Pawn.java, Rook.java) will return its own Piece.enum 
 	public abstract Piece type(); 
+	
+	public void setType(Piece type){
+		
+	}
+	 
+	 
+	/* Method called to return the owner of this piece. */
+	public Player player() { 
 		 
+		return owner;
+		 
+	} 
+	 
 	/* Method called to see if move requested is valid. */
-	public boolean isValidMove(Move move, IChessPiece[ ][ ] board) {
+	public boolean isValidMove(Move move, IChessPiece[ ][ ] board) { 
 	 	
 	// --- Variable Declarations  ---------------------------//
 	
@@ -84,8 +88,7 @@ public abstract class ChessPiece implements IChessPiece {
 	// --- Main Routine -------------------------------------//
 
 	// Get start position of cell.
-	fromPiece = board[move.getFromRow()]
-					[move.getFromColumn()];
+	fromPiece = board[move.getFromRow()] [move.getFromColumn()];
 	
 	// Get the end position of the cell.
 	toPiece = board[move.getToRow()] [move.getToColumn()];

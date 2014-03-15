@@ -8,7 +8,7 @@ package chess;
 * only be initialized once.					      *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
-* Author : McKim A. Jacob, Vonehr Kurt                                *
+* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	      *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
 * ISSUES AND NOTES						      *	                                      
@@ -25,16 +25,19 @@ public class ChessModel implements IChessModel {
 	//---------------------------------------------------------------//
 
   	/* The one instance of this class that exists. */
-  	private static ChessModel instance;
+  	private static ChessModel instance = null;
   
-	/* The game board holding all game pieces. Board is 8x8 */
-	private ChessPiece[][] board;
+	/* The game board holding all game pieces. Board is 8 x 8. */
+	private IChessPiece[][] board;
+	
+	/* The current player playing the game. */
+	private Player currentPlayer;
 	
 	/* The first player opponent. */
-	private Player white = Player.WHITE;
+	private Player White = Player.WHITE;
 	 
 	/* The second player opponent. */
-	private Player black = Player.BLACK;
+	private Player Black = Player.BLACK;
 	
 	/* The grid box dimension. */
 	private final int boardDim = 8;
@@ -43,34 +46,19 @@ public class ChessModel implements IChessModel {
 	// Class Constructors                                            //
 	//---------------------------------------------------------------//	
 	
-	public ChessModel() { 
-	
-		/** NOT NECESSARY, JUST INSTANTIATE THE ARRAY **/
-		//Init blank board
-//		for(int i = 0; i< boardDim; i++) {
-//			for(int j = 0; j< boardDim; j++){
-//				board[i][j] = new ChessPiece();
-//			}
-//		}
-		board = new ChessPiece[boardDim][boardDim];
+	private ChessModel() { 
 		
-		//Places Black pieces onto board
-		//board[7][0] = new Rook(Player.BLACK);
-		board[7][1] = new Knight(Player.BLACK);
-		board[7][2] = new Bishop(Player.BLACK);
-		board[7][3] = new Queen(Player.BLACK);
-		board[7][4] = new King(Player.BLACK);
-		board[7][5] = new Bishop(Player.BLACK);
-		board[7][6] = new Knight(Player.BLACK);
-		board[7][7] = new Rook(Player.BLACK);
 		
-		// Places black pawns.
-		for(int i = 0; i < boardDim; i++) {
-			board[6][i] = new Pawn(Player.BLACK);
+		board = new IChessPiece[boardDim][boardDim];
+		
+		for (int i=0; i < boardDim; i++){
+			for(int j=0; j<boardDim; j++){
+				board[i][j] = null;
+			}
 		}
-		
-		//Places White pieces onto board
-		//board[0][0] = new Rook(Player.WHITE);
+			
+		//Place White pieces onto board
+		board[0][0] = new Rook(Player.WHITE);
 		board[0][1] = new Knight(Player.WHITE);
 		board[0][2] = new Bishop(Player.WHITE);
 		board[0][3] = new Queen(Player.WHITE);
@@ -79,168 +67,181 @@ public class ChessModel implements IChessModel {
 		board[0][6] = new Knight(Player.WHITE);
 		board[0][7] = new Rook(Player.WHITE);
 		
-		// Places all the white pawns
+		//Place Black pieces onto board
+		board[7][0] = new Rook(Player.BLACK);
+		board[7][1] = new Knight(Player.BLACK);
+		board[7][2] = new Bishop(Player.BLACK);
+		board[7][3] = new Queen(Player.BLACK);
+		board[7][4] = new King(Player.BLACK);
+		board[7][5] = new Bishop(Player.BLACK);
+		board[7][6] = new Knight(Player.BLACK);
+		board[7][7] = new Rook(Player.BLACK);
+		
+		// Place black pawns.
+		for(int i = 0; i < boardDim; i++)
+			board[6][i] = new Pawn(Player.BLACK);
+		
+		// Place white pawns.
 		for(int i = 0; i< boardDim; i++)
 			board[6][i] = new Pawn(Player.WHITE);
-
+		
+		// Define the first current player.
+		currentPlayer = White;
+	
 		}
 	
+	
 	//--------------------------------------------------------------//	
-	// Function Definitions					     					//
+	// Function Definitions					     	//
 	//--------------------------------------------------------------//   
 	
-	// Is this necessary?
+	/* Allows this object to be a singleton object. */
 	public static ChessModel getInstance () {
+	  
 	    // Check to see if the instance exists.
        if (instance == null)
           instance = new ChessModel();
-      return instance;
+
+       // Return the instance of the object. 
+       return instance;
+	 
 	}
 
-	
-	/****************************************************************
-     * This method returns whether the game is complete.
-     *
-     * @return {@code true} if complete, {@code false} otherwise.
-     * 
-     *****************************************************************/
+	/* Returns whether checkmate can be declared. */
 	public boolean isComplete() { 
-		// TODO complete logic:
-		// ?	if (checkMate() = true) <-- the opposing player's king is dead meat
-		//			return true;
-		return false; 
+		
+		return false;
+		
 	} 
 
-	/****************************************************************
-     * This method returns whether the piece at location {
-     * @code [move.fromRow, move.fromColumn]} is allowed to move to 
-     * location{@code [move.fromRow, move.fromColumn]}.
-     *
-     * @param move a {@link Move} object describing the move to be made.
-     * 
-     * @return {@code true} if the proposed move is valid, {@code false} 
-     * otherwise.
-     * 
-     * @throws IndexOutOfBoundsException if either {@code [move.fromRow, 
-     * move.fromColumn]} or {@code [move.toRow,move.toColumn]} don't 
-     * represent valid locations on the board.
-     * 
-     *****************************************************************/
+	/* */
 	public boolean isValidMove(Move move) { 
-		// returns...
-		// PIECE TYPE == board[move.fromRow][move.fromColumn].type();
-		// board[move.fromRow][move.fromColumn].isValidMove(move, board[move.fromRow][move.fromColumn])
+		// TODO DONT TOUCH. BAD THINGS WILL HAPPEN.
 		return false;
 	} 
 
-	/****************************************************************
-     * This method moves the piece from location {@code [move.fromRow,
-     * move.fromColumn]} to location {@code [move.fromRow,move.
-     * fromColumn]}.
-     *
-     * @param move a {@link Move} object describing the move to be
-     * made.
-     * 
-     * @returns None
-     * 
-     * @throws IndexOutOfBoundsException if either {@code [move.fromRow,
-     * move.fromColumn]} or {@code [move.toRow,move.toColumn]} don't 
-     * represent valid locations on the board.
-     * 
-     *****************************************************************/
+	/* Moves a piece on the board. */
 	public void move(Move move) { 
-		// TODO complete this logic
 		
-		if (isValidMove(move)) {
-			// Grabs ChessPiece.FROM and replaces ChessPiece.TO in the board[][] array
-			board[move.fromRow][move.fromColumn] = board[move.toRow][move.toColumn];
-			board[move.fromRow][move.fromColumn] = null;
-		}
+		// --- Variable Declarations  -------------------------//
+		
+		/* The tempoary piece holder. */
+		IChessPiece temp; 
+		
+		// --- Main Routine -----------------------------------//
+		
+		// get the piece at the start postion.
+		temp = pieceAt (move.getFromRow(), move.getFromColumn());
+		
+		// Preform the swap.
+		board [move.getToRow()] [move.getToColumn()] = temp;
+		board [move.getFromRow()] [move.getFromColumn()] = null;				
+		
 	} 
 	
-	/****************************************************************
-     * This method reports whether the current player is in check.
-     *
-     * @return {@code true} if the current player is in check, 
-     * {@code false} otherwise.
-     * 
-     *****************************************************************/
+	/* Determines if a given player is in check. */
 	public boolean inCheck(Player p) { 
+		
+		// --- Variable Declarations  -------------------------//
+		
+		/* The player who is checking the checked. */ 
+		Player agianstPlayer = p == Player.WHITE ? Player.BLACK 
+							 : Player.WHITE;
+		
+		/* The king piece to check if in check. */
+		ChessPiece KING;
+		
+		/* The to postion x for all checks. */
+		int toKingX = -1;
+		
+		/* The to postion y for all checks. */
+		int toKingY = -1;
+		
+		/* The move to check. */
+		Move moveCheck;
+		
+		// --- Main Routine -----------------------------------//
+		
+		// Find the king on the board were checking for to be checked.
+		for (int x = 0; x < numRows(); x++) 
+		{
+			for (int y = 0; y < numColumns(); y++)
+			{
+				// If the piece matches the description set to pos.
+				if (board[x][y].type() == Piece.KING &&
+							board[x][y].player() == p)
+				{
+					toKingX = x;
+					toKingY = y;
+					break;
+				}
+			}
+		}
+		
+		// Determine any avenues that the king could be in check.
+		for (int x = 0; x < numRows(); x++) 
+		{
+			for (int y = 0; y < numColumns(); y++)
+			{
+				if (board[x][y].player() == agianstPlayer)
+				{
+					// Construct a move to check.
+					moveCheck = new Move (x, y, toKingX, toKingY);
+					
+					// If it came back valid. Set in check to true.
+					if (board[x][y].isValidMove(moveCheck,board))
+						return true;
+				}
+			}
+		}
+		
+		// Return the result.
 		return false; 
+		
 	} 
-	
-	/****************************************************************
-     * This method returns the current player.
-     *
-     * @return the current player.
-     * 
-     *****************************************************************/
+
+	/* Returns the current player. */
 	public Player currentPlayer() { 
-		// TODO complete this logic
-		// if (this.player == a.black.piece) {
-		// 		return black;
-		//  else
-				return white;
-	} 		
 
-	/****************************************************************
-     * This method reports back the number of rows that are on the 
-     * board.
-     *
-     * @return The row count as an integer.
-     * 
-     *****************************************************************/
-	public int numRows() {
-		int r = 8;
-		return r;
+		return currentPlayer;
+	
 	} 
 	
-	/****************************************************************
-     * This method reports back the number of columns that are on the 
-     * board.
-     *
-     * @return The column count as an integer.
-     * 
-     *****************************************************************/
-	public int numColumns() {
-		int c = 8;
-		return c;
+	/* Returns the number of rows on the board. */
+	public int numRows() { 
+
+		return boardDim;
+
+	} 
+	
+	/* Returns the number of columns on the board. */
+	public int numColumns() { 
+
+		return boardDim;
+		
 	} 
 
-	/****************************************************************
-     * This method returns the {@code ChessPiece} object at location 
-     * {@code [row, column]}.
-     *
-     * @param row    the row (numbered {@code 0} through 
-     * {@code numRows -1}
-     * 
-     * @param column the row (numbered {@code 0} through 
-     * {@code numColumns -1}
-     * 
-     * @return the {@code ChessPiece} object at location 
-     * {@code [row, column]}.
-     * 
-     * @throws IndexOutOfBoundsException if {@code [row, column]} is 
-     * not a valid location on the board.
-     * 
-     *****************************************************************/
-	public ChessPiece pieceAt(int row, int column) {  
-		// TODO complete this
-		// Use ChessPiece.type() to grab Piece.enum
-		// Use ChessPiece.player() to grab Player.enum
-		return board[row][column];
+	/* Returns a piece at a given point in the grid. */
+	public IChessPiece pieceAt(int row, int column) { 
+		
+		if (inGrid (row, column))
+			return board [row] [column];
+					
+		else
+			return null;				
 	} 
 	
    /****************************************************************
-   * This method validates that a move position is within the grid.
+   * This method validates that a move postion is within the grid.
    *
    * @return Whether or not the move is in the grid. 
    * 
    *****************************************************************/
 	public boolean inGrid (int xPos, int yPos) {
 		
-			// Ternary operate whether its in the grid.
-			return  (xPos <= 0 && xPos < boardDim) && (yPos >= 0 && 
-						yPos < boardDim) ? true : false; 
+		// Ternary operate whether its in the grid.
+		return  (xPos <= 0 && xPos < boardDim) && (yPos >= 0 && 
+					yPos < boardDim) ? true : false; 
 	}
+	
 }

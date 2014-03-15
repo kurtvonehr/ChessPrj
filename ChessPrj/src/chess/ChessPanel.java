@@ -36,8 +36,9 @@ public class ChessPanel extends JPanel {
 	
 	private ButtonListener bl = new ButtonListener();
 
+	// JUNK BOX of variables
 	private int rows, cols;
-	public int count;
+	public int clickCount;
 	public Move moving;
 	private JLabel coordinates;
 	
@@ -51,7 +52,7 @@ public class ChessPanel extends JPanel {
 		//---------------------------------------------------------------//	
 		// Creates a new ChessModel object                               //
 		//---------------------------------------------------------------//
-		model = new ChessModel();
+		model = ChessModel.getInstance();
 		
 		//---------------------------------------------------------------//	
 		// Gets number of Rows and Columns from ChessModel               //
@@ -79,23 +80,24 @@ public class ChessPanel extends JPanel {
 		// Inst. top panel and adds message label where messages can be displayed
 		//-----------------------------------------------------------------------------//
 		top_panel = new JPanel();
-		message = new JLabel("This is a game of chess...that doesn't work");
+		message = new JLabel("This is a game of chess...that might work");
 		top_panel.add(message);
 		
 		//-----------------------------------------------------------------------------//
 		// Builds out all of the buttons (aka the chess board squares)
 		//-----------------------------------------------------------------------------//
 		grid = new JPanel(new GridLayout (rows, cols));
-		for (int row = 0; row < 8; row++){
-			for (int col = 0; col < 8; col++){
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				// Create a new button
 				boardButtons[row][col] = new JButton("");
+				// Add an ActionListener to that button
 				boardButtons[row][col].addActionListener(bl);
+				// Add each button to the JPanel grid
 				grid.add(boardButtons[row][col]);
-				
-				/** Sets blank background image to each piece */
+				// Sets blank background image to each piece
 				boardButtons[row][col].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
-				
-				/** Then, sets background colors of buttons to black or white, as required by rules of chess **/
+				// Then, sets background colors of buttons to black or white, as required by rules of chess **/
 				if ( (row % 2 == 0 && col % 2 == 0) || (row % 2 == 1 && col % 2 ==1)) {
 					boardButtons[row][col].setBackground(Color.white);
 					boardButtons[row][col].setOpaque(true);
@@ -107,50 +109,46 @@ public class ChessPanel extends JPanel {
 			}
 		}
 		
-		/** Builds boardImages[][] array and then displays new game board pieces */
+		//-----------------------------------------------------------------------------//
+		// Builds boardImages[][] array (sprites)
+		//-----------------------------------------------------------------------------//
 		createImages();
+		
+		//-----------------------------------------------------------------------------//
+		// Displays the chess board
+		//-----------------------------------------------------------------------------//
 		displayBoard();
 		
+		//-----------------------------------------------------------------------------//
 		// incrementing int that counts the clicks from the actionListener //
-		count = 0;
-				
+		//-----------------------------------------------------------------------------//
+		clickCount = 0;
+		
+		//-----------------------------------------------------------------------------//		
+		// Adds everything above to the JFrame and styles it a tad
+		//-----------------------------------------------------------------------------//
 		add(top_panel);
 		add(grid);
 		add(bottom_panel);
-		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 
-	// updates the board and redraws the icons ?
-	private void displayBoard() {
-		for (int ii = 0; ii < rows; ii++) {
-			// TODO This is a static build of the icons, just to see them work properly.
-			// TODO The buttons should be aware of their type and set accordingly ??
-			boardButtons[0][ii].setIcon(new ImageIcon(boardImages[BLK][MAIN_ROW[ii]]));
-			boardButtons[1][ii].setIcon(new ImageIcon(boardImages[BLK][PAWN]));
-			boardButtons[rows-1][ii].setIcon(new ImageIcon(boardImages[WHT][MAIN_ROW[ii]]));
-			boardButtons[rows-2][ii].setIcon(new ImageIcon(boardImages[WHT][PAWN]));
-		}
+	//-----------------------------------------------------------------------------//
+	// Displays the ChessBoard
+	//-----------------------------------------------------------------------------//
+	private void displayBoard() {		
 		for (int ii = 0; ii < rows; ii++) {
 			for (int jj = 0; jj < cols; jj++) {
-				// Remove piece, if captured
-				//if (model.isCaptured())
-				//	boardButtons[ii][jj].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
+				boardButtons[ii][jj].setIcon(new ImageIcon(boardImages[model.pieceAt(ii, jj).player().ordinal()][model.pieceAt(ii, jj).type().ordinal()]));
+				
+				// TODO Add if NULL exception?
 			}
 		}
 	}
 	
-//	public static int getClickOne() {
-//		int row;
-//		int column;
-//		return x, y;
-//	}
-//	public static int getClickTwo() {
-//		re
-//	}
-	
-	/** Place other helper methods below */
-	
+	//-----------------------------------------------------------------------------//
+	// Creates the sprite images that will be used in displayBoard() for each button
+	//-----------------------------------------------------------------------------//
 	private void createImages() {
 		// Loads and creates image for each piece from the "sprite"
 		// Sprite's original location: http://i.stack.imgur.com/memIO.png
@@ -164,56 +162,53 @@ public class ChessPanel extends JPanel {
 		}
 		catch (Exception e){			// ??
 			e.printStackTrace();		// ??
-			System.exit(1);				// close window on error??
+			System.exit(1);				// close window on error?? what?
 		}
 	}
 	
-	/** Inner Class represents action listener for buttons **/
-	private class ButtonListener implements ActionListener {
-		
-//		int count = 0;
-//		ChessPiece piece = new ChessPiece();
-		//private int fromRow, fromColumn, toRow, toColumn;
-//		moving = new Move();
 	
+	
+	
+	
+//	public static int getClickOne() {
+//		int row;
+//		int column;
+//		return x, y;
+//	}
+//	public static int getClickTwo() {
+//		re
+//	}
+	
+	//-----------------------------------------------------------------------------//
+	// ActionListener InnerClass
+	//-----------------------------------------------------------------------------//
+	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			// loop through all the [rows,cols] and check for action event
+			// Loops through all the [rows,cols] of the ChessPiece[][] array 
+			// and checks for an "action event"
 			
 			for (int i = 0; i < rows; i++) {
 				for (int j = 0; j < cols; j++) {
 					if (e.getSource() == boardButtons[i][j]) {
 						
-						if (count == 0) {
-							// set coord. variables to Move Object move
-							moving.fromRow = i;
-							moving.fromColumn = j;
-							// instantiate Piece object?? with the pieceAt; use below...
-							count = count++;
+						if (clickCount == 0) {
+							moving.setFromRow(i);
+							moving.setFromColumn(j);
+							clickCount++;
 						}
-						if (count == 1) {
-							// sets Move Object 2nd coords.
-							moving.toRow = i;
-							moving.toColumn = j;
-							// check if move is valid
-							//if (isValidMove(moving, piece)) {
-								//model.move(moving.fromRow, moving.fromColumn, moving.toRow, moving.toColumn);
-								count = 0;
+						if (clickCount == 1) {
+							moving.setToRow(i);
+							moving.setToColumn(j);
+							clickCount = 0;
 							}
 						}
-						// Shows coordinates in message pane (testing)
+					
+						// Shows coordinates in message pane (TESTING)
 						coordinates.setText("( " + i + "," + j + ")");	
 					}
 				}
-			}
 			
-			
-			
-			/* **************************************
-			 * MOVE Button:
-			 * *************************************/
-//			if (e.getSource() == moveButton) {
-//				model.currentPlayer().move(play);
-//			}
+			displayBoard();
 		}
 	}
-
+}

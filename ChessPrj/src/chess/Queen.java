@@ -78,13 +78,13 @@ public class Queen extends ChessPiece {
 		boolean result = true;
 
 		/* The lesser row value of the queen's position. */
-		int lesser_row = 0;
+		int lesser_row;
 		
 		/* The lesser col value of the queen's position. */
 		int lesser_col;
 		
 		/* The greater row value of the queen's position. */
-		int greater_row = 0;
+		int greater_row;
 		
 		/* The greater col value of the queen's position. */
 		int greater_col;
@@ -106,17 +106,17 @@ public class Queen extends ChessPiece {
 				// Determine which part of the move is greater.
 				if ( move.getFromColumn() > move.getToColumn() )
 				{
-					greater_col = move.getFromColumn();
-					lesser_col = move.getToColumn();
+					greater_row = move.getFromColumn();
+					lesser_row = move.getToColumn();
 				}
 				else
 				{
-					greater_col = move.getToColumn();
-					lesser_col = move.getFromColumn();
+					greater_row = move.getToColumn();
+					lesser_row = move.getFromColumn();
 				}
 				
 				// Find if there are any pieces in between the rows.
-				for ( pos = (lesser_row + 1); pos < greater_row; pos++ )
+				for ( pos = lesser_row + 1; pos < greater_row; pos++ )
 				{
 					if (board [move.getToRow()] [pos] != null)
 					{	
@@ -132,17 +132,17 @@ public class Queen extends ChessPiece {
 				// Determine which part of the move is greater.
 				if ( move.getFromRow() > move.getToRow() )
 				{
-					greater_row = move.getFromRow();
-					lesser_row = move.getToRow();
+					greater_col = move.getFromRow();
+					lesser_col = move.getToRow();
 				}
 				else
 				{
-					greater_row = move.getToRow();
-					lesser_row = move.getFromRow();
+					greater_col = move.getToRow();
+					lesser_col = move.getFromRow();
 				}
 				
 				// Find if there are any pieces in between the rows.
-				for ( pos = lesser_row + 1; pos < greater_row; pos++ )
+				for ( pos = lesser_col + 1; pos < greater_col; pos++ )
 				{
 					if (board [pos] [move.getToColumn()] != null)
 					{	
