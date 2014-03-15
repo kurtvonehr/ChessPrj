@@ -74,7 +74,7 @@ public class Rook extends ChessPiece {
 		// --- Variable Declarations  -------------------------//
 		
 		/* The result of the computation. */
-		boolean result;
+		boolean result = true;
 		
 		/* The lesser value of the rook's position. */
 		int lesser;
