@@ -1,17 +1,17 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* ChessModel.java                             		              *
+* ChessModel.java                             		                  *
 *---------------------------------------------------------------------*
 * Description - A class used to control all game logic of the game of *
 * chess during the users interactions with the game. This class can   *
 * only be initialized once.					      *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
-* Author : McKim A. Jacob, Vonehr Kurt                                *
+* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES						      *	                                      
+* ISSUES AND NOTES						      					      *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
@@ -126,19 +126,29 @@ public class ChessModel implements IChessModel {
 		// complete this 
 	} 
 	
-
+	/* Returns the number of rows on the board. */
 	public int numRows() { 
-		// complete this 
+
+		return boardDim;
+
 	} 
 	
-
+	/* Returns the number of columns on the board. */
 	public int numColumns() { 
-		// complete this 
+
+		return boardDim;
+		
 	} 
 
-
+	/* Returns a piece at a given point in the grid. */
 	public IChessPiece pieceAt(int row, int column) { 
-		// complete this 
+		
+		if (inGrid (row, column))
+			return board [row] [column];
+					
+		else
+			return null;
+				
 	} 
 	
    /****************************************************************
