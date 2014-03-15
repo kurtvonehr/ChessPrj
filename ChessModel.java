@@ -5,7 +5,7 @@ package chess;
 *---------------------------------------------------------------------*
 * Description - A class used to control all game logic of the game of *
 * chess during the users interactions with the game. This class can   *
-* only be initialized once.					      *
+* only be initialized once.					     					  *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
 * Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
@@ -47,12 +47,6 @@ public class ChessModel implements IChessModel {
 	//---------------------------------------------------------------//	
 	
 	private ChessModel() { 
-	
-		//Init blank board
-		for(int i = 0; i< boardDim; i++)
-			for(int j = 0; j< boardDim; j++){
-				board[i][j] = null;
-			}
 		
 		//Place White pieces onto board
 		board[0][0] = new Rook(Player.WHITE);
@@ -92,21 +86,26 @@ public class ChessModel implements IChessModel {
 	// Function Definitions					     					//
 	//--------------------------------------------------------------//   
 	
+	/* Allows this object to be a singleton object. */
 	public static ChessModel getInstance () {
 	  
 	    // Check to see if the instance exists.
        if (instance == null)
           instance = new ChessModel();
 
-      return instance;
+       // Return the instance of the object. 
+       return instance;
 	 
 	}
-	
-	
+
+	/* Returns whether checkmate can be declared. */
 	public boolean isComplete() { 
+		
 		return false;
+		
 	} 
 
+	/* */
 	public boolean isValidMove(Move move) { 
 		// TODO DONT TOUCH. BAD THINGS WILL HAPPEN.
 		return false;
@@ -135,9 +134,6 @@ public class ChessModel implements IChessModel {
 	public boolean inCheck(Player p) { 
 		
 		// --- Variable Declarations  -------------------------//
-
-		/* Whether or not the player is in check. */
-		boolean check = false;
 		
 		/* The player who is checking the checked. */ 
 		agianstPlayer = p == WHITE ? BLACK : WHITE;
@@ -146,10 +142,13 @@ public class ChessModel implements IChessModel {
 		chessPiece king;
 		
 		/* The to postion x for all checks. */
-		int toKingX;
+		int toKingX = -1;
 		
 		/* The to postion y for all checks. */
-		int toKingY;
+		int toKingY = -1;
+		
+		/* The move to check. */
+		Move moveCheck;
 		
 		// --- Main Routine -----------------------------------//
 		
@@ -174,13 +173,22 @@ public class ChessModel implements IChessModel {
 		{
 			for (int y = 0; y < numColumns(); y++)
 			{
-				if ()
+				if (board[x][y].player() == agianstPlayer)
+				{
+					// Construct a move to check.
+					checkMove = new Move (x, y, toKingX, toKingY);
+					
+					// If it came back valid. Set in check to true.
+					if (board[x][y].isValidMove(checkMove))
+						return true;
+				}
 			}
 		}
 		
-		return check; 
+		// Return the result.
+		return false; 
+		
 	} 
-	
 
 	/* Returns the current player. */
 	public Player currentPlayer() { 
@@ -224,7 +232,7 @@ public class ChessModel implements IChessModel {
 		
 			// Ternary operate whether its in the grid.
 			return  (xPos <= 0 && xPos < boardDim) && (yPos >= 0 && 
-						yPos < boardDim) ) ? true : false; 
+								 yPos < boardDim) ) ? true : false; 
 		
 	}
 	

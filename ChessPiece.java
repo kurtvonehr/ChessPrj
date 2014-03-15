@@ -53,7 +53,7 @@ public abstract class ChessPiece implements IChessPiece {
 	} 
 	
 	//--------------------------------------------------------------//	
-	// Interface Function Definitions				//
+	// Interface Function Definitions								//
 	//--------------------------------------------------------------//
 	 
 	/* Method called to return piece type as Piece. */
@@ -88,8 +88,7 @@ public abstract class ChessPiece implements IChessPiece {
 	// --- Main Routine -------------------------------------//
 
 	// Get start position of cell.
-	fromPiece = board[move.getFromRow()]
-					[move.getFromColumn()];
+	fromPiece = board[move.getFromRow()] [move.getFromColumn()];
 	
 	// Get the end position of the cell.
 	toPiece = board[move.getToRow()] [move.getToColumn()];

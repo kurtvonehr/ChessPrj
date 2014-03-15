@@ -10,7 +10,41 @@ package chess;
 
 public class Move {
 
-   public int fromRow, fromColumn, toRow, toColumn;
+	//---------------------------------------------------------------//	
+	// Class Variable Definitions                                    //
+	//---------------------------------------------------------------//
+	
+	/* The row to move from. */
+   public int fromRow;
+   
+   /* The column to move from. */
+   public int fromColumn; 
+   
+   /* The row to move to. */
+   public int toRow;
+   
+   /* The column to move to. */
+   public int toColumn;
+   
+   //---------------------------------------------------------------//	
+   // Class Constructors                                            //
+   //---------------------------------------------------------------//	
+   
+	public Move() {
+    
+	}
+
+	
+    public Move(int fromRow, int fromColumn, int toRow, int toColumn) {
+      this.fromRow = fromRow;
+      this.fromColumn = fromColumn;
+      this.toRow = toRow;
+      this.toColumn = toColumn;
+    }
+   
+	//--------------------------------------------------------------//	
+	// Function Definitions											//
+	//--------------------------------------------------------------//
 
     public int getFromRow() {
     	return fromRow;
@@ -43,14 +77,7 @@ public class Move {
 	public void setToColumn(int toColumn) {
 		this.toColumn = toColumn;
 	}
-
-	public Move() {
-    }
-
-    public Move(int fromRow, int fromColumn, int toRow, int toColumn) {
-      this.fromRow = fromRow;
-      this.fromColumn = fromColumn;
-      this.toRow = toRow;
-      this.toColumn = toColumn;
-   }
+	
+	//--------------------------------------------------------------//
+	
 }
