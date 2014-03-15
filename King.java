@@ -1,7 +1,7 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* King.java                             		              *
+* King.java                             		              		  *
 *---------------------------------------------------------------------*
 * Description - A class used to emulate a specialized game peice in   *
 * the game of chess. The King is the key peice to wining the game of  *
@@ -11,7 +11,7 @@ package chess;
 * Author : McKim A. Jacob, Vonehr Kurt                                *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES						      *	                                      
+* ISSUES AND NOTES						      						  *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
@@ -41,7 +41,7 @@ public class King extends ChessPiece {
 	
 	
 	//--------------------------------------------------------------//	
-	// Override Function Definitions				//
+	// Override Function Definitions								//
 	//--------------------------------------------------------------//  
 
 
@@ -83,15 +83,17 @@ public class King extends ChessPiece {
 		{
 			//If move is greater than one square in any direction, 
 			//move is invalid.
-			if(abs((move.getToRow() - move.getFromRow()))>1)
+			if(abs((move.getToRow() - move.getFromRow())) > 1)
 				validMove = false;
-			if(abs((move.getToColumn() - move.getFromColumn()))>1)
+			if(abs((move.getToColumn() - move.getFromColumn())) > 1)
 				validMove = false;
 			if(move.getToColumn == move.getFromColumn)
 				if(move.getToRow == move.getFromRow)
 					validMove = false;
 		}
+		
 		return validMove;
+		
 	}
 	
 	//--------------------------------------------------------------//  
