@@ -45,12 +45,14 @@ public class ChessModel implements IChessModel {
 	
 	public ChessModel() { 
 	
+		/** DONT NEED TO DO THIS, JUST INSTANTIATE THE ARRAY **/
 		//Init blank board
-		for(int i = 0; i< boardDim; i++) {
-			for(int j = 0; j< boardDim; j++){
-				board[i][j] = new ChessPiece();
-			}
-		}
+//		for(int i = 0; i< boardDim; i++) {
+//			for(int j = 0; j< boardDim; j++){
+//				board[i][j] = new ChessPiece();
+//			}
+//		}
+		board = new ChessPiece[boardDim][boardDim];
 		
 		//Place Black pieces onto board
 		board[7][0] = new Rook(Player.BLACK);
@@ -66,7 +68,6 @@ public class ChessModel implements IChessModel {
 		for(int i = 0; i < boardDim; i++) {
 			board[6][i] = new Pawn(Player.BLACK);
 		}
-		
 		
 		//Place White pieces onto board
 		board[0][0] = new Rook(Player.WHITE);
