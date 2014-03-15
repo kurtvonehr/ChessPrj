@@ -1,6 +1,7 @@
 package chess;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -21,7 +22,6 @@ import javax.swing.JPanel;
  * Only allow valid moves (i.e. isMoveValid())
  * changed
  */
-
 @SuppressWarnings("serial")
 public class ChessPanel extends JPanel {
 
@@ -32,13 +32,14 @@ public class ChessPanel extends JPanel {
 	
 	private JPanel top_panel, bottom_panel, grid;
 	private JLabel message;
-	private JButton moveButton;
+	//private JButton moveButton;
 	
 	private ButtonListener bl = new ButtonListener();
 
 	private int rows, cols;
 	public int count;
 	public Move moving;
+	private JLabel coordinates;
 	
 	// These are purely for visual purposes...
 	public static final int QUEEN=0, KING=1, ROOK=2, KNIGHT=3, BISHOP=4, PAWN=5;
@@ -47,44 +48,61 @@ public class ChessPanel extends JPanel {
 	
 	public ChessPanel() {
 		
-		model = new ChessModel();
-		// Gets number of Rows and Columns from ChessModel
+		//---------------------------------------------------------------//	
+		// Creates a new ChessModel object                               //
+		//---------------------------------------------------------------//
+		model = ChessModel.getInstance();
+		
+		//---------------------------------------------------------------//	
+		// Gets number of Rows and Columns from ChessModel               //
+		//---------------------------------------------------------------//
 		rows = model.numRows();
 		cols = model.numColumns();
-		count = 0;
 		
+		//-----------------------------------------------------------------------------//	
 		// Inst. array of chess board 'cells' and the array of icons used for the pieces
+		//-----------------------------------------------------------------------------//	
 		boardButtons = new JButton[rows][cols];
 		boardImages = new Image[2][6];
 		
-		// Inst. bottom panel and adds "Move" button to it
+		//-----------------------------------------------------------------------------//
+		// Inst. bottom panel and adds "Move" button to it (depreciated)
+		//-----------------------------------------------------------------------------//
 		bottom_panel = new JPanel();
-		moveButton = new JButton("Move");
-		moveButton.addActionListener((ActionListener) bl);
-		bottom_panel.add(moveButton);
+		bottom_panel.setPreferredSize(new Dimension(500, 100));
+		//moveButton = new JButton("Move");
+		//moveButton.addActionListener((ActionListener) bl);
+		coordinates = new JLabel("Coordinates");
+		bottom_panel.add(coordinates);
 		
+		//-----------------------------------------------------------------------------//
 		// Inst. top panel and adds message label where messages can be displayed
+		//-----------------------------------------------------------------------------//
 		top_panel = new JPanel();
-		message = new JLabel("This is a game of chess...that doesn't work");
+		message = new JLabel("This is a game of chess...that might work");
 		top_panel.add(message);
 		
-		// Builds out all of the buttons, which are the squares of the chess board
+		//-----------------------------------------------------------------------------//
+		// Builds out all of the buttons (aka the chess board squares)
+		//-----------------------------------------------------------------------------//
 		grid = new JPanel(new GridLayout (rows, cols));
 		for (int row = 0; row < 8; row++){
 			for (int col = 0; col < 8; col++){
 				boardButtons[row][col] = new JButton("");
-				boardButtons[row][col].addActionListener(new ButtonListener());
+				boardButtons[row][col].addActionListener(bl);
 				grid.add(boardButtons[row][col]);
 				
 				/** Sets blank background image to each piece */
 				boardButtons[row][col].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
 				
-				/** Sets background colors of buttons to black or white, as required by rules of chess **/
+				/** Then, sets background colors of buttons to black or white, as required by rules of chess **/
 				if ( (row % 2 == 0 && col % 2 == 0) || (row % 2 == 1 && col % 2 ==1)) {
 					boardButtons[row][col].setBackground(Color.white);
+					boardButtons[row][col].setOpaque(true);
 				}
 				else {
 					boardButtons[row][col].setBackground(Color.black);
+					boardButtons[row][col].setOpaque(true);
 				}
 			}
 		}
@@ -93,6 +111,9 @@ public class ChessPanel extends JPanel {
 		createImages();
 		displayBoard();
 		
+		// incrementing int that counts the clicks from the actionListener //
+		count = 0;
+				
 		add(top_panel);
 		add(grid);
 		add(bottom_panel);
@@ -112,21 +133,22 @@ public class ChessPanel extends JPanel {
 		}
 		for (int ii = 0; ii < rows; ii++) {
 			for (int jj = 0; jj < cols; jj++) {
-				// Remove piece, if captured
-				if (model.isCaptured())
-					boardButtons[ii][jj].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
+				boardButtons[ii][jj].setIcon(new ImageIcon(boardImages[model.pieceAt(ii, jj).player()][model.pieceAt(ii, jj).type()]));
+				// Remove piece, if capture
+				//if (model.isCaptured())
+				//	boardButtons[ii][jj].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
 			}
 		}
 	}
 	
-	public static int getClickOne() {
-		int row;
-		int column;
-		return x, y;
-	}
-	public static int getClickTwo() {
-		re
-	}
+//	public static int getClickOne() {
+//		int row;
+//		int column;
+//		return x, y;
+//	}
+//	public static int getClickTwo() {
+//		re
+//	}
 	
 	/** Place other helper methods below */
 	
@@ -135,11 +157,13 @@ public class ChessPanel extends JPanel {
 		// Sprite's original location: http://i.stack.imgur.com/memIO.png
 		try {
 			BufferedImage bi = ImageIO.read(new File("src/chess/pieces.png"));
+			
 			for (int i=0; i < 2; i++) {
 				for (int j=0; j < 6; j++) {
 					boardImages[i][j] = bi.getSubimage(j * 64, i * 64, 64, 64);
 				}
 			}
+			
 		}
 		catch (Exception e){			// ??
 			e.printStackTrace();		// ??
@@ -149,11 +173,14 @@ public class ChessPanel extends JPanel {
 	
 	/** Inner Class represents action listener for buttons **/
 	private class ButtonListener implements ActionListener {
-		
+	
+//		ChessPiece piece = new ChessPiece();
 		//private int fromRow, fromColumn, toRow, toColumn;
+//		moving = new Move();
+	
 		public void actionPerformed(ActionEvent e) {
 			// loop through all the [rows,cols] and check for action event
-			moving = new Move();
+			
 			for (int i = 0; i < rows; i++) {
 				for (int j = 0; j < cols; j++) {
 					if (e.getSource() == boardButtons[i][j]) {
@@ -162,8 +189,7 @@ public class ChessPanel extends JPanel {
 							// set coord. variables to Move Object move
 							moving.fromRow = i;
 							moving.fromColumn = j;
-							// instantiate Piece object?? with the pieceAt; use below
-							ChessPiece piece =;
+							// instantiate Piece object?? with the pieceAt; use below...
 							count = count++;
 						}
 						if (count == 1) {
@@ -171,17 +197,18 @@ public class ChessPanel extends JPanel {
 							moving.toRow = i;
 							moving.toColumn = j;
 							// check if move is valid
-							if (isValidMove(moving, piece)) {
-								model.move(moving.fromRow, moving.fromColumn, moving.toRow, moving.toColumn);
+							//if (isValidMove(moving, piece)) {
+								//model.move(moving.fromRow, moving.fromColumn, moving.toRow, moving.toColumn);
 								count = 0;
 							}
 						}
 						// Shows coordinates in message pane (testing)
-						//message.setText("( " + i + "," + j + ")");	
+						coordinates.setText("( " + i + "," + j + ")");	
 					}
 				}
+			displayBoard();
 			}
-			
+						
 			
 			
 			/* **************************************
@@ -192,4 +219,4 @@ public class ChessPanel extends JPanel {
 //			}
 		}
 	}
-}
+
