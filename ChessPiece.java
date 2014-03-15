@@ -27,7 +27,7 @@ public abstract class ChessPiece implements IChessPiece {
 	private Player owner; 
 	
 	/* The core model controller that operates all pieces. */
-	private ChessModel model;
+	protected ChessModel model;
 	
 	//---------------------------------------------------------------//	
  	// Class Constructors                                            //
