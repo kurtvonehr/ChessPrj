@@ -1,17 +1,17 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* ChessModel.java                             		                  *
+* ChessModel.java                             		              *
 *---------------------------------------------------------------------*
 * Description - A class used to control all game logic of the game of *
 * chess during the users interactions with the game. This class can   *
-* only be initialized once.					     					  *
+* only be initialized once.					      *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
-* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
+* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	      *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES						      					      *	                                      
+* ISSUES AND NOTES						      *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
@@ -30,7 +30,7 @@ public class ChessModel implements IChessModel {
 	/* The game board holding all game pieces. Board is 8 x 8. */
 	private IChessPiece[][] board;
 	
-	/*  */
+	/* The current player playing the game. */
 	private Player currentPlayer;
 	
 	/* The first player opponent. */
@@ -83,7 +83,7 @@ public class ChessModel implements IChessModel {
 	
 	
 	//--------------------------------------------------------------//	
-	// Function Definitions					     					//
+	// Function Definitions					     	//
 	//--------------------------------------------------------------//   
 	
 	/* Allows this object to be a singleton object. */
@@ -117,7 +117,7 @@ public class ChessModel implements IChessModel {
 		// --- Variable Declarations  -------------------------//
 		
 		/* The tempoary piece holder. */
-		ChessPiece temp; 
+		IChessPiece temp; 
 		
 		// --- Main Routine -----------------------------------//
 		
@@ -125,8 +125,8 @@ public class ChessModel implements IChessModel {
 		temp = pieceAt (move.getFromRow(), move.getFromColumn());
 		
 		// Preform the swap.
-		board [move.getToRow()] [Move.getToColumn()] = temp;
-		board [move.getFromRow()] [Move.getFromColumn()] = null;				
+		board [move.getToRow()] [move.getToColumn()] = temp;
+		board [move.getFromRow()] [move.getFromColumn()] = null;				
 		
 	} 
 	
@@ -136,10 +136,11 @@ public class ChessModel implements IChessModel {
 		// --- Variable Declarations  -------------------------//
 		
 		/* The player who is checking the checked. */ 
-		agianstPlayer = p == WHITE ? BLACK : WHITE;
+		Player agianstPlayer = p == Player.WHITE ? Player.BLACK 
+							 : Player.WHITE;
 		
 		/* The king piece to check if in check. */
-		chessPiece king;
+		ChessPiece king;
 		
 		/* The to postion x for all checks. */
 		int toKingX = -1;
@@ -158,8 +159,8 @@ public class ChessModel implements IChessModel {
 			for (int y = 0; y < numColumns(); y++)
 			{
 				// If the piece matches the description set to pos.
-				if (board[x][y].getType() == Piece.KING &&
-										board[x][y].player() == p)
+				if (board[x][y].type() == Piece.KING &&
+							board[x][y].player() == p)
 				{
 					toKingX = x;
 					toKingY = y;
@@ -176,10 +177,10 @@ public class ChessModel implements IChessModel {
 				if (board[x][y].player() == agianstPlayer)
 				{
 					// Construct a move to check.
-					checkMove = new Move (x, y, toKingX, toKingY);
+					moveCheck = new Move (x, y, toKingX, toKingY);
 					
 					// If it came back valid. Set in check to true.
-					if (board[x][y].isValidMove(checkMove))
+					if (board[x][y].isValidMove(moveCheck,board))
 						return true;
 				}
 			}
@@ -229,10 +230,9 @@ public class ChessModel implements IChessModel {
    *****************************************************************/
 	public boolean inGrid (int xPos, int yPos) {
 		
-			// Ternary operate whether its in the grid.
-			return  (xPos <= 0 && xPos < boardDim) && (yPos >= 0 && 
-								 yPos < boardDim) ) ? true : false; 
-		
+		// Ternary operate whether its in the grid.
+		return  (xPos <= 0 && xPos < boardDim) && (yPos >= 0 && 
+					yPos < boardDim) ? true : false; 
 	}
 	
 }
