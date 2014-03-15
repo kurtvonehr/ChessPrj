@@ -104,7 +104,7 @@ public class ChessModel implements IChessModel {
 	
 	
 	public boolean isComplete() { 
-		return false; 
+		return false;
 	} 
 
 	public boolean isValidMove(Move move) { 
@@ -133,7 +133,52 @@ public class ChessModel implements IChessModel {
 	
 	/* Determines if a given player is in check. */
 	public boolean inCheck(Player p) { 
-		return false; 
+		
+		// --- Variable Declarations  -------------------------//
+
+		/* Whether or not the player is in check. */
+		boolean check = false;
+		
+		/* The player who is checking the checked. */ 
+		agianstPlayer = p == WHITE ? BLACK : WHITE;
+		
+		/* The king piece to check if in check. */
+		chessPiece king;
+		
+		/* The to postion x for all checks. */
+		int toKingX;
+		
+		/* The to postion y for all checks. */
+		int toKingY;
+		
+		// --- Main Routine -----------------------------------//
+		
+		// Find the king on the board were checking for to be checked.
+		for (int x = 0; x < numRows(); x++) 
+		{
+			for (int y = 0; y < numColumns(); y++)
+			{
+				// If the piece matches the description set to pos.
+				if (board[x][y].getType() == Piece.KING &&
+										board[x][y].player() == p)
+				{
+					toKingX = x;
+					toKingY = y;
+					break;
+				}
+			}
+		}
+		
+		// Determine any avenues that the king could be in check.
+		for (int x = 0; x < numRows(); x++) 
+		{
+			for (int y = 0; y < numColumns(); y++)
+			{
+				if ()
+			}
+		}
+		
+		return check; 
 	} 
 	
 
