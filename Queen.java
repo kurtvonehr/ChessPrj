@@ -75,7 +75,22 @@ public class Queen extends ChessPiece {
 		// --- Variable Declarations  -------------------------//
 
 		/* The result of the computation. */
-		boolean result;
+		boolean result = true;
+
+		/* The lesser row value of the queen's position. */
+		int lesser_row;
+		
+		/* The lesser col value of the queen's position. */
+		int lesser_col;
+		
+		/* The greater row value of the queen's position. */
+		int greater_row;
+		
+		/* The greater col value of the queen's position. */
+		int greater_col;
+		
+		/* The position in the array to be pointing. */
+		int pos;
 
 		// --- Main Routine -----------------------------------//
 
@@ -85,7 +100,140 @@ public class Queen extends ChessPiece {
 		// continue with checking for piece specifics.
 		if (result)
 		{
-		    //TODO implement queen search.
+		    	// Check if it is horizontal.
+			if (move.getFromRow() == move.getToRow())
+			{
+				// Determine which part of the move is greater.
+				if ( move.getFromColumn() > move.getToColumn() )
+				{
+					greater = move.getFromColumn();
+					lesser = move.getToColumn();
+				}
+				else
+				{
+					greater = move.getToColumn();
+					lesser = move.getFromColumn();
+				}
+				
+				// Find if there are any pieces in between the rows.
+				for ( pos = lesser + 1; pos < greater; pos++ )
+				{
+					if (board [move.getToRow()] [pos] != null)
+					{	
+						result = false;
+						break;
+					}
+				}
+			}
+			
+			// Check if it is vertical.
+			else if (move.getFromColumn() == move.getToColumn())
+			{
+				// Determine which part of the move is greater.
+				if ( move.getFromRow() > move.getToRow() )
+				{
+					greater = move.getFromRow();
+					lesser = move.getToRow();
+				}
+				else
+				{
+					greater = move.getToRow();
+					lesser = move.getFromRow();
+				}
+				
+				// Find if there are any pieces in between the rows.
+				for ( pos = lesser + 1; pos < greater; pos++ )
+				{
+					if (board [pos] [move.getToColumn()] != null)
+					{	
+						result = false;
+						break;
+					}
+				}
+			}
+			
+			// Check if it is on the positive slope diagonal.
+			else if ((move.getFromColumn() - move.getToColumn()) == 
+			(move.getFromRow - move.getFromRow))
+			{
+				// Determine which part of the move is greater.
+				if ( move.getFromRow() > move.getToRow() )
+				{
+					greater_row = move.getFromRow();
+					lesser_row = move.getToRow();
+				}
+				else
+				{
+					greater_row = move.getToRow();
+					lesser_row = move.getFromRow();
+				}
+				
+				// Determine which part of the move is greater.
+				if ( move.getFromColumn() > move.getToColumn() )
+				{
+					greater_col = move.getFromColumn();
+					lesser_col = move.getToColumn();
+				}
+				else
+				{
+					greater_col = move.getToColumn();
+					lesser_col = move.getFromColumn();
+				}
+				
+				
+				// Find if there are any pieces in between the rows.
+				for ( pos = 1; pos < (greater_row-lesser_row); pos++ )
+				{
+					if (board [lesser_row + pos] [less_col + pos] != null)
+					{	
+						result = false;
+						break;
+					}
+				}
+			}
+			
+			// Check if it is on the negative slope diagonal
+			else if ((move.getFromColumn() - move.getToColumn()) == 
+			-(move.getFromRow - move.getFromRow))
+			{
+				// Determine which part of the move is greater.
+				if ( move.getFromRow() > move.getToRow() )
+				{
+					greater_row = move.getFromRow();
+					lesser_row = move.getToRow();
+				}
+				else
+				{
+					greater_row = move.getToRow();
+					lesser_row = move.getFromRow();
+				}
+				
+				// Determine which part of the move is greater.
+				if ( move.getFromColumn() > move.getToColumn() )
+				{
+					greater_col = move.getFromColumn();
+					lesser_col = move.getToColumn();
+				}
+				else
+				{
+					greater_col = move.getToColumn();
+					lesser_col = move.getFromColumn();
+				}
+				
+				
+				// Find if there are any pieces in between the rows.
+				for ( pos = 1; pos < (greater_row-lesser_row); pos++ )
+				{
+					if (board [greater_row - pos] [less_col + pos] != null)
+					{	
+						result = false;
+						break;
+					}
+				}
+			}
+			
+			else
+				result = false;
 		}
 
 		// Return the result of the operation.
