@@ -55,7 +55,7 @@ public class Rook extends ChessPiece {
   	*****************************************************************/
   	@Override
   	public Piece type () {
-    
+  
     	return Piece.ROOK;
     
   	}

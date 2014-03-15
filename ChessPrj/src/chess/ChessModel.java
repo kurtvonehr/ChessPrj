@@ -45,7 +45,7 @@ public class ChessModel implements IChessModel {
 	
 	public ChessModel() { 
 	
-		/** DONT NEED TO DO THIS, JUST INSTANTIATE THE ARRAY **/
+		/** NOT NECESSARY, JUST INSTANTIATE THE ARRAY **/
 		//Init blank board
 //		for(int i = 0; i< boardDim; i++) {
 //			for(int j = 0; j< boardDim; j++){
@@ -54,8 +54,8 @@ public class ChessModel implements IChessModel {
 //		}
 		board = new ChessPiece[boardDim][boardDim];
 		
-		//Place Black pieces onto board
-		board[7][0] = new Rook(Player.BLACK);
+		//Places Black pieces onto board
+		//board[7][0] = new Rook(Player.BLACK);
 		board[7][1] = new Knight(Player.BLACK);
 		board[7][2] = new Bishop(Player.BLACK);
 		board[7][3] = new Queen(Player.BLACK);
@@ -64,13 +64,13 @@ public class ChessModel implements IChessModel {
 		board[7][6] = new Knight(Player.BLACK);
 		board[7][7] = new Rook(Player.BLACK);
 		
-		// Place black pawns.
+		// Places black pawns.
 		for(int i = 0; i < boardDim; i++) {
 			board[6][i] = new Pawn(Player.BLACK);
 		}
 		
-		//Place White pieces onto board
-		board[0][0] = new Rook(Player.WHITE);
+		//Places White pieces onto board
+		//board[0][0] = new Rook(Player.WHITE);
 		board[0][1] = new Knight(Player.WHITE);
 		board[0][2] = new Bishop(Player.WHITE);
 		board[0][3] = new Queen(Player.WHITE);
@@ -79,7 +79,7 @@ public class ChessModel implements IChessModel {
 		board[0][6] = new Knight(Player.WHITE);
 		board[0][7] = new Rook(Player.WHITE);
 		
-		// Place white pawns.
+		// Places all the white pawns
 		for(int i = 0; i< boardDim; i++)
 			board[6][i] = new Pawn(Player.WHITE);
 
@@ -89,6 +89,7 @@ public class ChessModel implements IChessModel {
 	// Function Definitions					     					//
 	//--------------------------------------------------------------//   
 	
+	// Is this necessary?
 	public static ChessModel getInstance () {
 	    // Check to see if the instance exists.
        if (instance == null)
@@ -96,53 +97,137 @@ public class ChessModel implements IChessModel {
       return instance;
 	}
 
-	public boolean inCheck() { 
-		return false; 
-	}
 	
+	/****************************************************************
+     * This method returns whether the game is complete.
+     *
+     * @return {@code true} if complete, {@code false} otherwise.
+     * 
+     *****************************************************************/
 	public boolean isComplete() { 
-		// complete logic:
-		// ?	if (piece.isKing() == null) <-- the king is dead
+		// TODO complete logic:
+		// ?	if (checkMate() = true) <-- the opposing player's king is dead meat
 		//			return true;
 		return false; 
 	} 
 
-
+	/****************************************************************
+     * This method returns whether the piece at location {
+     * @code [move.fromRow, move.fromColumn]} is allowed to move to 
+     * location{@code [move.fromRow, move.fromColumn]}.
+     *
+     * @param move a {@link Move} object describing the move to be made.
+     * 
+     * @return {@code true} if the proposed move is valid, {@code false} 
+     * otherwise.
+     * 
+     * @throws IndexOutOfBoundsException if either {@code [move.fromRow, 
+     * move.fromColumn]} or {@code [move.toRow,move.toColumn]} don't 
+     * represent valid locations on the board.
+     * 
+     *****************************************************************/
 	public boolean isValidMove(Move move) { 
 		// returns...
+		// PIECE TYPE == board[move.fromRow][move.fromColumn].type();
+		// board[move.fromRow][move.fromColumn].isValidMove(move, board[move.fromRow][move.fromColumn])
 		return false;
 	} 
 
-
+	/****************************************************************
+     * This method moves the piece from location {@code [move.fromRow,
+     * move.fromColumn]} to location {@code [move.fromRow,move.
+     * fromColumn]}.
+     *
+     * @param move a {@link Move} object describing the move to be
+     * made.
+     * 
+     * @returns None
+     * 
+     * @throws IndexOutOfBoundsException if either {@code [move.fromRow,
+     * move.fromColumn]} or {@code [move.toRow,move.toColumn]} don't 
+     * represent valid locations on the board.
+     * 
+     *****************************************************************/
 	public void move(Move move) { 
-		// complete this
+		// TODO complete this logic
+		
+		if (isValidMove(move)) {
+			// Grabs ChessPiece.FROM and replaces ChessPiece.TO in the board[][] array
+			board[move.fromRow][move.fromColumn] = board[move.toRow][move.toColumn];
+			board[move.fromRow][move.fromColumn] = null;
+		}
 	} 
 	
+	/****************************************************************
+     * This method reports whether the current player is in check.
+     *
+     * @return {@code true} if the current player is in check, 
+     * {@code false} otherwise.
+     * 
+     *****************************************************************/
 	public boolean inCheck(Player p) { 
 		return false; 
 	} 
 	
+	/****************************************************************
+     * This method returns the current player.
+     *
+     * @return the current player.
+     * 
+     *****************************************************************/
 	public Player currentPlayer() { 
-		// complete this logic
+		// TODO complete this logic
 		// if (this.player == a.black.piece) {
 		// 		return black;
 		//  else
 				return white;
 	} 		
 
+	/****************************************************************
+     * This method reports back the number of rows that are on the 
+     * board.
+     *
+     * @return The row count as an integer.
+     * 
+     *****************************************************************/
 	public int numRows() {
 		int r = 8;
 		return r;
 	} 
 	
-
+	/****************************************************************
+     * This method reports back the number of columns that are on the 
+     * board.
+     *
+     * @return The column count as an integer.
+     * 
+     *****************************************************************/
 	public int numColumns() {
 		int c = 8;
 		return c;
 	} 
 
-	public ChessPiece pieceAt(int row, int column) { 
-		// complete this 
+	/****************************************************************
+     * This method returns the {@code ChessPiece} object at location 
+     * {@code [row, column]}.
+     *
+     * @param row    the row (numbered {@code 0} through 
+     * {@code numRows -1}
+     * 
+     * @param column the row (numbered {@code 0} through 
+     * {@code numColumns -1}
+     * 
+     * @return the {@code ChessPiece} object at location 
+     * {@code [row, column]}.
+     * 
+     * @throws IndexOutOfBoundsException if {@code [row, column]} is 
+     * not a valid location on the board.
+     * 
+     *****************************************************************/
+	public ChessPiece pieceAt(int row, int column) {  
+		// TODO complete this
+		// Use ChessPiece.type() to grab Piece.enum
+		// Use ChessPiece.player() to grab Player.enum
 		return board[row][column];
 	} 
 	

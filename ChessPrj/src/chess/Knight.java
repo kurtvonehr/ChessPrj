@@ -30,15 +30,14 @@ public class Knight extends ChessPiece {
 	//---------------------------------------------------------------//	
 
 	/*****************************************************************
-  	The primary constructor for the Pawn peice. It creates a pawn
+  	The primary constructor for the Pawn piece. It creates a Knight
   	for the given player specified.
         
 	 @return None 
-    
   	*****************************************************************/
   	public Knight (Player player) {
-
-		super (player);
+  		
+		super(player);
 
 	}
 

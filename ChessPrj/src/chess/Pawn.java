@@ -43,12 +43,23 @@ public class Pawn extends ChessPiece {
 		super (player);
 		
 		// Config class variables. 
-		firstMove = true;
+		setFirstMove(true);
 		
 	}
 
 	//--------------------------------------------------------------//	
-	// Override Function Definitions				//
+	// Getter & Setter of firstMove() to make Eclipse happy
+	//--------------------------------------------------------------//	
+  	public boolean getFirstMove() {
+		return firstMove;
+	}
+
+	public void setFirstMove(boolean firstMove) {
+		this.firstMove = firstMove;
+	}
+	
+	//--------------------------------------------------------------//	
+	// Override Function Definitions				
 	//--------------------------------------------------------------//  
 
 
@@ -115,8 +126,4 @@ public class Pawn extends ChessPiece {
 		return result;
 		
 	}
-	
-	//--------------------------------------------------------------//  
-
-	
 }

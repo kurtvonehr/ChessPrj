@@ -29,7 +29,7 @@ public class ChessGUI {
 		ChessPanel panel = new ChessPanel();
 		frame.getContentPane().add(panel);
 		
-		//frame.setMinimumSize(new Dimension(500, 500));
+		frame.setMinimumSize(new Dimension(500, 500));
 		frame.setResizable(false);
 		
 		frame.pack();

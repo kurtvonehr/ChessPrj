@@ -22,6 +22,7 @@ import javax.swing.JPanel;
  * Only allow valid moves (i.e. isMoveValid())
  * changed
  */
+@SuppressWarnings("serial")
 public class ChessPanel extends JPanel {
 
 	private ChessModel model;
@@ -31,7 +32,7 @@ public class ChessPanel extends JPanel {
 	
 	private JPanel top_panel, bottom_panel, grid;
 	private JLabel message;
-	private JButton moveButton;
+	//private JButton moveButton;
 	
 	private ButtonListener bl = new ButtonListener();
 
