@@ -27,8 +27,11 @@ public class ChessModel implements IChessModel {
   	/* The one instance of this class that exists. */
   	private static ChessModel instance;
   
-	/* The game board holding all game pieces. Board is 8x8 */
+	/* The game board holding all game pieces. Board is 8 x 8. */
 	private IChessPiece[][] board;
+	
+	/*  */
+	private Player currentPlayer;
 	
 	/* The first player opponent. */
 	private Player White = Player.WHITE;
@@ -79,7 +82,8 @@ public class ChessModel implements IChessModel {
 		for(int i = 0; i< boardDim; i++)
 			board[6][i] = new Pawn(Player.WHITE);
 		
-		
+		// Define the first current player.
+		currentPlayer = White;
 	
 		}
 	
@@ -97,33 +101,47 @@ public class ChessModel implements IChessModel {
       return instance;
 	 
 	}
-
-	public boolean inCheck() { 
-		return false; 
-	}
+	
 	
 	public boolean isComplete() { 
 		return false; 
 	} 
 
-
 	public boolean isValidMove(Move move) { 
-		// complete this 
+		// TODO DONT TOUCH. BAD THINGS WILL HAPPEN.
+		return false;
 	} 
 
-
+	/* Moves a piece on the board. */
 	public void move(Move move) { 
-		// complete this 
+		
+		// --- Variable Declarations  -------------------------//
+		
+		/* The tempoary piece holder. */
+		ChessPiece temp; 
+		
+		// --- Main Routine -----------------------------------//
+		
+		// get the piece at the start postion.
+		temp = pieceAt (move.getFromRow(), move.getFromColumn());
+		
+		// Preform the swap.
+		board [move.getToRow()] [Move.getToColumn()] = temp;
+		board [move.getFromRow()] [Move.getFromColumn()] = null;				
+		
 	} 
 	
-
+	/* Determines if a given player is in check. */
 	public boolean inCheck(Player p) { 
 		return false; 
 	} 
 	
 
+	/* Returns the current player. */
 	public Player currentPlayer() { 
-		// complete this 
+
+		return currentPlayer;
+	
 	} 
 	
 	/* Returns the number of rows on the board. */
@@ -164,6 +182,5 @@ public class ChessModel implements IChessModel {
 						yPos < boardDim) ) ? true : false; 
 		
 	}
-
-
+	
 }

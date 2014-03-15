@@ -1,11 +1,13 @@
 package chess;
 
-/**
- * Objects implementing this interface represent the state of a chess game.   Notice that this interface is designed
- * to maintain the game state only, it does not provide any methods to control the flow of the game.
+/****************************************************************
+ * Objects implementing this interface represent the state of a
+ * chess game.Notice that this interface is designed to maintain 
+ * the game state only, it does not provide any methods to control 
+ * the flow of the game.
  *
- * @author Kurt VonEhr, Jacob Mckim, 
- */
+ * @author Kurt VonEhr, Jacob Mckim, Aernouts Kenneth
+ ****************************************************************/
 
 public interface IChessModel {
 

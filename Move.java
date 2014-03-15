@@ -1,11 +1,12 @@
 package chess;
 
-/**
- * Packages the four components of a move into a single object.    (Instance variables are public because this object
+/*****************************************************************
+ * Packages the four components of a move into a single object.    
+ * (Instance variables are public because this object
  * is a simple container.)
  *
- * @author Kurt VonEhr, Jacob Mckim, 
- */
+ * @author Kurt VonEhr, Jacob Mckim, Aernouts Kenneth
+ *****************************************************************/
 
 public class Move {
 
