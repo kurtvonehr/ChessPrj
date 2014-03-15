@@ -98,8 +98,8 @@ public class Bishop extends ChessPiece {
 	if (result)
 	{
 		// Check if it is on the positive slope diagonal.
-		else if ((move.getFromColumn() - move.getToColumn()) ==
-		(move.getFromRow - move.getFromRow))
+		if ((move.getFromColumn() - move.getToColumn()) ==
+		(move.getFromRow() - move.getFromRow()))
 		{
 			// Determine which part of the move is greater.
 			if ( move.getFromRow() > move.getToRow() )
@@ -129,7 +129,7 @@ public class Bishop extends ChessPiece {
 			// Find if there are any pieces in between the rows.
 			for ( pos = 1; pos < (greater_row-lesser_row); pos++ )
 			{
-				if (board [lesser_row + pos] [less_col + pos] != null)
+				if (board [lesser_row + pos] [lesser_col + pos] != null)
 				{	
 					result = false;
 					break;
@@ -139,7 +139,7 @@ public class Bishop extends ChessPiece {
 		
 		// Check if it is on the negative slope diagonal
 		else if ((move.getFromColumn() - move.getToColumn()) ==
-		-(move.getFromRow - move.getFromRow))
+		-(move.getFromRow() - move.getFromRow()))
 		{
 			// Determine which part of the move is greater.
 			if ( move.getFromRow() > move.getToRow() )
@@ -169,7 +169,7 @@ public class Bishop extends ChessPiece {
 			// Find if there are any pieces in between the rows.
 			for ( pos = 1; pos < (greater_row-lesser_row); pos++ )
 			{
-				if (board [greater_row - pos] [less_col + pos] != null)
+				if (board [greater_row - pos] [lesser_col + pos] != null)
 				{	
 					result = false;
 					break;
@@ -190,4 +190,4 @@ public class Bishop extends ChessPiece {
 	
 	//--------------------------------------------------------------//
 
-}
+
