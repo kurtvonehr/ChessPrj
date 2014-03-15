@@ -79,16 +79,16 @@ public class King extends ChessPiece {
 		validMove = super.isValidMove(move, board);
 		
 		// Validate that the super works.
-		if (vaidMove)
+		if (validMove)
 		{
 			//If move is greater than one square in any direction, 
 			//move is invalid.
-			if(abs((move.getToRow() - move.getFromRow())) > 1)
+			if(Math.abs((move.getToRow() - move.getFromRow())) > 1)
 				validMove = false;
-			if(abs((move.getToColumn() - move.getFromColumn())) > 1)
+			if(Math.abs((move.getToColumn() - move.getFromColumn())) > 1)
 				validMove = false;
-			if(move.getToColumn == move.getFromColumn)
-				if(move.getToRow == move.getFromRow)
+			if(move.getToColumn() == move.getFromColumn())
+				if(move.getToRow() == move.getFromRow())
 					validMove = false;
 		}
 		
