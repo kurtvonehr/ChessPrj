@@ -67,12 +67,10 @@ public class ChessPanel extends JPanel {
 		boardImages = new Image[2][6];
 		
 		//-----------------------------------------------------------------------------//
-		// Inst. bottom panel and adds "Move" button to it (depreciated)
+		// Inst. bottom panel with String coordinates output
 		//-----------------------------------------------------------------------------//
 		bottom_panel = new JPanel();
 		bottom_panel.setPreferredSize(new Dimension(500, 100));
-		//moveButton = new JButton("Move");
-		//moveButton.addActionListener((ActionListener) bl);
 		coordinates = new JLabel("Coordinates");
 		bottom_panel.add(coordinates);
 		
@@ -89,11 +87,11 @@ public class ChessPanel extends JPanel {
 		grid = new JPanel(new GridLayout (rows, cols));
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				// Create a new button
+				// Creates a new button
 				boardButtons[row][col] = new JButton("");
-				// Add an ActionListener to that button
+				// Adds an ActionListener to that button
 				boardButtons[row][col].addActionListener(bl);
-				// Add each button to the JPanel grid
+				// Adds each button to the JPanel grid
 				grid.add(boardButtons[row][col]);
 				// Sets blank background image to each piece
 				boardButtons[row][col].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
@@ -184,9 +182,7 @@ public class ChessPanel extends JPanel {
 	//-----------------------------------------------------------------------------//
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			// Loops through all the [rows,cols] of the ChessPiece[][] array 
-			// and checks for an "action event"
-			
+			// Loops through all the [rows,cols] of the ChessPiece[][] array for ActionEvent
 			for (int i = 0; i < rows; i++) {
 				for (int j = 0; j < cols; j++) {
 					if (e.getSource() == boardButtons[i][j]) {
@@ -199,6 +195,8 @@ public class ChessPanel extends JPanel {
 						if (clickCount == 1) {
 							moving.setToRow(i);
 							moving.setToColumn(j);
+							if (model.isValidMove(moving))
+									model.move(moving);
 							clickCount = 0;
 							}
 						}
