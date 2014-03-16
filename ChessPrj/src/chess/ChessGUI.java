@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 * a new ChessPanel object ("panel")									  *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess Game	                                  *
-* Author : Kenneth Aernouts, 										  *
+* Author : Kenneth Aernouts  										  *
 * Group : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth				  *
 * Date: 3/13/2014			                                          *
 *---------------------------------------------------------------------*
@@ -35,5 +35,4 @@ public class ChessGUI {
 		frame.pack();
 		frame.setVisible(true);
 	}
-
 }

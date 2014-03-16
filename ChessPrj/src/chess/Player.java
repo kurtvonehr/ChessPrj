@@ -3,10 +3,9 @@ package chess;
 /**
  * A player of a chess game.
  *
- * @author Kurt VonEhr, Jacob Mckim, 
+ * @author Zachary Kurmas
  */
 public enum Player {
-	
    BLACK, WHITE;
 
    /**

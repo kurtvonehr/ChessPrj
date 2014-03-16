@@ -42,7 +42,7 @@ public class Rook extends ChessPiece {
 	}
 
 	//--------------------------------------------------------------//	
-	// Override Function Definitions		      		//
+	// Override Function Definitions		      		
 	//--------------------------------------------------------------//  
 
 

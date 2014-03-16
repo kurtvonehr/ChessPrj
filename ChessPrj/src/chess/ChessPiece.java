@@ -27,7 +27,7 @@ public abstract class ChessPiece implements IChessPiece {
 	private Player owner; 
 	
 	/* The core model controller that operates all pieces. */
-	public ChessModel model;
+	//private ChessModel model;
 	
 	//---------------------------------------------------------------//	
  	// Class Constructors                                            //
@@ -45,10 +45,10 @@ public abstract class ChessPiece implements IChessPiece {
 	protected ChessPiece(Player player) { 
 		
 		// Set class attributes.
-		owner = player; 
+		this.owner = player; 
 		
 		// Get the model object for help with control.
-		model = ChessModel.getInstance();
+		//model = ChessModel.getInstance();
 		
 	} 
 	
@@ -56,22 +56,20 @@ public abstract class ChessPiece implements IChessPiece {
 	// Interface Function Definitions								//
 	//--------------------------------------------------------------//
 	 
-	/* Method called to return piece type as Piece. */
+	/* Method called to return piece type as Piece enum object. */
 	public abstract Piece type(); 
 	
-	public void setType(Piece type){
-		
-	}
+//	public void setType(Piece type){
+//		
+//	}
 	 
 	 
 	/* Method called to return the owner of this piece. */
 	public Player player() { 
-		 
-		return owner;
-		 
+		return owner; 
 	} 
 	 
-	/* Method called to see if move requested is valid. */
+	/* Method called to see if the move requested is valid. */
 	public boolean isValidMove(Move move, IChessPiece[ ][ ] board) { 
 	 	
 	// --- Variable Declarations  ---------------------------//
@@ -94,17 +92,16 @@ public abstract class ChessPiece implements IChessPiece {
 	toPiece = board[move.getToRow()] [move.getToColumn()];
 	
 	// Verify that it's the right piece.
-	if (fromPiece != null)
+	if (fromPiece != null) 
 	{
 		// Verify that the move change position of piece.
 		if ( (move.getFromRow() != move.getToRow() ) &&
-			( move.getFromColumn() != move.getToColumn () ) )
+			( move.getFromColumn() != move.getToColumn () ) ) 
 		{
 			// Verify that the end pos is not on one of the the player's
 			if (toPiece.player() != owner)
 				result = true;
 		}
-		
 	}
 	
 	// Return the result of the operation.
