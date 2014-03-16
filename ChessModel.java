@@ -1,17 +1,17 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* ChessModel.java                             		              *
+* ChessModel.java                             		             	  *
 *---------------------------------------------------------------------*
 * Description - A class used to control all game logic of the game of *
 * chess during the users interactions with the game. This class can   *
-* only be initialized once.					      *
+* only be initialized once.					      					  *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
-* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	      *
+* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES						      *	                                      
+* ISSUES AND NOTES						      						  *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
@@ -85,7 +85,7 @@ public class ChessModel implements IChessModel {
 	
 	
 	//--------------------------------------------------------------//	
-	// Function Definitions					     	//
+	// Function Definitions					     					//
 	//--------------------------------------------------------------//   
 	
 	/* Allows this object to be a singleton object. */
@@ -100,12 +100,14 @@ public class ChessModel implements IChessModel {
 	 
 	}
 
+	
 	/* Returns whether checkmate can be declared. */
 	public boolean isComplete() { 
 		
 		return false;
 		
 	} 
+	
 
 	/* */
 	public boolean isValidMove(Move move) { 
@@ -113,24 +115,26 @@ public class ChessModel implements IChessModel {
 		return false;
 	} 
 
+	
 	/* Moves a piece on the board. */
 	public void move(Move move) { 
 		
 		// --- Variable Declarations  -------------------------//
 		
-		/* The tempoary piece holder. */
+		/* The temporary piece holder. */
 		IChessPiece temp; 
 		
 		// --- Main Routine -----------------------------------//
 		
-		// get the piece at the start postion.
+		// get the piece at the start position.
 		temp = pieceAt (move.getFromRow(), move.getFromColumn());
 		
-		// Preform the swap.
+		// Perform the swap.
 		board [move.getToRow()] [move.getToColumn()] = temp;
 		board [move.getFromRow()] [move.getFromColumn()] = null;				
 		
 	} 
+	
 	
 	/* Determines if a given player is in check. */
 	public boolean inCheck(Player p) { 
@@ -141,13 +145,10 @@ public class ChessModel implements IChessModel {
 		Player agianstPlayer = p == Player.WHITE ? Player.BLACK 
 							 : Player.WHITE;
 		
-		/* The king piece to check if in check. */
-		ChessPiece king;
-		
-		/* The to postion x for all checks. */
+		/* The to position x for all checks. */
 		int toKingX = -1;
 		
-		/* The to postion y for all checks. */
+		/* The to position y for all checks. */
 		int toKingY = -1;
 		
 		/* The move to check. */
@@ -155,7 +156,7 @@ public class ChessModel implements IChessModel {
 		
 		// --- Main Routine -----------------------------------//
 		
-		// Find the king on the board were checking for to be checked.
+		// Find the king on the board to check for checked.
 		for (int x = 0; x < numRows(); x++) 
 		{
 			for (int y = 0; y < numColumns(); y++)
@@ -192,6 +193,7 @@ public class ChessModel implements IChessModel {
 		return false; 
 		
 	} 
+	
 
 	/* Returns the current player. */
 	public Player currentPlayer() { 
@@ -200,6 +202,7 @@ public class ChessModel implements IChessModel {
 	
 	} 
 	
+	
 	/* Returns the number of rows on the board. */
 	public int numRows() { 
 
@@ -207,25 +210,28 @@ public class ChessModel implements IChessModel {
 
 	} 
 	
+	
 	/* Returns the number of columns on the board. */
 	public int numColumns() { 
 
 		return boardDim;
 		
 	} 
+	
 
 	/* Returns a piece at a given point in the grid. */
 	public IChessPiece pieceAt(int row, int column) { 
 		
-		//if (inGrid (row, column))
+		if (inGrid (row, column))
 			return board [row] [column];
 					
-		//else
-		//	return null;				
+		else
+			return null;				
 	} 
 	
+	
    /****************************************************************
-   * This method validates that a move postion is within the grid.
+   * This method validates that a move position is within the grid.
    *
    * @return Whether or not the move is in the grid. 
    * 
@@ -233,7 +239,7 @@ public class ChessModel implements IChessModel {
 	public boolean inGrid (int xPos, int yPos) {
 		
 		// Ternary operate whether its in the grid.
-		return  (xPos <= 0 && xPos < boardDim) && (yPos >= 0 && 
+		return  (xPos >= 0 && xPos < boardDim) && (yPos >= 0 && 
 					yPos < boardDim) ? true : false; 
 	}
 	
