@@ -93,16 +93,19 @@ public class ChessPanel extends JPanel {
 				boardButtons[row][col].addActionListener(bl);
 				// Adds each button to the JPanel grid
 				grid.add(boardButtons[row][col]);
-				// Sets blank background image to each piece
-				boardButtons[row][col].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
+				// Sets blank image to each piece
+				//boardButtons[row][col].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
 				// Then, sets background colors of buttons to black or white, as required by rules of chess **/
 				if ( (row % 2 == 0 && col % 2 == 0) || (row % 2 == 1 && col % 2 ==1)) {
 					boardButtons[row][col].setBackground(Color.white);
 					boardButtons[row][col].setOpaque(true);
+					boardButtons[row][col].setBorderPainted(false);
 				}
 				else {
 					boardButtons[row][col].setBackground(Color.black);
 					boardButtons[row][col].setOpaque(true);
+					boardButtons[row][col].setBorderPainted(false);
+					
 				}
 			}
 		}
@@ -134,12 +137,21 @@ public class ChessPanel extends JPanel {
 	//-----------------------------------------------------------------------------//
 	// Displays the ChessBoard
 	//-----------------------------------------------------------------------------//
-	private void displayBoard() {		
-		for (int ii = 0; ii < rows; ii++) {
-			for (int jj = 0; jj < cols; jj++) {
-				boardButtons[ii][jj].setIcon(new ImageIcon(boardImages[model.pieceAt(ii, jj).player().ordinal()][model.pieceAt(ii, jj).type().ordinal()]));
+	private void displayBoard() {
+		
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
 				
-				// TODO Add if NULL exception?
+				int p = 0;
+				int t = 0;
+				
+				if (model.pieceAt(i, j) == null)
+					boardButtons[i][j].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
+				else {
+					p = model.pieceAt(i, j).player().ordinal();
+					t = model.pieceAt(i, j).type().ordinal();
+					boardButtons[i][j].setIcon(new ImageIcon(boardImages[p][t]));
+				}
 			}
 		}
 	}
@@ -164,19 +176,6 @@ public class ChessPanel extends JPanel {
 		}
 	}
 	
-	
-	
-	
-	
-//	public static int getClickOne() {
-//		int row;
-//		int column;
-//		return x, y;
-//	}
-//	public static int getClickTwo() {
-//		re
-//	}
-	
 	//-----------------------------------------------------------------------------//
 	// ActionListener InnerClass
 	//-----------------------------------------------------------------------------//
@@ -187,6 +186,9 @@ public class ChessPanel extends JPanel {
 				for (int j = 0; j < cols; j++) {
 					if (e.getSource() == boardButtons[i][j]) {
 						
+						// Shows coordinates in message pane (fer TESTING perposs)
+						coordinates.setText("( " + (i+1) + "," + (j+1) + ")");	
+						
 						if (clickCount == 0) {
 							moving.setFromRow(i);
 							moving.setFromColumn(j);
@@ -196,16 +198,16 @@ public class ChessPanel extends JPanel {
 							moving.setToRow(i);
 							moving.setToColumn(j);
 							if (model.isValidMove(moving))
-									model.move(moving);
+								model.move(moving);
+							else
+								coordinates.setText("That move is not valid");
 							clickCount = 0;
+							// TODO model.player.nextTurn();
 							}
 						}
-					
-						// Shows coordinates in message pane (TESTING)
-						coordinates.setText("( " + i + "," + j + ")");	
 					}
 				}
-			
+			// Re-displays buttons and related piece images
 			displayBoard();
 		}
 	}
