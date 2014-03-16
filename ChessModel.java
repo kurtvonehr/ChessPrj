@@ -46,7 +46,9 @@ public class ChessModel implements IChessModel {
 	// Class Constructors                                            //
 	//---------------------------------------------------------------//	
 	
-	private ChessModel() { 
+	public ChessModel() { 
+		
+		board = new ChessPiece[this.numRows()][this.numColumns()];
 		
 		//Place White pieces onto board
 		board[0][0] = new Rook(Player.WHITE);
