@@ -144,12 +144,19 @@ public class ChessPanel extends JPanel {
 				
 				int p = 0;
 				int t = 0;
-				
+				//sets button size to 64x64pix
 				if (model.pieceAt(i, j) == null)
 					boardButtons[i][j].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
 				else {
 					p = model.pieceAt(i, j).player().ordinal();
 					t = model.pieceAt(i, j).type().ordinal();
+					//Pawn, Knight and Bishop int values are swapped, swap them back
+					if(t == 3)
+						t = 5;
+					else if(t == 5)
+						t = 4;
+					else if(t == 4)
+						t = 3;
 					boardButtons[i][j].setIcon(new ImageIcon(boardImages[p][t]));
 				}
 			}

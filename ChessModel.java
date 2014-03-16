@@ -76,7 +76,7 @@ public class ChessModel implements IChessModel {
 		
 		// Place white pawns.
 		for(int i = 0; i< boardDim; i++)
-			board[6][i] = new Pawn(Player.WHITE);
+			board[1][i] = new Pawn(Player.WHITE);
 		
 		// Define the first current player.
 		currentPlayer = White;
@@ -217,11 +217,11 @@ public class ChessModel implements IChessModel {
 	/* Returns a piece at a given point in the grid. */
 	public IChessPiece pieceAt(int row, int column) { 
 		
-		if (inGrid (row, column))
+		//if (inGrid (row, column))
 			return board [row] [column];
 					
-		else
-			return null;				
+		//else
+		//	return null;				
 	} 
 	
    /****************************************************************
