@@ -109,10 +109,22 @@ public class ChessModel implements IChessModel {
 	} 
 	
 
-	/* */
+	/* Calls a piece and asks if the move is valid. */
 	public boolean isValidMove(Move move) { 
-		// TODO DONT TOUCH. BAD THINGS WILL HAPPEN.
-		return false;
+		
+		/* The piece to ask for information from. */
+		ChessPiece piece;
+		
+		// Get the piece to be pulled.
+		piece = (ChessPiece) pieceAt(move.getFromRow(),
+											move.getFromColumn());
+		
+		// Return the result of the board move.
+		if (piece != null)
+			return piece.isValidMove(move, board);
+		else 
+			return false;
+
 	} 
 
 	
