@@ -1,16 +1,16 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* ChessPiece.java                             		              *
+* ChessPiece.java                             		              	  *
 *---------------------------------------------------------------------*
 * Description - A class used as the default definition for all the    *
-* board pieces involved in the game of chess.			      *
+* board pieces involved in the game of chess.			     		  *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
 * Author : McKim A. Jacob, VonEhr Kurt                                *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES						      *	                                      
+* ISSUES AND NOTES						      						  *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
@@ -100,8 +100,11 @@ public abstract class ChessPiece implements IChessPiece {
 		if ( (move.getFromRow() != move.getToRow() ) &&
 			( move.getFromColumn() != move.getToColumn () ) )
 		{
-			// Verify that the end pos is not on one of the the player's
-			if (toPiece.player() != owner)
+			// Verify that the end pos is not a players piece.
+			if ( toPiece == null )
+				result = true;
+			
+			else if (toPiece.player() != owner)
 				result = true;
 		}
 		
