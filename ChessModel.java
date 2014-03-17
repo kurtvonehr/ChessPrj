@@ -243,4 +243,19 @@ public class ChessModel implements IChessModel {
 					yPos < boardDim) ? true : false; 
 	}
 	
+	
+   /****************************************************************
+   * This method toggles which players turn it currently is.
+   *
+   * @return The player enum whose turn is up (WHITE or BLACK).
+   * 
+   *****************************************************************/
+	public Player nextTurn () {
+		
+		return currentPlayer = currentPlayer == Player.WHITE ? 
+										  Player.BLACK : Player.WHITE;
+		
+	}
+	
+	
 }
