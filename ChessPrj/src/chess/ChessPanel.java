@@ -74,8 +74,7 @@ public class ChessPanel extends JPanel {
 		turn = new JLabel("");
 		bottom_panel.add(turn);
 		bottom_panel.add(coordinates);
-		//bottom_panel.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
+
 		//-----------------------------------------------------------------------------//
 		// Inst. top panel and adds message label where messages can be displayed
 		//-----------------------------------------------------------------------------//
@@ -130,6 +129,7 @@ public class ChessPanel extends JPanel {
 		//-----------------------------------------------------------------------------//		
 		// Adds everything above to the JFrame and styles it a tad
 		//-----------------------------------------------------------------------------//
+		
 		add(top_panel);
 		add(grid);
 		add(bottom_panel);
@@ -192,7 +192,7 @@ public class ChessPanel extends JPanel {
 						
 						// Shows coordinates in message pane (fer TESTING perposs)
 						coordinates.setText("( " + (i+1) + "," + (j+1) + ")");	
-
+						
 						if (clickCount == 0) {
 							moving.setFromRow(i);
 							moving.setFromColumn(j);
