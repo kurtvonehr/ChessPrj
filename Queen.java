@@ -153,8 +153,8 @@ public class Queen extends ChessPiece {
 			}
 			
 			// Check if it is on the positive slope diagonal.
-			else if ((move.getFromColumn() - move.getToColumn()) == 
-			(move.getFromRow() - move.getFromRow()))
+			else if ((move.getFromColumn() - move.getToColumn()) ==
+			-(move.getFromRow() - move.getToRow()))
 			{
 				// Determine which part of the move is greater.
 				if ( move.getFromRow() > move.getToRow() )
@@ -179,12 +179,12 @@ public class Queen extends ChessPiece {
 					greater_col = move.getToColumn();
 					lesser_col = move.getFromColumn();
 				}
-				
-				
+			
+			
 				// Find if there are any pieces in between the rows.
 				for ( pos = 1; pos < (greater_row-lesser_row); pos++ )
 				{
-					if (board [lesser_row + pos] [lesser_col + pos] != null)
+					if (board [greater_row - pos] [lesser_col + pos] != null)
 					{	
 						result = false;
 						break;
@@ -193,8 +193,8 @@ public class Queen extends ChessPiece {
 			}
 			
 			// Check if it is on the negative slope diagonal
-			else if ((move.getFromColumn() - move.getToColumn()) == 
-			-(move.getFromRow() - move.getFromRow()))
+			else if ((move.getFromColumn() - move.getToColumn()) ==
+			(move.getFromRow() - move.getToRow()))
 			{
 				// Determine which part of the move is greater.
 				if ( move.getFromRow() > move.getToRow() )
@@ -219,12 +219,12 @@ public class Queen extends ChessPiece {
 					greater_col = move.getToColumn();
 					lesser_col = move.getFromColumn();
 				}
-				
-				
+			
+			
 				// Find if there are any pieces in between the rows.
 				for ( pos = 1; pos < (greater_row-lesser_row); pos++ )
 				{
-					if (board [greater_row - pos] [lesser_col + pos] != null)
+					if (board [lesser_row + pos] [lesser_col + pos] != null)
 					{	
 						result = false;
 						break;
