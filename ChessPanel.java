@@ -2,13 +2,13 @@ package chess;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -16,36 +16,36 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/*--------------------------------------------------------------------*
-* ChessGUI.java                             		                  *
-*---------------------------------------------------------------------*
-* Description: Presents the GUI, listens and reacts to user interaction
-* with the chess board. Checks for valid moves, moves the pieces,
-* finds the next player, and announces game status to the user
-*---------------------------------------------------------------------*
-* Project: Project 3 : Chess Game	                                  *
-* Author : Kenneth Aernouts 										  *
-* Group : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth				  *
-* Date: 3/13/2014-3/20/14	                                          *
-*---------------------------------------------------------------------*
-* ISSUES AND NOTES						                              *	                                      
-*---------------------------------------------------------------------*                            
-* 
-*---------------------------------------------------------------------*/
-
+/**
+ * Responsible for presenting the GUI, the user's actions, and updating the view
+ * Implement a standard form of chess (White moves first, then black)
+ * Only allow valid moves (i.e. isMoveValid())
+ * changed
+ */
 @SuppressWarnings("serial")
 public class ChessPanel extends JPanel {
+
 	private ChessModel model;
+	
 	private JButton[][] boardButtons;
-	private Image[][] boardImages;	
-	private JPanel first_panel, third_panel, fourth_panel, grid;
-	private JLabel message, gameStatus, turn;
+	private Image[][] boardImages;
+	
+	private JPanel top_panel, bottom_panel, grid;
+	private JLabel message, coordinates, turn;
+	//private JButton moveButton;
+	
 	private ButtonListener bl = new ButtonListener();
+
+	// JUNK BOX of variables
 	private int rows, cols;
-	private Move moving;
-	//---------------------------------------------------------------//
-	// Constructor - creates a new model, builds the panels
-	//---------------------------------------------------------------//	
+	public int clickCount;
+	public Move moving;
+	
+	// These are purely for visual purposes...
+	//public static final int QUEEN=0, KING=1, ROOK=2, KNIGHT=3, BISHOP=4, PAWN=5;
+	//public static final int BLK=0, WHT=1;
+	//public static final int[] MAIN_ROW = {ROOK, KNIGHT, BISHOP, KING, QUEEN, BISHOP, KNIGHT, ROOK};
+	
 	public ChessPanel() {
 		
 		//---------------------------------------------------------------//	
@@ -67,28 +67,21 @@ public class ChessPanel extends JPanel {
 		
 		//-----------------------------------------------------------------------------//
 		// Inst. bottom panel with String coordinates output
-		//-----------------------------------------------------------------------------//	
-		third_panel = new JPanel();
+		//-----------------------------------------------------------------------------//
+		bottom_panel = new JPanel();
+		bottom_panel.setPreferredSize(new Dimension(500, 100));
+		coordinates = new JLabel("");
 		turn = new JLabel("");
-		third_panel.add(turn);
-		
-		fourth_panel = new JPanel();
-		gameStatus = new JLabel("");
-		fourth_panel.add(gameStatus);
+		bottom_panel.add(turn);
+		bottom_panel.add(coordinates);
+
 		//-----------------------------------------------------------------------------//
 		// Inst. top panel and adds message label where messages can be displayed
 		//-----------------------------------------------------------------------------//
-		first_panel = new JPanel();
-		first_panel.setPreferredSize(new Dimension(500,50));
-		message = new JLabel("A Fabulous Chess Game by Ken, Kurt, and Jake", JLabel.CENTER);
-		message.setVerticalTextPosition(JLabel.CENTER);
-		first_panel.add(message);
+		top_panel = new JPanel();
+		message = new JLabel("2 Player Chess");
+		top_panel.add(message);
 		
-		// Font styling
-		Font fancy = new Font("Serif", Font.PLAIN, 18);
-		gameStatus.setFont(fancy);
-		message.setFont(fancy);
-		turn.setFont(fancy);
 		//-----------------------------------------------------------------------------//
 		// Builds out all of the buttons (aka the chess board squares)
 		//-----------------------------------------------------------------------------//
@@ -103,18 +96,21 @@ public class ChessPanel extends JPanel {
 				grid.add(boardButtons[row][col]);
 				// Sets blank image to each piece
 				//boardButtons[row][col].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
-				
 				// Then, sets background colors of buttons to black or white, as required by rules of chess **/
-				if ( (row % 2 == 0 && col % 2 == 0) || (row % 2 == 1 && col % 2 == 1)) {
+				if ( (row % 2 == 0 && col % 2 == 0) || (row % 2 == 1 && col % 2 ==1)) {
 					boardButtons[row][col].setBackground(Color.white);
+					boardButtons[row][col].setOpaque(true);
+					boardButtons[row][col].setBorderPainted(false);
 				}
 				else {
 					boardButtons[row][col].setBackground(Color.black);
+					boardButtons[row][col].setOpaque(true);
+					boardButtons[row][col].setBorderPainted(false);
+					
 				}
-				boardButtons[row][col].setOpaque(true);
-				boardButtons[row][col].setBorderPainted(false);
 			}
 		}
+		
 		//-----------------------------------------------------------------------------//
 		// Builds boardImages[][] array (sprites)
 		//-----------------------------------------------------------------------------//
@@ -125,18 +121,18 @@ public class ChessPanel extends JPanel {
 		//-----------------------------------------------------------------------------//
 		displayBoard();
 		
-//		//-----------------------------------------------------------------------------//
-//		// incrementing int that counts the clicks from the actionListener //
-//		//-----------------------------------------------------------------------------//
-//		clickCount = 0;
-//		
-		//-----------------------------------------------------------------------------//		
-		// Adds everything above to the JFrame and sets the layout
 		//-----------------------------------------------------------------------------//
-		add(first_panel);
+		// incrementing int that counts the clicks from the actionListener //
+		//-----------------------------------------------------------------------------//
+		clickCount = 0;
+		
+		//-----------------------------------------------------------------------------//		
+		// Adds everything above to the JFrame and styles it a tad
+		//-----------------------------------------------------------------------------//
+		
+		add(top_panel);
 		add(grid);
-		add(third_panel);
-		add(fourth_panel);
+		add(bottom_panel);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 
@@ -152,37 +148,23 @@ public class ChessPanel extends JPanel {
 				
 				if (model.pieceAt(i, j) == null)
 					boardButtons[i][j].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
+					//boardButtons[i][j].setIcon(new ImageIcon(boardImages[p][t]));
 				else {
 					p = model.pieceAt(i, j).player().ordinal();
 					t = model.pieceAt(i, j).type().ordinal();
-//					if(t == 5)
-//						t = 4;
-//					else if(t == 3)
-//						t = 5;
-//					else if(t ==  4)
-//						t = 3;
+					if(t == 5)
+						t = 4;
+					else if(t == 3)
+						t = 5;
+					else if(t ==  4)
+						t = 3;
 					boardButtons[i][j].setIcon(new ImageIcon(boardImages[p][t]));
 				}
-				
-				
 			}
 		}
-		turn.setText("It is " + model.currentPlayer() + "'s turn.");
+		turn.setText("Turn: " + model.currentPlayer());
 	}
 	
-	// Resets buttons back to default
-	private void boardReset() {
-				for (int row = 0; row < 8; row++) {
-					for (int col = 0; col < 8; col++) {
-						if ( (row % 2 == 0 && col % 2 == 0) || (row % 2 == 1 && col % 2 == 1)) {
-							boardButtons[row][col].setBackground(Color.white);
-						}
-						else {
-							boardButtons[row][col].setBackground(Color.black);
-						}
-					}
-				}
-			}
 	//-----------------------------------------------------------------------------//
 	// Creates the sprite images that will be used in displayBoard() for each button
 	//-----------------------------------------------------------------------------//
@@ -209,94 +191,42 @@ public class ChessPanel extends JPanel {
 	private class ButtonListener implements ActionListener {
 		int clickCount = 0;
 		public void actionPerformed(ActionEvent e) {
+			// Loops through all the [rows,cols] of the ChessPiece[][] array for ActionEvent
 			for (int i = 0; i < rows; i++) {
 				for (int j = 0; j < cols; j++) {
 					if (e.getSource() == boardButtons[i][j]) {
-						//--------------------------------------------//
-						// Uses a click counter to determine if the
-						// player has selected the piece to be moved
-						// or where they would like to move the piece.
-						//--------------------------------------------//
-						if (clickCount == 0) { 
-							//--------------------------------------------//
-							// Sets the beginning coordinates of the move
-							// from the piece's current position.
-							//--------------------------------------------//
+						
+						// Shows coordinates in message pane (fer TESTING perposs)
+						//coordinates.setText("( " + (i+1) + "," + (j+1) + ")");	
+						
+						if (clickCount == 0) {
 							moving.setFromRow(i);
 							moving.setFromColumn(j);
-							//--------------------------------------------//
-							// Gives selected button a red (or whatever)
-							// color and re displays the chess board
-							//--------------------------------------------//
-							if (model.pieceAt(i, j).player() == model.currentPlayer()) {
-								boardButtons[i][j].setBackground(Color.lightGray);
-							}
-							// TODO should, maybe, needs to catch null pointer...
-							else if (model.pieceAt(i, j).player() != null) {
-								if ( (i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 ==1)) {
-									boardButtons[i][j].setBackground(Color.white);
-								}
-								else
-									boardButtons[i][j].setBackground(Color.black);
-							}
-							// Redraws the board, with the changes made.
-							displayBoard();
-							//--------------------------------------------//
-							// Increments the click counter and resets
-							// the bottom JPanel message to show that a
-							// piece has been selected.
-							//--------------------------------------------//
 							clickCount += 1;
-							gameStatus.setText("Piece selected");
+							coordinates.setText("Piece selected");
 						}
 						else if (clickCount == 1) {
 							
-							
-							// TODO Causes a de-select on first load. Stops working after first set of clicks.
-							// Basically it redraws the cells again.
-							boardReset();
-							
-							//--------------------------------------------//
-							// Checks the click counter to make sure this
-							// is the user's second click and sets the
-							// Move objects "to" coordinates.
-							//--------------------------------------------//
 							moving.setToRow(i);
 							moving.setToColumn(j);
-							//--------------------------------------------//
-							// Checks if the Move is allowed and not in check.
-							//--------------------------------------------//
-							if (model.isValidMove(moving) && !model.inCheck(model.currentPlayer())) {
-								// Executes the move method and sets the message to the player.
+							if (model.isValidMove(moving) && !model.inCheck(model.currentPlayer()))
+							{
 								model.move(moving);
-								//--------------------------------------------//
-								// Resets the background color of the chess
-								// board, after a player has completed a move.
-								//--------------------------------------------//
-								if (model.currentPlayer() == Player.BLACK) {
-									boardButtons[i][j].setBackground(Color.black);
-								}
-								else
-									boardButtons[i][j].setBackground(Color.white);
-								// Changes player to next player
 								model.nextTurn();
-								// If in check, shows this message
 								if (model.inCheck(model.currentPlayer()))
-									gameStatus.setText("In Check");
-							}		
+									coordinates.setText("In Check");
+							}
+							
 							else
-								gameStatus.setText("Sorry, that move is not allowed,");	
-							//--------------------------------------------//
-							// Resets the click counter
-							//--------------------------------------------//
+								coordinates.setText("That move is not valid");
 							clickCount = 0;
+							
 						}
 					}
 				}
 			}
-			//--------------------------------------------//
-			// Re-displays the board (reset, shows next player)
-			//--------------------------------------------//
+			//coordinates.setText("" + clickCount);
+			// Re-displays buttons and related piece images
 			displayBoard();
 		}
 	}
