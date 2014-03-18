@@ -23,7 +23,7 @@ public class ChessGUI {
 
 	public static void main(String[] args) {
 		
-		JFrame frame = new JFrame("A Fabulous Chess Game");
+		JFrame frame = new JFrame("Chess Game");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		ChessPanel panel = new ChessPanel();
