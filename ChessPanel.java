@@ -51,7 +51,7 @@ public class ChessPanel extends JPanel {
 		//---------------------------------------------------------------//	
 		// Creates a new ChessModel object                               //
 		//---------------------------------------------------------------//
-		model = ChessModel.getInstance();
+		model = new ChessModel();
 		moving = new Move(0, 0, 0, 0);
 		//---------------------------------------------------------------//	
 		// Gets number of Rows and Columns from ChessModel               //
@@ -70,7 +70,7 @@ public class ChessPanel extends JPanel {
 		//-----------------------------------------------------------------------------//
 		bottom_panel = new JPanel();
 		bottom_panel.setPreferredSize(new Dimension(500, 100));
-		coordinates = new JLabel("Coordinates");
+		coordinates = new JLabel("");
 		turn = new JLabel("");
 		bottom_panel.add(turn);
 		bottom_panel.add(coordinates);
@@ -79,7 +79,7 @@ public class ChessPanel extends JPanel {
 		// Inst. top panel and adds message label where messages can be displayed
 		//-----------------------------------------------------------------------------//
 		top_panel = new JPanel();
-		message = new JLabel("This is a game of chess...that might work");
+		message = new JLabel("2 Player Chess");
 		top_panel.add(message);
 		
 		//-----------------------------------------------------------------------------//
@@ -150,19 +150,19 @@ public class ChessPanel extends JPanel {
 					boardButtons[i][j].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
 					//boardButtons[i][j].setIcon(new ImageIcon(boardImages[p][t]));
 				else {
+					p = model.pieceAt(i, j).player().ordinal();
+					t = model.pieceAt(i, j).type().ordinal();
 					if(t == 5)
 						t = 4;
 					else if(t == 3)
 						t = 5;
 					else if(t ==  4)
 						t = 3;
-					p = model.pieceAt(i, j).player().ordinal();
-					t = model.pieceAt(i, j).type().ordinal();
 					boardButtons[i][j].setIcon(new ImageIcon(boardImages[p][t]));
 				}
 			}
 		}
-		turn.setText("It is " + model.currentPlayer() + "'s turn");
+		turn.setText("Turn: " + model.currentPlayer());
 	}
 	
 	//-----------------------------------------------------------------------------//
@@ -197,25 +197,28 @@ public class ChessPanel extends JPanel {
 					if (e.getSource() == boardButtons[i][j]) {
 						
 						// Shows coordinates in message pane (fer TESTING perposs)
-						coordinates.setText("( " + (i+1) + "," + (j+1) + ")");	
+						//coordinates.setText("( " + (i+1) + "," + (j+1) + ")");	
 						
 						if (clickCount == 0) {
 							moving.setFromRow(i);
 							moving.setFromColumn(j);
 							clickCount += 1;
+							coordinates.setText("Piece selected");
 						}
 						else if (clickCount == 1) {
+							
 							moving.setToRow(i);
 							moving.setToColumn(j);
-							if (model.isValidMove(moving))
+							if (model.isValidMove(moving) && !model.inCheck(model.currentPlayer()))
 							{
 								model.move(moving);
 								model.nextTurn();
+								if (model.inCheck(model.currentPlayer()))
+									coordinates.setText("In Check");
 							}
 							
 							else
 								coordinates.setText("That move is not valid");
-							
 							clickCount = 0;
 							
 						}
