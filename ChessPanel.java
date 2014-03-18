@@ -150,6 +150,12 @@ public class ChessPanel extends JPanel {
 					boardButtons[i][j].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
 					//boardButtons[i][j].setIcon(new ImageIcon(boardImages[p][t]));
 				else {
+					if(t == 5)
+						t = 4;
+					else if(t == 3)
+						t = 5;
+					else if(t ==  4)
+						t = 3;
 					p = model.pieceAt(i, j).player().ordinal();
 					t = model.pieceAt(i, j).type().ordinal();
 					boardButtons[i][j].setIcon(new ImageIcon(boardImages[p][t]));
