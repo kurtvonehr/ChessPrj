@@ -105,7 +105,7 @@ public class ChessPanel extends JPanel {
 				//boardButtons[row][col].setIcon(new ImageIcon(new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB)));
 				
 				// Then, sets background colors of buttons to black or white, as required by rules of chess **/
-				if ( (row % 2 == 0 && col % 2 == 0) || (row % 2 == 1 && col % 2 ==1)) {
+				if ( (row % 2 == 0 && col % 2 == 0) || (row % 2 == 1 && col % 2 == 1)) {
 					boardButtons[row][col].setBackground(Color.white);
 				}
 				else {
@@ -115,7 +115,6 @@ public class ChessPanel extends JPanel {
 				boardButtons[row][col].setBorderPainted(false);
 			}
 		}
-		
 		//-----------------------------------------------------------------------------//
 		// Builds boardImages[][] array (sprites)
 		//-----------------------------------------------------------------------------//
@@ -171,6 +170,19 @@ public class ChessPanel extends JPanel {
 		turn.setText("It is " + model.currentPlayer() + "'s turn.");
 	}
 	
+	// Resets buttons back to default
+	private void boardReset() {
+				for (int row = 0; row < 8; row++) {
+					for (int col = 0; col < 8; col++) {
+						if ( (row % 2 == 0 && col % 2 == 0) || (row % 2 == 1 && col % 2 == 1)) {
+							boardButtons[row][col].setBackground(Color.white);
+						}
+						else {
+							boardButtons[row][col].setBackground(Color.black);
+						}
+					}
+				}
+			}
 	//-----------------------------------------------------------------------------//
 	// Creates the sprite images that will be used in displayBoard() for each button
 	//-----------------------------------------------------------------------------//
@@ -242,12 +254,7 @@ public class ChessPanel extends JPanel {
 							
 							// TODO Causes a de-select on first load. Stops working after first set of clicks.
 							// Basically it redraws the cells again.
-							if ( (i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 ==1)) {
-								boardButtons[i][j].setBackground(Color.white);
-							}
-							else
-								boardButtons[i][j].setBackground(Color.black);
-							
+							boardReset();
 							
 							//--------------------------------------------//
 							// Checks the click counter to make sure this
@@ -273,16 +280,16 @@ public class ChessPanel extends JPanel {
 									boardButtons[i][j].setBackground(Color.white);
 								// Changes player to next player
 								model.nextTurn();
-								//--------------------------------------------//
-								// Resets the click counter
-								//--------------------------------------------//
-								clickCount = 0;
 								// If in check, shows this message
 								if (model.inCheck(model.currentPlayer()))
 									gameStatus.setText("In Check");
 							}		
 							else
 								gameStatus.setText("Sorry, that move is not allowed,");	
+							//--------------------------------------------//
+							// Resets the click counter
+							//--------------------------------------------//
+							clickCount = 0;
 						}
 					}
 				}
