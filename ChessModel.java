@@ -25,7 +25,7 @@ public class ChessModel implements IChessModel {
 	//---------------------------------------------------------------//
 
   	/* The one instance of this class that exists. */
-  	private static ChessModel instance;
+  	protected static ChessModel instance;
   
 	/* The game board holding all game pieces. Board is 8 x 8. */
 	private IChessPiece[][] board;
@@ -87,18 +87,6 @@ public class ChessModel implements IChessModel {
 	//--------------------------------------------------------------//	
 	// Function Definitions					     					//
 	//--------------------------------------------------------------//   
-	
-	/* Allows this object to be a singleton object. */
-	public static ChessModel getInstance () {
-	  
-	    // Check to see if the instance exists.
-       if (instance == null)
-          instance = new ChessModel();
-
-       // Return the instance of the object. 
-       return instance;
-	 
-	}
 
 	
 	/* Returns whether checkmate can be declared. */
@@ -120,7 +108,8 @@ public class ChessModel implements IChessModel {
 											move.getFromColumn());
 		
 		// Return the result of the board move.
-		if (piece != null)
+		if (!(board[move.fromRow][move.fromColumn] == null ||
+				board[move.fromRow][move.fromColumn].player() != currentPlayer))
 			return piece.isValidMove(move, board);
 		else 
 			return false;
@@ -153,9 +142,8 @@ public class ChessModel implements IChessModel {
 		
 		// --- Variable Declarations  -------------------------//
 		
-		/* The player who is checking the checked. */ 
-		Player agianstPlayer = p == Player.WHITE ? Player.BLACK 
-							 : Player.WHITE;
+		Player againstPlayer = p == Player.WHITE ? Player.BLACK
+				: Player.WHITE;
 		
 		/* The to position x for all checks. */
 		int toKingX = -1;
@@ -168,13 +156,13 @@ public class ChessModel implements IChessModel {
 		
 		// --- Main Routine -----------------------------------//
 		
-		// Find the king on the board to check for checked.
+		// Find the king on the board to verify if in check.
 		for (int x = 0; x < numRows(); x++) 
 		{
 			for (int y = 0; y < numColumns(); y++)
 			{
 				// If the piece matches the description set to pos.
-				if (board[x][y].type() == Piece.KING &&
+				if (!(board[x][y] == null) && board[x][y].type() == Piece.KING &&
 							board[x][y].player() == p)
 				{
 					toKingX = x;
@@ -189,7 +177,7 @@ public class ChessModel implements IChessModel {
 		{
 			for (int y = 0; y < numColumns(); y++)
 			{
-				if (board[x][y].player() == agianstPlayer)
+				if (!(board[x][y] == null) && board[x][y].player() == againstPlayer)
 				{
 					// Construct a move to check.
 					moveCheck = new Move (x, y, toKingX, toKingY);
