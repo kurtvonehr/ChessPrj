@@ -99,47 +99,7 @@ public class Bishop extends ChessPiece {
 	{
 		// Check if it is on the positive slope diagonal.
 		if ((move.getFromColumn() - move.getToColumn()) ==
-		(move.getFromRow() - move.getFromRow()))
-		{
-			// Determine which part of the move is greater.
-			if ( move.getFromRow() > move.getToRow() )
-			{
-				greater_row = move.getFromRow();
-				lesser_row = move.getToRow();
-			}
-			else
-			{
-				greater_row = move.getToRow();
-				lesser_row = move.getFromRow();
-			}
-			
-			// Determine which part of the move is greater.
-			if ( move.getFromColumn() > move.getToColumn() )
-			{
-				greater_col = move.getFromColumn();
-				lesser_col = move.getToColumn();
-			}
-			else
-			{
-				greater_col = move.getToColumn();
-				lesser_col = move.getFromColumn();
-			}
-		
-		
-			// Find if there are any pieces in between the rows.
-			for ( pos = 1; pos < (greater_row-lesser_row); pos++ )
-			{
-				if (board [lesser_row + pos] [lesser_col + pos] != null)
-				{	
-					result = false;
-					break;
-				}
-			}
-		}
-		
-		// Check if it is on the negative slope diagonal
-		else if ((move.getFromColumn() - move.getToColumn()) ==
-		-(move.getFromRow() - move.getFromRow()))
+		-(move.getFromRow() - move.getToRow()))
 		{
 			// Determine which part of the move is greater.
 			if ( move.getFromRow() > move.getToRow() )
@@ -170,6 +130,46 @@ public class Bishop extends ChessPiece {
 			for ( pos = 1; pos < (greater_row-lesser_row); pos++ )
 			{
 				if (board [greater_row - pos] [lesser_col + pos] != null)
+				{	
+					result = false;
+					break;
+				}
+			}
+		}
+		
+		// Check if it is on the negative slope diagonal
+		else if ((move.getFromColumn() - move.getToColumn()) ==
+		(move.getFromRow() - move.getToRow()))
+		{
+			// Determine which part of the move is greater.
+			if ( move.getFromRow() > move.getToRow() )
+			{
+				greater_row = move.getFromRow();
+				lesser_row = move.getToRow();
+			}
+			else
+			{
+				greater_row = move.getToRow();
+				lesser_row = move.getFromRow();
+			}
+			
+			// Determine which part of the move is greater.
+			if ( move.getFromColumn() > move.getToColumn() )
+			{
+				greater_col = move.getFromColumn();
+				lesser_col = move.getToColumn();
+			}
+			else
+			{
+				greater_col = move.getToColumn();
+				lesser_col = move.getFromColumn();
+			}
+		
+		
+			// Find if there are any pieces in between the rows.
+			for ( pos = 1; pos < (greater_row-lesser_row); pos++ )
+			{
+				if (board [lesser_row + pos] [lesser_col + pos] != null)
 				{	
 					result = false;
 					break;
