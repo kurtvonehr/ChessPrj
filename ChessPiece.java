@@ -27,7 +27,7 @@ public abstract class ChessPiece implements IChessPiece {
 	private Player owner; 
 	
 	/* The core model controller that operates all pieces. */
-	protected ChessModel model;
+	private ChessModel model;
 	
 	//---------------------------------------------------------------//	
  	// Class Constructors                                            //
@@ -42,13 +42,17 @@ public abstract class ChessPiece implements IChessPiece {
 	@return None 
     
  	*****************************************************************/
+	protected ChessPiece(){
+		this.owner = Player.NOBODY;
+	}
+	
 	protected ChessPiece(Player player) { 
 		
 		// Set class attributes.
 		this.owner = player; 
 		
 		// Get the model object for help with control.
-		//model = ChessModel.getInstance();
+		//model = new ChessModel();
 		
 	} 
 	
@@ -93,22 +97,21 @@ public abstract class ChessPiece implements IChessPiece {
 	// Get the end position of the cell.
 	toPiece = board[move.getToRow()] [move.getToColumn()];
 	
-	// Verify that it's the right piece.
-	if (fromPiece != null)
-	{
+	if(fromPiece != null){
 		// Verify that the move change position of piece.
-		if ( (move.getFromRow() != move.getToRow() ) &&
-			( move.getFromColumn() != move.getToColumn () ) )
-		{
-			// Verify that the end pos is not a players piece.
-			if ( toPiece == null )
-				result = true;
-			
-			else if (toPiece.player() != owner)
-				result = true;
-		}
-		
+		if ( !((move.getFromRow() == move.getToRow() ) &&
+				( move.getFromColumn() == move.getToColumn () )) )
+			{
+				// Verify that the end pos is not a players piece.
+				if ( toPiece == null )
+					result = true;
+				
+				else if (toPiece.player() != owner)
+					result = true;
+			}
 	}
+		
+	
 	
 	// Return the result of the operation.
 	return result;
