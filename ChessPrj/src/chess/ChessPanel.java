@@ -201,10 +201,10 @@ public class ChessPanel extends JPanel {
 						if (clickCount == 1) {
 							moving.setToRow(i);
 							moving.setToColumn(j);
-//							if (model.isValidMove(moving))
-//								model.move(moving);
-//							else
-//								coordinates.setText("That move is not valid");
+							if (model.isValidMove(moving))
+								model.move(moving);
+							else
+								coordinates.setText("That move is not valid");
 							clickCount = 0;
 							
 							
@@ -212,8 +212,8 @@ public class ChessPanel extends JPanel {
 							}
 						}
 					}
-				}
-			//coordinates.setText("" + clickCount);
+			}
+			coordinates.setText("" + clickCount);
 			// Re-displays buttons and related piece images
 			displayBoard();
 		}
