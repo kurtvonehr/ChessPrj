@@ -13,7 +13,7 @@ package chess;
 *---------------------------------------------------------------------*
 * ISSUES AND NOTES						      *	                                      
 *---------------------------------------------------------------------*
-* 
+* 		
 *                                 
 *                                 
 *---------------------------------------------------------------------*/
@@ -24,6 +24,8 @@ public class Pawn extends ChessPiece {
 	// Class Variable Definitions                                    //
 	//---------------------------------------------------------------//
 	
+	private Player player;
+	
 	/* Determines if this is the pawn's first move. */
 	private boolean firstMove;
 	
@@ -32,7 +34,7 @@ public class Pawn extends ChessPiece {
 	//---------------------------------------------------------------//	
 	
 	/*****************************************************************
-  	The primary constructor for the Pawn peice. It creates a pawn
+  	The primary constructor for the Pawn piece. It creates a pawn
   	for the given player specified.
         
 	 @return None 
@@ -41,6 +43,8 @@ public class Pawn extends ChessPiece {
   	public Pawn (Player player) {
 		
 		super (player);
+		
+		this.player = player;
 		
 		// Config class variables. 
 		firstMove = true;
@@ -80,7 +84,19 @@ public class Pawn extends ChessPiece {
 		// --- Variable Declarations  -------------------------//
 
 		/* The result of the computation. */
-		boolean result;
+		boolean result = false;
+		
+		/* The current row position of the pawn. */
+		int row;
+		
+		/* The current column position of the pawn. */
+		int col;
+		
+		/* The move to row position. */
+		int toRow = move.getToRow();
+		
+		/* The move to column position. */
+		int toCol = move.getToColumn();
 		
 		// --- Main Routine -----------------------------------//
 		
@@ -90,26 +106,75 @@ public class Pawn extends ChessPiece {
 		// continue with checking for piece specifics.
 		if (result)
 		{
+			// Get row position values.
+			row = move.getFromRow ();
+			col = move.getFromColumn ();
+			toRow = move.getToRow ();
+			toCol = move.getToColumn ();
+			
 			// Determine which direction we should be moving.
-			if (player() == Player.BLACK)
+			if (player() == Player.WHITE)
 			{
 				
-				// TODO implement logic.
+				// -- Check what move call was performed. -- //
 				
-				// Step through and see what type of move it could be.
-				//if (move.getTo) 
+				// Check for a first move instance.
+				if (firstMove && col == toCol && toRow == row + 2)
+					result = true;
 				
-				// Take into account extra start case.
-				//if ()
+				// If they called a north west move.
+				else if (toRow == row + 1 && toCol == col - 1) 
+				{
+					// Check that the opponent has a piece there.
+					if (player == Player.BLACK)
+						result = true;
+				}
+				
+				// If they called a north east move.
+				else if (toRow == row + 1 && toCol == col + 1) 
+				{
+					// Check that the opponent has a piece there.
+					if (player == Player.BLACK)
+						result = true;
+				}
+				
+				// If they called a due north move. 
+				else if (toRow == row + 1 && toCol == col && player == null)
+					result = true;
 			}
 			
 			else
 			{
-				// TODO implement logic.
-
+				// -- Check what move call was performed. -- //
+				
+				// Check for a first move instance.
+				if (firstMove && col == toCol && toRow == row - 2)
+					result = true;
+				
+				// If they called a north west move.
+				else if (toRow == row - 1 && toCol == col - 1) 
+				{
+					// Check that the opponent has a piece there.
+					if (player == Player.BLACK)
+						result = true;
+				}
+				
+				// If they called a north east move.
+				else if (toRow == row - 1 && toCol == col + 1) 
+				{
+					// Check that the opponent has a piece there.
+					if (player == Player.BLACK)
+						result = true;
+				}
+				
+				// If they called a due north move. 
+				else if (toRow == row - 1 && toCol == col && player == null)
+					result = true;
 			}
-			
 		}
+		
+		// Make sure if the first move cleared that we turn it off.
+		firstMove = firstMove && result ? false : false;
 		
 		// Return the result of the operation.
 		return result;

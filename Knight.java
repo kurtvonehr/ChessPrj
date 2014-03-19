@@ -2,7 +2,7 @@ package chess;
 
 
 /*--------------------------------------------------------------------*
-* Kight.java                             		              *
+* Kight.java                             		              		  *
 *---------------------------------------------------------------------*
 * Description - A class used to emulate a specialized game peice in   *
 * the game of chess. The Knight is allowed to move only in L shaped   *
@@ -12,7 +12,7 @@ package chess;
 * Author : McKim A. Jacob, Vonehr Kurt                                *
 * Date Of Creation: 3 - 1 - 2014                                      *
 *---------------------------------------------------------------------*
-* ISSUES AND NOTES						      *	                                      
+* ISSUES AND NOTES						      						  *	                                      
 *---------------------------------------------------------------------*
 * 
 *                                 
@@ -43,7 +43,7 @@ public class Knight extends ChessPiece {
 	}
 
 	//--------------------------------------------------------------//	
-	// Override Function Definitions				//
+	// Override Function Definitions								//
 	//--------------------------------------------------------------//  
 
 
@@ -75,17 +75,65 @@ public class Knight extends ChessPiece {
 		// --- Variable Declarations  -------------------------//
 
 		/* The result of the computation. */
-		boolean result;
+		boolean result = false;
+		
+		/* The current row postion of the pawn. */
+		int row;
+		
+		/* The current column position of the pawn. */
+		int col;
+		
+		/* The move to row position. */
+		int toRow = move.getToRow();
+		
+		/* The move to column position. */
+		int toCol = move.getToColumn();
 
 		// --- Main Routine -----------------------------------//
 
 		// Perform the generic background check.
 		result = super.isValidMove(move, board);
+		
+		// Get row positon values.
+		row = move.getFromRow ();
+		col = move.getFromColumn ();
+		toRow = move.getToRow ();
+		toCol = move.getToColumn ();
 
 		// continue with checking for piece specifics.
 		if (result)
 		{
-		    //TODO implement pawn search.
+			// Small North East Move.
+			if (toRow == row + 3 && toCol == + 2)
+				result = true;
+			
+			// Big North East Move.
+			else if (toRow == row + 2 && toCol == col + 3)
+				result = true;
+			
+			// Small North West Move.
+			else if (toRow == row + 3 && toCol == col - 2)
+				result = true;
+			
+			// Big North West Move.
+			else if (toRow == row + 2 && toCol == col - 3)
+				result = true;
+			
+			// Small South East Move.
+			else if (toRow == row - 3 && toCol == + 2)
+				result = true;
+			
+			// Big South East Move.
+			else if (toRow == row - 2 && toCol == col + 3)
+				result = true;
+
+			// Small Small West Move.
+			else if (toRow == row - 3 && toCol == col - 2)
+				result = true;
+			
+			// Big South West Move.
+			else if (toRow == row - 2 && toCol == col - 3)
+				result = true;
 		}
 
 		// Return the result of the operation.

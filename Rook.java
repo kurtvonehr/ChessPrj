@@ -53,6 +53,7 @@ public class Rook extends ChessPiece {
   	@return The class type of rook as a string. 
     
   	*****************************************************************/
+  	
   	@Override
   	public Piece type () {
     
