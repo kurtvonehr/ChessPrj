@@ -92,7 +92,7 @@ public class Knight extends ChessPiece {
 		// --- Main Routine -----------------------------------//
 
 		// Perform the generic background check.
-		result = super.isValidMove(move, board);
+		boolean validmove = super.isValidMove(move, board);
 		
 		// Get row positon values.
 		row = move.getFromRow ();
@@ -101,38 +101,38 @@ public class Knight extends ChessPiece {
 		toCol = move.getToColumn ();
 
 		// continue with checking for piece specifics.
-		if (result)
+		if (validmove)
 		{
 			// Small North East Move.
-			if (toRow == row + 3 && toCol == + 2)
+			if (toRow == row + 2 && toCol == col + 1)
 				result = true;
 			
 			// Big North East Move.
-			else if (toRow == row + 2 && toCol == col + 3)
+			else if (toRow == row + 1 && toCol == col + 2)
 				result = true;
 			
 			// Small North West Move.
-			else if (toRow == row + 3 && toCol == col - 2)
+			else if (toRow == row + 2 && toCol == col - 1)
 				result = true;
 			
 			// Big North West Move.
-			else if (toRow == row + 2 && toCol == col - 3)
+			else if (toRow == row + 1 && toCol == col - 2)
 				result = true;
 			
 			// Small South East Move.
-			else if (toRow == row - 3 && toCol == + 2)
+			else if (toRow == row - 2 && toCol == col + 1)
 				result = true;
 			
 			// Big South East Move.
-			else if (toRow == row - 2 && toCol == col + 3)
+			else if (toRow == row - 1 && toCol == col + 2)
 				result = true;
 
 			// Small Small West Move.
-			else if (toRow == row - 3 && toCol == col - 2)
+			else if (toRow == row - 2 && toCol == col - 1)
 				result = true;
 			
 			// Big South West Move.
-			else if (toRow == row - 2 && toCol == col - 3)
+			else if (toRow == row - 1 && toCol == col - 2)
 				result = true;
 		}
 
