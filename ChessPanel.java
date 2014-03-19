@@ -152,12 +152,6 @@ public class ChessPanel extends JPanel {
 				else {
 					p = model.pieceAt(i, j).player().ordinal();
 					t = model.pieceAt(i, j).type().ordinal();
-					if(t == 5)
-						t = 4;
-					else if(t == 3)
-						t = 5;
-					else if(t ==  4)
-						t = 3;
 					boardButtons[i][j].setIcon(new ImageIcon(boardImages[p][t]));
 				}
 			}
