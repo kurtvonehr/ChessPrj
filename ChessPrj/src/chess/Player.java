@@ -7,7 +7,7 @@ package chess;
  */
 public enum Player {
 	
-   BLACK, WHITE;
+   BLACK, WHITE, NOBODY;
 
    /**
     * Return the {@code Player} whose turn is next.

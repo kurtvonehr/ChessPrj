@@ -42,7 +42,7 @@ public class ChessPanel extends JPanel {
 	private JPanel first_panel, third_panel, fourth_panel, grid;
 	private JLabel message, gameStatus, turn;
 	private ButtonListener bl = new ButtonListener();
-	private int rows, cols;
+	private int rows, cols, clickCount;
 	private Move moving;
 	//---------------------------------------------------------------//
 	// Constructor - creates a new model, builds the panels
@@ -129,7 +129,7 @@ public class ChessPanel extends JPanel {
 //		//-----------------------------------------------------------------------------//
 //		// incrementing int that counts the clicks from the actionListener //
 //		//-----------------------------------------------------------------------------//
-//		clickCount = 0;
+		clickCount = 0;
 //		
 		//-----------------------------------------------------------------------------//		
 		// Adds everything above to the JFrame and sets the layout
@@ -216,7 +216,6 @@ public class ChessPanel extends JPanel {
 			for (int i = 0; i < rows; i++) {
 				for (int j = 0; j < cols; j++) {
 					if (e.getSource() == boardButtons[i][j]) {
-						if (boardButtons[i][j] == null)
 						//--------------------------------------------//
 						// Uses a click counter to determine if the
 						// player has selected the piece to be moved
@@ -236,7 +235,7 @@ public class ChessPanel extends JPanel {
 							if (model.pieceAt(i, j).player() == model.currentPlayer()) {
 								boardButtons[i][j].setBackground(Color.lightGray);
 							}
-							// TODO should, maybe, needs to catch null pointer...
+//							// TODO should, maybe, needs to catch null pointer...
 							else if (model.pieceAt(i, j).player() != null) {
 								if ( (i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 ==1)) {
 									boardButtons[i][j].setBackground(Color.white);
@@ -256,9 +255,7 @@ public class ChessPanel extends JPanel {
 						}
 						else if (clickCount == 1) {
 							
-							
-							// TODO Causes a de-select on first load. Stops working after first set of clicks.
-							// Basically it redraws the cells again.
+							// Clears highlight selections from previous click
 							boardReset();
 							
 							//--------------------------------------------//
@@ -268,21 +265,13 @@ public class ChessPanel extends JPanel {
 							//--------------------------------------------//
 							moving.setToRow(i);
 							moving.setToColumn(j);
+							
 							//--------------------------------------------//
 							// Checks if the Move is allowed and not in check.
 							//--------------------------------------------//
 							if (model.isValidMove(moving) && !model.inCheck(model.currentPlayer())) {
 								// Executes the move method and sets the message to the player.
 								model.move(moving);
-								//--------------------------------------------//
-								// Resets the background color of the chess
-								// board, after a player has completed a move.
-								//--------------------------------------------//
-								if (model.currentPlayer() == Player.BLACK) {
-									boardButtons[i][j].setBackground(Color.black);
-								}
-								else
-									boardButtons[i][j].setBackground(Color.white);
 								// Changes player to next player
 								model.nextTurn();
 								// If in check, shows this message
@@ -291,6 +280,7 @@ public class ChessPanel extends JPanel {
 							}		
 							else
 								gameStatus.setText("Sorry, that move is not allowed,");	
+							
 							//--------------------------------------------//
 							// Resets the click counter
 							//--------------------------------------------//

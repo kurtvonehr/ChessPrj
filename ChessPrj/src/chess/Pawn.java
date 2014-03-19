@@ -101,10 +101,10 @@ public class Pawn extends ChessPiece {
 		// --- Main Routine -----------------------------------//
 		
 		// Perform the generic background check.
-		result = super.isValidMove(move, board);
-		
+		boolean validmove = super.isValidMove(move, board);
+
 		// continue with checking for piece specifics.
-		if (result)
+		if (validmove)
 		{
 			// Get row position values.
 			row = move.getFromRow ();
@@ -119,27 +119,31 @@ public class Pawn extends ChessPiece {
 				// -- Check what move call was performed. -- //
 				
 				// Check for a first move instance.
-				if (firstMove && col == toCol && toRow == row + 2)
+				if (firstMove && col == toCol && toRow == row - 2){
 					result = true;
+					// Make sure if the first move cleared that we turn it off.
+					firstMove = false;
+				}
 				
 				// If they called a north west move.
-				else if (toRow == row + 1 && toCol == col - 1) 
+				else if (toRow == row - 1 && toCol == col - 1) 
 				{
 					// Check that the opponent has a piece there.
-					if (player == Player.BLACK)
+					if (!(board[toRow][toCol] == null || board[toRow][toCol].player().equals(Player.WHITE)))
 						result = true;
 				}
 				
 				// If they called a north east move.
-				else if (toRow == row + 1 && toCol == col + 1) 
+				else if (toRow == row - 1 && toCol == col + 1) 
 				{
 					// Check that the opponent has a piece there.
-					if (player == Player.BLACK)
+					if (!(board[toRow][toCol] == null || board[toRow][toCol].player().equals(Player.WHITE)))
 						result = true;
 				}
 				
 				// If they called a due north move. 
-				else if (toRow == row + 1 && toCol == col && player == null)
+				else if (toRow == row - 1 && toCol == col && 
+						board[toRow][toCol] == null)
 					result = true;
 			}
 			
@@ -148,33 +152,34 @@ public class Pawn extends ChessPiece {
 				// -- Check what move call was performed. -- //
 				
 				// Check for a first move instance.
-				if (firstMove && col == toCol && toRow == row - 2)
+				if (firstMove && col == toCol && toRow == row + 2){
 					result = true;
+					// Make sure if the first move cleared that we turn it off.
+					firstMove = false;
+				}
 				
 				// If they called a north west move.
-				else if (toRow == row - 1 && toCol == col - 1) 
+				else if (toRow == row + 1 && toCol == col - 1) 
 				{
 					// Check that the opponent has a piece there.
-					if (player == Player.BLACK)
+					if (!(board[toRow][toCol] == null || board[toRow][toCol].player().equals(Player.BLACK)))
 						result = true;
 				}
 				
 				// If they called a north east move.
-				else if (toRow == row - 1 && toCol == col + 1) 
+				else if (toRow == row + 1 && toCol == col + 1) 
 				{
 					// Check that the opponent has a piece there.
-					if (player == Player.BLACK)
+					if (!(board[toRow][toCol] == null || board[toRow][toCol].player().equals(Player.BLACK)))
 						result = true;
 				}
 				
 				// If they called a due north move. 
-				else if (toRow == row - 1 && toCol == col && player == null)
+				else if (toRow == row + 1 && toCol == col && 
+						board[toRow][toCol] == null)
 					result = true;
 			}
 		}
-		
-		// Make sure if the first move cleared that we turn it off.
-		firstMove = firstMove && result ? false : false;
 		
 		// Return the result of the operation.
 		return result;
