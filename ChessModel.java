@@ -17,9 +17,6 @@ public class ChessModel implements IChessModel {
 	//---------------------------------------------------------------//	
 	// Class Variable Definitions                                    //
 	//---------------------------------------------------------------//
-
-  	/* The one instance of this class that exists. */
-  	protected static ChessModel instance;
   
 	/* The game board holding all game pieces. Board is 8 x 8. */
 	private IChessPiece[][] board;
