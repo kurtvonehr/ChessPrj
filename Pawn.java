@@ -1,15 +1,21 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* Pawn.java                             		             		  *
+* Pawn.java                             		              *
 *---------------------------------------------------------------------*
 * Description - A class used to emulate a specialized game peice in   *
 * the game of chess. The pawn is allowed to move only linear	      *
-* patterns and can only attack diagonally.			      			  *
+* patterns and can only attack diagonally.			      *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
-* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
-* Date Of Creation: 3 - 1 - 2014                                      *                          
+* Author : McKim A. Jacob, Vonehr Kurt                                *
+* Date Of Creation: 3 - 1 - 2014                                      *
+*---------------------------------------------------------------------*
+* ISSUES AND NOTES						      *	                                      
+*---------------------------------------------------------------------*
+* 		
+*                                 
+*                                 
 *---------------------------------------------------------------------*/
 
 public class Pawn extends ChessPiece {
@@ -17,6 +23,8 @@ public class Pawn extends ChessPiece {
 	//---------------------------------------------------------------//	
 	// Class Variable Definitions                                    //
 	//---------------------------------------------------------------//
+	
+	private Player player;
 	
 	/* Determines if this is the pawn's first move. */
 	private boolean firstMove;
@@ -36,7 +44,9 @@ public class Pawn extends ChessPiece {
 		
 		super (player);
 		
-		// Configure class variables. 
+		this.player = player;
+		
+		// Config class variables. 
 		firstMove = true;
 		
 	}
@@ -109,22 +119,17 @@ public class Pawn extends ChessPiece {
 				// -- Check what move call was performed. -- //
 				
 				// Check for a first move instance.
-				if (firstMove && col == toCol && toRow == row - 2)
-				{
+				if (firstMove && col == toCol && toRow == row - 2){
 					result = true;
-					
-					// If first move cleared toggle off.
+					// Make sure if the first move cleared that we turn it off.
 					firstMove = false;
-					
 				}
 				
 				// If they called a north west move.
 				else if (toRow == row - 1 && toCol == col - 1) 
 				{
 					// Check that the opponent has a piece there.
-					if (!(board[toRow][toCol] == null || board
-						[toRow][toCol].player().equals(
-													Player.WHITE) ) )
+					if (!(board[toRow][toCol] == null || board[toRow][toCol].player().equals(Player.WHITE)))
 						result = true;
 				}
 				
@@ -132,9 +137,7 @@ public class Pawn extends ChessPiece {
 				else if (toRow == row - 1 && toCol == col + 1) 
 				{
 					// Check that the opponent has a piece there.
-					if (!(board[toRow][toCol] == null ||
-						board[toRow][toCol].player().equals(
-													Player.WHITE) ) )
+					if (!(board[toRow][toCol] == null || board[toRow][toCol].player().equals(Player.WHITE)))
 						result = true;
 				}
 				
@@ -151,8 +154,7 @@ public class Pawn extends ChessPiece {
 				// Check for a first move instance.
 				if (firstMove && col == toCol && toRow == row + 2){
 					result = true;
-					
-					// If first move cleared toggle off.
+					// Make sure if the first move cleared that we turn it off.
 					firstMove = false;
 				}
 				
@@ -160,9 +162,7 @@ public class Pawn extends ChessPiece {
 				else if (toRow == row + 1 && toCol == col - 1) 
 				{
 					// Check that the opponent has a piece there.
-					if (!(board[toRow][toCol] == null || 
-							board[toRow][toCol].player().equals(
-													Player.BLACK) ) )
+					if (!(board[toRow][toCol] == null || board[toRow][toCol].player().equals(Player.BLACK)))
 						result = true;
 				}
 				
@@ -170,9 +170,7 @@ public class Pawn extends ChessPiece {
 				else if (toRow == row + 1 && toCol == col + 1) 
 				{
 					// Check that the opponent has a piece there.
-					if (!(board[toRow][toCol] == null ||
-							board[toRow][toCol].player().equals( 
-													Player.BLACK) ) )
+					if (!(board[toRow][toCol] == null || board[toRow][toCol].player().equals(Player.BLACK)))
 						result = true;
 				}
 				

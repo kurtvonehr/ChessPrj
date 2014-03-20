@@ -1,26 +1,36 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* Bishop.java                             		             		  *
+* Bishop.java                             		              *
 *---------------------------------------------------------------------*
-* Description - A class used to emulate a specialized game piece in   *
+* Description - A class used to emulate a specialized game peice in   *
 * the game of chess. The bishop is allowed to move only linear	      *
-* patterns along the line f(x) and -f(x).			      			  *
+* patterns along the line f(x) and -f(x).			      *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
-* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
-* Date Of Creation: 3 - 1 - 2014                                      *                        
+* Author : McKim A. Jacob, Vonehr Kurt                                *
+* Date Of Creation: 3 - 1 - 2014                                      *
+*---------------------------------------------------------------------*
+* ISSUES AND NOTES						      *	                                      
+*---------------------------------------------------------------------*
+* 
+*                                 
+*                                 
 *---------------------------------------------------------------------*/
 
 
 public class Bishop extends ChessPiece {
 	
 	//---------------------------------------------------------------//	
+	// Class Variable Definitions                                    //
+	//---------------------------------------------------------------//
+	
+	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
 	//---------------------------------------------------------------//	
 	
 	/*****************************************************************
-	 The primary constructor for the bishop piece. It creates a bishop
+	 The primary constructor for the bishop peice. It creates a bishop
 	 for the given player specified.
 	     
 	 @return None 
@@ -33,12 +43,12 @@ public class Bishop extends ChessPiece {
 	}
 	
 	//--------------------------------------------------------------//	
-	// Override Function Definitions								//
+	// Override Function Definitions				//
 	//--------------------------------------------------------------//
 	
 	/*****************************************************************
-  	An overridden accesor method that returns the type of chess piece
-  	this class piece is.
+  	An overriden acessor method that returns the type of chess peice
+  	this class peice is.
         
   	@return The class type of Bishop as a piece enum. 
     
@@ -54,9 +64,7 @@ public class Bishop extends ChessPiece {
 	/*****************************************************************
 	An overridden validation method used to make sure that the
 	requested move to perform is valid.
-	
 	@return Whether or not the move was valid.
-	
 	*****************************************************************/
 	@Override
 	public boolean isValidMove(Move move, IChessPiece[][] board) {
@@ -74,6 +82,9 @@ public class Bishop extends ChessPiece {
 	
 	/* The greater row value of the queen's position. */
 	int greater_row;
+	
+	/* The greater col value of the queen's position. */
+	int greater_col;
 	
 	/* The position in the array to be pointing. */
 	int pos;
@@ -105,10 +116,12 @@ public class Bishop extends ChessPiece {
 			// Determine which part of the move is greater.
 			if ( move.getFromColumn() > move.getToColumn() )
 			{
+				greater_col = move.getFromColumn();
 				lesser_col = move.getToColumn();
 			}
 			else
 			{
+				greater_col = move.getToColumn();
 				lesser_col = move.getFromColumn();
 			}
 		
@@ -143,10 +156,12 @@ public class Bishop extends ChessPiece {
 			// Determine which part of the move is greater.
 			if ( move.getFromColumn() > move.getToColumn() )
 			{
+				greater_col = move.getFromColumn();
 				lesser_col = move.getToColumn();
 			}
 			else
 			{
+				greater_col = move.getToColumn();
 				lesser_col = move.getFromColumn();
 			}
 		

@@ -1,18 +1,13 @@
 package chess;
 
-/*--------------------------------------------------------------------*
-* IChessModel.java                             		               *
-*---------------------------------------------------------------------*
- * Objects implementing this interface represent the state of a	      *
- * chess game.Notice that this interface is designed to maintain      *
- * the game state only, it does not provide any methods to control    *
- * the flow of the game.											  *
-*---------------------------------------------------------------------*
-* Project: Project 3 : Chess Game	                                  *
-* Author : Kenneth Aernouts, 										  *
-* Group : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth				  *
-* Date: 3/13/2014			                                          *
-*---------------------------------------------------------------------*/
+/****************************************************************
+ * Objects implementing this interface represent the state of a
+ * chess game.Notice that this interface is designed to maintain 
+ * the game state only, it does not provide any methods to control 
+ * the flow of the game.
+ *
+ * @author Kurt VonEhr, Jacob Mckim, Aernouts Kenneth
+ ****************************************************************/
 
 public interface IChessModel {
 

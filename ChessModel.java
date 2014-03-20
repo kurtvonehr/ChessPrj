@@ -9,7 +9,13 @@ package chess;
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
 * Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
-* Date Of Creation: 3 - 1 - 2014                                      *                          
+* Date Of Creation: 3 - 1 - 2014                                      *
+*---------------------------------------------------------------------*
+* ISSUES AND NOTES						      						  *	                                      
+*---------------------------------------------------------------------*
+* 
+*                                 
+*                                 
 *---------------------------------------------------------------------*/
 
 public class ChessModel implements IChessModel {
@@ -17,15 +23,15 @@ public class ChessModel implements IChessModel {
 	//---------------------------------------------------------------//	
 	// Class Variable Definitions                                    //
 	//---------------------------------------------------------------//
+
+  	/* The one instance of this class that exists. */
+  	protected static ChessModel instance;
   
 	/* The game board holding all game pieces. Board is 8 x 8. */
 	private IChessPiece[][] board;
 	
 	/* The current player playing the game. */
 	private Player currentPlayer;
-	
-	/* The opposing player playing the game. */
-	private Player opposingPlayer;
 	
 	/* The first player opponent. */
 	private Player White = Player.WHITE;
@@ -35,9 +41,6 @@ public class ChessModel implements IChessModel {
 	
 	/* The grid box dimension. */
 	private final int boardDim = 8;
-	
-	// The toggle value indicating whether the game is over. */
-	boolean gameOver;
 	
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
@@ -77,12 +80,6 @@ public class ChessModel implements IChessModel {
 		
 		// Define the first current player.
 		currentPlayer = White;
-		
-		// Define the opposing player
-		opposingPlayer = Black; 
-		
-		// Set the games current state.
-		gameOver = false;
 	
 		}
 	
@@ -95,7 +92,7 @@ public class ChessModel implements IChessModel {
 	/* Returns whether checkmate can be declared. */
 	public boolean isComplete() { 
 		
-		return gameOver;
+		return false;
 		
 	} 
 	
@@ -103,29 +100,17 @@ public class ChessModel implements IChessModel {
 	/* Calls a piece and asks if the move is valid. */
 	public boolean isValidMove(Move move) { 
 		
-		// --- Variable Declarations  -------------------------//
-		
 		/* The piece to ask for information from. */
 		ChessPiece piece;
 		
-		// --- Main Routine -----------------------------------//
+		// Get the piece to be pulled.
+		piece = (ChessPiece) pieceAt(move.getFromRow(),
+											move.getFromColumn());
 		
-		// Make sure the move is not null.
-		if (move != null)
-		{
-			// Get the piece to be pulled.
-			piece = (ChessPiece) pieceAt(move.getFromRow(),
-												move.getFromColumn());
-			
-			// Return the result of the board move.
-			if (!(board[move.fromRow][move.fromColumn] == null ||
-					board[move.fromRow][move.fromColumn].player() != 
-														currentPlayer) )
-				return piece.isValidMove(move, board);
-			else 
-				return false;
-		}
-		
+		// Return the result of the board move.
+		if (!(board[move.fromRow][move.fromColumn] == null ||
+				board[move.fromRow][move.fromColumn].player() != currentPlayer))
+			return piece.isValidMove(move, board);
 		else 
 			return false;
 
@@ -161,19 +146,17 @@ public class ChessModel implements IChessModel {
 				: Player.WHITE;
 		
 		/* The to position x for all checks. */
-		int KingX = -1;
+		int toKingX = -1;
 		
 		/* The to position y for all checks. */
-		int KingY = -1;
+		int toKingY = -1;
 		
 		/* The move to check. */
 		Move moveCheck;
 		
-		boolean check = false;
-		
 		// --- Main Routine -----------------------------------//
 		
-		// Find the king on the board.
+		// Find the king on the board to verify if in check.
 		for (int x = 0; x < numRows(); x++) 
 		{
 			for (int y = 0; y < numColumns(); y++)
@@ -182,15 +165,14 @@ public class ChessModel implements IChessModel {
 				if (!(board[x][y] == null) && board[x][y].type() == Piece.KING &&
 							board[x][y].player() == p)
 				{
-					KingX = x;
-					KingY = y;
+					toKingX = x;
+					toKingY = y;
 					break;
 				}
 			}
 		}
 		
-		// Determine if there are any moves that the opposing player could
-		//move and put the king into check
+		// Determine any avenues that the king could be in check.
 		for (int x = 0; x < numRows(); x++) 
 		{
 			for (int y = 0; y < numColumns(); y++)
@@ -198,38 +180,17 @@ public class ChessModel implements IChessModel {
 				if (!(board[x][y] == null) && board[x][y].player() == againstPlayer)
 				{
 					// Construct a move to check.
-					moveCheck = new Move (x, y, KingX, KingY);
+					moveCheck = new Move (x, y, toKingX, toKingY);
 					
 					// If it came back valid. Set in check to true.
 					if (board[x][y].isValidMove(moveCheck,board))
-						check = true;
+						return true;
 				}
 			}
 		}
 		
-		
-		//check for checkmate and set iscomplete to true if it is
-		if(check){
-			//check all valid moves of the king and if any will
-			//allow it to move out of check			
-			for (int x = 0; x < numRows(); x++) 
-			{
-				for (int y = 0; y < numColumns(); y++)
-				{
-						// Construct a move to check.
-						moveCheck = new Move (KingX, KingY, x, y);
-						
-						// If it came back valid. Set in check to true.
-						if (board[KingX][KingY].isValidMove(moveCheck,board))
-							gameOver = false;
-						else
-							gameOver = true;
-				}
-			}
-		}
-			
 		// Return the result.
-		return check; 
+		return false; 
 		
 	} 
 	
@@ -268,10 +229,6 @@ public class ChessModel implements IChessModel {
 			return null;				
 	} 
 	
-	//--------------------------------------------------------------//	
-	// Custom Function Definitions					     			//
-	//--------------------------------------------------------------//  
-	
 	
    /****************************************************************
    * This method validates that a move position is within the grid.
@@ -295,57 +252,10 @@ public class ChessModel implements IChessModel {
    *****************************************************************/
 	public Player nextTurn () {
 		
-		//Opposing Player is now the current player
-		opposingPlayer = currentPlayer;
-		
 		return currentPlayer = currentPlayer == Player.WHITE ? 
 										  Player.BLACK : Player.WHITE;
 		
 	}
-
-
-   /****************************************************************
-   * This method sets a board piece equal to something.
-   *
-   *@param piece - The object to set it to.
-   *
-   *@param x - The x position to place the piece.
-   *
-   *@param y - The y position to place the piece.
-   *
-   * @return None
-   * 
-   *****************************************************************/
-	protected void setBoardPiece(IChessPiece piece, int x, int y) {
-		this.board[x][y] = piece;
-	}
-
-
-   /****************************************************************
-   * This method returns the opposing player in the game.
-   *
-   * @return The player enum whose opposing (WHITE or BLACK).
-   * 
-   *****************************************************************/
-	public Player getOpposingPlayer() {
-		return opposingPlayer;
-	}
-
-	
-   /****************************************************************
-   * This method toggles whether the game is in a checkmate state.
-   *
-   *@param currentPlayer2 - the player who were checking for check-
-   *mate.
-   *
-   * @return The boolean state of checkmate.
-   * 
-   *****************************************************************/
-	public boolean inCheckMate(Player currentPlayer2) {
-		return false;
-	}
 	
 	
-	//--------------------------------------------------------------//  
-
 }

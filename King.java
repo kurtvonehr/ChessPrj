@@ -3,16 +3,26 @@ package chess;
 /*--------------------------------------------------------------------*
 * King.java                             		              		  *
 *---------------------------------------------------------------------*
-* Description - A class used to emulate a specialized game piece in   *
-* the game of chess. The King is the key piece to wining the game of  *
+* Description - A class used to emulate a specialized game peice in   *
+* the game of chess. The King is the key peice to wining the game of  *
 * chess. It can only move in single steps at a time.	              *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
-* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
-* Date Of Creation: 3 - 1 - 2014                                      *                          
+* Author : McKim A. Jacob, Vonehr Kurt                                *
+* Date Of Creation: 3 - 1 - 2014                                      *
+*---------------------------------------------------------------------*
+* ISSUES AND NOTES						      						  *	                                      
+*---------------------------------------------------------------------*
+* 
+*                                 
+*                                 
 *---------------------------------------------------------------------*/
 
 public class King extends ChessPiece {
+	
+	//---------------------------------------------------------------//	
+	// Class Variable Definitions                                    //
+	//---------------------------------------------------------------//
 	
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //

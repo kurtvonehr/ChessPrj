@@ -1,19 +1,30 @@
 package chess;
 
+
 /*--------------------------------------------------------------------*
-* Queen.java                             		              		  *
+* Queen.java                             		              *
 *---------------------------------------------------------------------*
-* Description - A class used to emulate a specialized game piece in   *
+* Description - A class used to emulate a specialized game peice in   *
 * the game of chess. The Queen is allowed to move both in straight    *
 * and diagonal lines.                                                 *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
-* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
-* Date Of Creation: 3 - 1 - 2014                                      *                          
+* Author : McKim A. Jacob, Vonehr Kurt                                *
+* Date Of Creation: 3 - 1 - 2014                                      *
+*---------------------------------------------------------------------*
+* ISSUES AND NOTES						      *	                                      
+*---------------------------------------------------------------------*
+* 
+*                                 
+*                                 
 *---------------------------------------------------------------------*/
 
 public class Queen extends ChessPiece {
- 
+  
+	//---------------------------------------------------------------//	
+	// Class Variable Definitions                                    //
+	//---------------------------------------------------------------//
+
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
 	//---------------------------------------------------------------//	
@@ -32,7 +43,7 @@ public class Queen extends ChessPiece {
 	}
 
 	//--------------------------------------------------------------//	
-	// Override Function Definitions			        			//
+	// Override Function Definitions			        //
 	//--------------------------------------------------------------//  
 
 
@@ -168,8 +179,8 @@ public class Queen extends ChessPiece {
 					greater_col = move.getToColumn();
 					lesser_col = move.getFromColumn();
 				}
-			
-			
+				
+				
 				// Find if there are any pieces in between the rows.
 				for ( pos = 1; pos < (greater_row-lesser_row); pos++ )
 				{
@@ -208,8 +219,8 @@ public class Queen extends ChessPiece {
 					greater_col = move.getToColumn();
 					lesser_col = move.getFromColumn();
 				}
-			
-			
+				
+				
 				// Find if there are any pieces in between the rows.
 				for ( pos = 1; pos < (greater_row-lesser_row); pos++ )
 				{
