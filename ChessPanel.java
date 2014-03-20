@@ -1,7 +1,7 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* ChessModel.java                             		             	  *
+* ChessPanel.java                             		             	  *
 *---------------------------------------------------------------------*
 * Description - A class responsible for presenting the GUI, the       *
 * user's actions, and updating the view Implement a standard form of  *
