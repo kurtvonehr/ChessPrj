@@ -7,7 +7,6 @@ package chess;
 * board pieces involved in the game of chess.			     		  *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess Game	                                  *
-* Author : Kenneth Aernouts, 										  *
 * Group : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth				  *
 * Date: 3/13/2014			                                          *
 *---------------------------------------------------------------------*/
@@ -62,6 +61,7 @@ public abstract class ChessPiece implements IChessPiece {
 	/* Method called to return piece type as Piece. */
 	public abstract Piece type(); 
 	
+	
 	/* Method called to set the piece type. */
 	public void setType(Piece type){
 		
@@ -75,6 +75,7 @@ public abstract class ChessPiece implements IChessPiece {
 		 
 	} 
 	 
+	
 	/* Method called to see if move requested is valid. */
 	public boolean isValidMove(Move move, IChessPiece[ ][ ] board) { 
 	 	
