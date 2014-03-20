@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -212,7 +213,7 @@ public class ChessPanel extends JPanel {
 							moving.setToRow(i);
 							moving.setToColumn(j);
 							
-							if (model.isValidMove(moving) &&  !model.inCheckMate(model.currentPlayer()))
+							if (model.isValidMove(moving) &&  !model.isComplete())
 							{
 								tmp = model.pieceAt(i,j);
 								model.move(moving);
@@ -224,6 +225,9 @@ public class ChessPanel extends JPanel {
 									//check if move puts other player into check
 									if (model.inCheck(model.currentPlayer()))
 										coordinates.setText("In Check");
+									if(model.isComplete())
+										coordinates.setText("Check Mate! " + model.currentPlayer() + " loses.");
+										
 								}
 								else{
 									
@@ -246,11 +250,9 @@ public class ChessPanel extends JPanel {
 
 
 							}
-							else if (model.inCheckMate(model.currentPlayer())){
-								coordinates.setText("Check Mate! " + model.currentPlayer() + " loses.");
-							}
 							else
 								coordinates.setText("That move is not valid");
+							
 							clickCount = 0;
 							
 						}

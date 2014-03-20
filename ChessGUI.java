@@ -34,6 +34,7 @@ public class ChessGUI {
 		
 		frame.pack();
 		frame.setVisible(true);
+		
 	}
 
 }

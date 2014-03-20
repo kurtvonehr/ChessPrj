@@ -45,6 +45,9 @@ public class ChessModel implements IChessModel {
 	/* The grid box dimension. */
 	private final int boardDim = 8;
 	
+	//game over
+	boolean gameOver;
+	
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
 	//---------------------------------------------------------------//	
@@ -86,6 +89,8 @@ public class ChessModel implements IChessModel {
 		
 		// Define the opposing player
 		opposingPlayer = Black; 
+		
+		gameOver = false;
 	
 		}
 	
@@ -98,7 +103,7 @@ public class ChessModel implements IChessModel {
 	/* Returns whether checkmate can be declared. */
 	public boolean isComplete() { 
 		
-		return false;
+		return gameOver;
 		
 	} 
 	
@@ -152,17 +157,19 @@ public class ChessModel implements IChessModel {
 				: Player.WHITE;
 		
 		/* The to position x for all checks. */
-		int toKingX = -1;
+		int KingX = -1;
 		
 		/* The to position y for all checks. */
-		int toKingY = -1;
+		int KingY = -1;
 		
 		/* The move to check. */
 		Move moveCheck;
 		
+		boolean check = false;
+		
 		// --- Main Routine -----------------------------------//
 		
-		// Find the king on the board to verify if in check.
+		// Find the king on the board.
 		for (int x = 0; x < numRows(); x++) 
 		{
 			for (int y = 0; y < numColumns(); y++)
@@ -171,8 +178,8 @@ public class ChessModel implements IChessModel {
 				if (!(board[x][y] == null) && board[x][y].type() == Piece.KING &&
 							board[x][y].player() == p)
 				{
-					toKingX = x;
-					toKingY = y;
+					KingX = x;
+					KingY = y;
 					break;
 				}
 			}
@@ -187,17 +194,38 @@ public class ChessModel implements IChessModel {
 				if (!(board[x][y] == null) && board[x][y].player() == againstPlayer)
 				{
 					// Construct a move to check.
-					moveCheck = new Move (x, y, toKingX, toKingY);
+					moveCheck = new Move (x, y, KingX, KingY);
 					
 					// If it came back valid. Set in check to true.
 					if (board[x][y].isValidMove(moveCheck,board))
-						return true;
+						check = true;
 				}
 			}
 		}
 		
+		
+		//check for checkmate and set iscomplete to true if it is
+		if(check){
+			//check all valid moves of the king and if any will
+			//allow it to move out of check			
+			for (int x = 0; x < numRows(); x++) 
+			{
+				for (int y = 0; y < numColumns(); y++)
+				{
+						// Construct a move to check.
+						moveCheck = new Move (KingX, KingY, x, y);
+						
+						// If it came back valid. Set in check to true.
+						if (board[KingX][KingY].isValidMove(moveCheck,board))
+							gameOver = false;
+						else
+							gameOver = true;
+				}
+			}
+		}
+			
 		// Return the result.
-		return false; 
+		return check; 
 		
 	} 
 	
