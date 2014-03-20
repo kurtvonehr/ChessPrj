@@ -9,13 +9,7 @@ package chess;
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
 * Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
-* Date Of Creation: 3 - 1 - 2014                                      *
-*---------------------------------------------------------------------*
-* ISSUES AND NOTES						      						  *	                                      
-*---------------------------------------------------------------------*
-* 
-*                                 
-*                                 
+* Date Of Creation: 3 - 1 - 2014                                      *                          
 *---------------------------------------------------------------------*/
 
 public class ChessModel implements IChessModel {
@@ -45,7 +39,7 @@ public class ChessModel implements IChessModel {
 	/* The grid box dimension. */
 	private final int boardDim = 8;
 	
-	//game over
+	// The toggle value indicating whether the game is over. */
 	boolean gameOver;
 	
 	//---------------------------------------------------------------//	
@@ -90,6 +84,7 @@ public class ChessModel implements IChessModel {
 		// Define the opposing player
 		opposingPlayer = Black; 
 		
+		// Set the games current state.
 		gameOver = false;
 	
 		}
@@ -111,8 +106,12 @@ public class ChessModel implements IChessModel {
 	/* Calls a piece and asks if the move is valid. */
 	public boolean isValidMove(Move move) { 
 		
+		// --- Variable Declarations  -------------------------//
+		
 		/* The piece to ask for information from. */
 		ChessPiece piece;
+		
+		// --- Main Routine -----------------------------------//
 		
 		// Get the piece to be pulled.
 		piece = (ChessPiece) pieceAt(move.getFromRow(),
@@ -120,7 +119,8 @@ public class ChessModel implements IChessModel {
 		
 		// Return the result of the board move.
 		if (!(board[move.fromRow][move.fromColumn] == null ||
-				board[move.fromRow][move.fromColumn].player() != currentPlayer))
+				board[move.fromRow][move.fromColumn].player() != 
+													currentPlayer) )
 			return piece.isValidMove(move, board);
 		else 
 			return false;
@@ -264,6 +264,10 @@ public class ChessModel implements IChessModel {
 			return null;				
 	} 
 	
+	//--------------------------------------------------------------//	
+	// Custom Function Definitions					     			//
+	//--------------------------------------------------------------//  
+	
 	
    /****************************************************************
    * This method validates that a move position is within the grid.
@@ -296,19 +300,48 @@ public class ChessModel implements IChessModel {
 	}
 
 
-protected void setBoardPiece(IChessPiece piece, int x, int y) {
-	this.board[x][y] = piece;
-}
+   /****************************************************************
+   * This method sets a board piece equal to something.
+   *
+   *@param piece - The object to set it to.
+   *
+   *@param x - The x position to place the piece.
+   *
+   *@param y - The y position to place the piece.
+   *
+   * @return None
+   * 
+   *****************************************************************/
+	protected void setBoardPiece(IChessPiece piece, int x, int y) {
+		this.board[x][y] = piece;
+	}
 
 
-public Player getOpposingPlayer() {
-	return opposingPlayer;
-}
+   /****************************************************************
+   * This method returns the opposing player in the game.
+   *
+   * @return The player enum whose opposing (WHITE or BLACK).
+   * 
+   *****************************************************************/
+	public Player getOpposingPlayer() {
+		return opposingPlayer;
+	}
 
-
-public boolean inCheckMate(Player currentPlayer2) {
-	return false;
-}
+	
+   /****************************************************************
+   * This method toggles whether the game is in a checkmate state.
+   *
+   *@param currentPlayer2 - the player who were checking for check-
+   *mate.
+   *
+   * @return The boolean state of checkmate.
+   * 
+   *****************************************************************/
+	public boolean inCheckMate(Player currentPlayer2) {
+		return false;
+	}
 	
 	
+	//--------------------------------------------------------------//  
+
 }
