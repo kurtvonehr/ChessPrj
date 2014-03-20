@@ -1,7 +1,7 @@
 package chess;
 
 /*--------------------------------------------------------------------*
-* ChessPiece.java                             		              	  *
+* IChessModel.java                             		               *
 *---------------------------------------------------------------------*
  * Objects implementing this interface represent the state of a	      *
  * chess game.Notice that this interface is designed to maintain      *
