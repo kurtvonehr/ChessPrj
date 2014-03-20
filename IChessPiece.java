@@ -1,10 +1,18 @@
 package chess;
 
-/**
- * Describes a piece for a game of chess (King, Queen, Rook, etc.)
- *
- * @author Kurt VonEhr, Jacob Mckim, 
- */
+
+/*--------------------------------------------------------------------*
+* IChessPiece.java                             		              	  *
+*---------------------------------------------------------------------*
+* Description -Describes a piece for a game of chess				  *
+*  (King, Queen, Rook, etc.).							     		  *
+*---------------------------------------------------------------------*
+* Project: Project 3 : Chess Game	                                  *
+* Group : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth				  *
+* Date: 3/13/2014			                                          *
+*---------------------------------------------------------------------*/
+
+
 // Created  12/3/12 at 3:29 PM
 // (C) Zachary Kurmas 2012
 
