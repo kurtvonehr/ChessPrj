@@ -1,30 +1,19 @@
 package chess;
 
-
 /*--------------------------------------------------------------------*
-* Queen.java                             		              *
+* Queen.java                             		              		  *
 *---------------------------------------------------------------------*
-* Description - A class used to emulate a specialized game peice in   *
+* Description - A class used to emulate a specialized game piece in   *
 * the game of chess. The Queen is allowed to move both in straight    *
 * and diagonal lines.                                                 *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
-* Author : McKim A. Jacob, Vonehr Kurt                                *
-* Date Of Creation: 3 - 1 - 2014                                      *
-*---------------------------------------------------------------------*
-* ISSUES AND NOTES						      *	                                      
-*---------------------------------------------------------------------*
-* 
-*                                 
-*                                 
+* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
+* Date Of Creation: 3 - 1 - 2014                                      *                          
 *---------------------------------------------------------------------*/
 
 public class Queen extends ChessPiece {
-  
-	//---------------------------------------------------------------//	
-	// Class Variable Definitions                                    //
-	//---------------------------------------------------------------//
-
+ 
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
 	//---------------------------------------------------------------//	
@@ -43,7 +32,7 @@ public class Queen extends ChessPiece {
 	}
 
 	//--------------------------------------------------------------//	
-	// Override Function Definitions			        //
+	// Override Function Definitions			        			//
 	//--------------------------------------------------------------//  
 
 
