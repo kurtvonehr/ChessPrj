@@ -4,33 +4,23 @@ package chess;
 /*--------------------------------------------------------------------*
 * Kight.java                             		              		  *
 *---------------------------------------------------------------------*
-* Description - A class used to emulate a specialized game peice in   *
+* Description - A class used to emulate a specialized game piece in   *
 * the game of chess. The Knight is allowed to move only in L shaped   *
-* paterns across the game board.                                      *
+* patterns across the game board.                                     *
 *---------------------------------------------------------------------*
 * Project: Project 3 : Chess 	                                      *
-* Author : McKim A. Jacob, Vonehr Kurt                                *
-* Date Of Creation: 3 - 1 - 2014                                      *
-*---------------------------------------------------------------------*
-* ISSUES AND NOTES						      						  *	                                      
-*---------------------------------------------------------------------*
-* 
-*                                 
-*                                 
+* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
+* Date Of Creation: 3 - 1 - 2014                                      *                          
 *---------------------------------------------------------------------*/
 
 public class Knight extends ChessPiece {
-  
-	//---------------------------------------------------------------//	
-	// Class Variable Definitions                                    //
-	//---------------------------------------------------------------//
-
+	
 	//---------------------------------------------------------------//	
 	// Class Constructors                                            //
 	//---------------------------------------------------------------//	
 
 	/*****************************************************************
-  	The primary constructor for the Pawn peice. It creates a pawn
+  	The primary constructor for the Pawn piece. It creates a pawn
   	for the given player specified.
         
 	 @return None 
@@ -48,7 +38,7 @@ public class Knight extends ChessPiece {
 
 
 	/*****************************************************************
-  	An overriden acessor method that returns the type of chess peice
+  	An overridden accesor method that returns the type of chess piece
   	this class peice is.
         
   	@return The class type of knight as a Piece enum. 
@@ -63,8 +53,8 @@ public class Knight extends ChessPiece {
   	
   	
   	/*****************************************************************
-  	An overriden validation method used to make sure that the 
-  	requested move to preform is valid.
+  	An overridden validation method used to make sure that the 
+  	requested move to perform is valid.
         
   	@return Whether or not the move was valid.
     
@@ -77,7 +67,7 @@ public class Knight extends ChessPiece {
 		/* The result of the computation. */
 		boolean result = false;
 		
-		/* The current row postion of the pawn. */
+		/* The current row position of the pawn. */
 		int row;
 		
 		/* The current column position of the pawn. */
@@ -94,7 +84,7 @@ public class Knight extends ChessPiece {
 		// Perform the generic background check.
 		boolean validmove = super.isValidMove(move, board);
 		
-		// Get row positon values.
+		// Get row position values.
 		row = move.getFromRow ();
 		col = move.getFromColumn ();
 		toRow = move.getToRow ();
