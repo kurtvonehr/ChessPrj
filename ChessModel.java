@@ -33,6 +33,9 @@ public class ChessModel implements IChessModel {
 	/* The current player playing the game. */
 	private Player currentPlayer;
 	
+	/* The opposing player playing the game. */
+	private Player opposingPlayer;
+	
 	/* The first player opponent. */
 	private Player White = Player.WHITE;
 	 
@@ -80,6 +83,9 @@ public class ChessModel implements IChessModel {
 		
 		// Define the first current player.
 		currentPlayer = White;
+		
+		// Define the opposing player
+		opposingPlayer = Black; 
 	
 		}
 	
@@ -172,7 +178,8 @@ public class ChessModel implements IChessModel {
 			}
 		}
 		
-		// Determine any avenues that the king could be in check.
+		// Determine if there are any moves that the opposing player could
+		//move and put the king into check
 		for (int x = 0; x < numRows(); x++) 
 		{
 			for (int y = 0; y < numColumns(); y++)
@@ -252,10 +259,28 @@ public class ChessModel implements IChessModel {
    *****************************************************************/
 	public Player nextTurn () {
 		
+		//Opposing Player is now the current player
+		opposingPlayer = currentPlayer;
+		
 		return currentPlayer = currentPlayer == Player.WHITE ? 
 										  Player.BLACK : Player.WHITE;
 		
 	}
+
+
+protected void setBoardPiece(IChessPiece piece, int x, int y) {
+	this.board[x][y] = piece;
+}
+
+
+public Player getOpposingPlayer() {
+	return opposingPlayer;
+}
+
+
+public boolean inCheckMate(Player currentPlayer2) {
+	return false;
+}
 	
 	
 }

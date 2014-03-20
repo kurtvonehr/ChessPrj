@@ -40,6 +40,7 @@ public class ChessPanel extends JPanel {
 	private int rows, cols;
 	public int clickCount;
 	public Move moving;
+	public Move reverse;
 	
 	// These are purely for visual purposes...
 	//public static final int QUEEN=0, KING=1, ROOK=2, KNIGHT=3, BISHOP=4, PAWN=5;
@@ -52,7 +53,11 @@ public class ChessPanel extends JPanel {
 		// Creates a new ChessModel object                               //
 		//---------------------------------------------------------------//
 		model = new ChessModel();
+		//forward move
 		moving = new Move(0, 0, 0, 0);
+		//reverse move
+		reverse = new Move(0,0,0,0);
+		
 		//---------------------------------------------------------------//	
 		// Gets number of Rows and Columns from ChessModel               //
 		//---------------------------------------------------------------//
@@ -183,7 +188,10 @@ public class ChessPanel extends JPanel {
 	// ActionListener InnerClass
 	//-----------------------------------------------------------------------------//
 	private class ButtonListener implements ActionListener {
+		
 		int clickCount = 0;
+		IChessPiece tmp;
+		
 		public void actionPerformed(ActionEvent e) {
 			// Loops through all the [rows,cols] of the ChessPiece[][] array for ActionEvent
 			for (int i = 0; i < rows; i++) {
@@ -203,14 +211,44 @@ public class ChessPanel extends JPanel {
 							
 							moving.setToRow(i);
 							moving.setToColumn(j);
-							if (model.isValidMove(moving) && !model.inCheck(model.currentPlayer()))
-							{
-								model.move(moving);
-								model.nextTurn();
-								if (model.inCheck(model.currentPlayer()))
-									coordinates.setText("In Check");
-							}
 							
+							if (model.isValidMove(moving) &&  !model.inCheckMate(model.currentPlayer()))
+							{
+								tmp = model.pieceAt(i,j);
+								model.move(moving);
+								//check if move caused current player to 
+								//place itself in check, reverse move
+								//and set click count to 0
+								if(!(model.inCheck(model.currentPlayer()))){
+									model.nextTurn();
+									//check if move puts other player into check
+									if (model.inCheck(model.currentPlayer()))
+										coordinates.setText("In Check");
+								}
+								else{
+									
+									//reverses the move
+									reverse.setFromColumn(moving.toColumn);
+									reverse.setToColumn(moving.fromColumn);
+									reverse.setFromRow(moving.toRow);
+									reverse.setToRow(moving.fromRow);
+									
+									model.move(reverse);
+									
+									//replaces a piece that was set to null with the piece
+									//that was overwritten during the "move" method
+									model.setBoardPiece(tmp,reverse.fromRow, reverse.fromColumn);
+									
+									coordinates.setText("That move is not valid");
+									clickCount = 0;
+								}
+									
+
+
+							}
+							else if (model.inCheckMate(model.currentPlayer())){
+								coordinates.setText("Check Mate! " + model.currentPlayer() + " loses.");
+							}
 							else
 								coordinates.setText("That move is not valid");
 							clickCount = 0;
