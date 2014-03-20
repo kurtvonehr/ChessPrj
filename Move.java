@@ -1,12 +1,16 @@
 package chess;
 
-/*****************************************************************
- * Packages the four components of a move into a single object.    
- * (Instance variables are public because this object
- * is a simple container.)
- *
- * @author Kurt VonEhr, Jacob Mckim, Aernouts Kenneth
- *****************************************************************/
+/*--------------------------------------------------------------------*
+* Move.java                             		             		  *
+*---------------------------------------------------------------------*
+ * Description - Packages the four components of a move into a 		  *
+ * single object. (Instance variables are public because this object  *
+ * is a simple container.)    					 					  *
+*---------------------------------------------------------------------*
+* Project: Project 3 : Chess 	                                      *
+* Author : McKim A. Jacob, Vonehr Kurt, Aernouts Kenneth	          *
+* Date Of Creation: 3 - 1 - 2014                                      *                          
+*---------------------------------------------------------------------*/
 
 public class Move {
 
