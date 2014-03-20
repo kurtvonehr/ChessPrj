@@ -110,15 +110,22 @@ public class ChessModel implements IChessModel {
 		
 		// --- Main Routine -----------------------------------//
 		
-		// Get the piece to be pulled.
-		piece = (ChessPiece) pieceAt(move.getFromRow(),
-											move.getFromColumn());
+		// Make sure the move is not null.
+		if (move != null)
+		{
+			// Get the piece to be pulled.
+			piece = (ChessPiece) pieceAt(move.getFromRow(),
+												move.getFromColumn());
+			
+			// Return the result of the board move.
+			if (!(board[move.fromRow][move.fromColumn] == null ||
+					board[move.fromRow][move.fromColumn].player() != 
+														currentPlayer) )
+				return piece.isValidMove(move, board);
+			else 
+				return false;
+		}
 		
-		// Return the result of the board move.
-		if (!(board[move.fromRow][move.fromColumn] == null ||
-				board[move.fromRow][move.fromColumn].player() != 
-													currentPlayer) )
-			return piece.isValidMove(move, board);
 		else 
 			return false;
 
